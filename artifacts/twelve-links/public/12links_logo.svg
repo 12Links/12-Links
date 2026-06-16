@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <style>
+      .bg { fill: #0A0E1A; }
+      .mark-line { stroke: #1E90FF; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .mark-line-glow { stroke: #1E90FF; stroke-width: 6; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.18; }
+      .mark-line-accent { stroke: #00CFFF; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .node-dot { fill: #00CFFF; }
+      .node-dot-outer { fill: none; stroke: #00CFFF; stroke-width: 1.2; opacity: 0.4; }
+      .text-num { font-family: 'Arial', sans-serif; font-size: 72px; font-weight: 900; fill: #FFFFFF; letter-spacing: -2px; }
+      .text-brand { font-family: 'Arial', sans-serif; font-size: 72px; font-weight: 300; fill: #1E90FF; letter-spacing: 6px; }
+      .text-sub { font-family: 'Arial', sans-serif; font-size: 15px; font-weight: 400; fill: #5A7FA8; letter-spacing: 5px; }
+      .divider { stroke: #1E90FF; stroke-width: 1; opacity: 0.6; }
+      .grid-dot { fill: #1E3A5F; opacity: 0.5; }
+      .corner-mark { stroke: #00CFFF; stroke-width: 1.5; fill: none; opacity: 0.5; }
+      .lang-tick { stroke: #1E4A6E; stroke-width: 1; opacity: 0.8; }
+      .lang-active { stroke: #00CFFF; stroke-width: 2; opacity: 0.9; }
+    </style>
+
+    <!-- Glow filter for dots -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Subtle glow for lines -->
+    <filter id="line-glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="800" height="800" rx="0"/>
+
+  <!-- Subtle grid dot pattern -->
+  <g opacity="0.4">
+    <!-- Sparse dot grid -->
+    <circle class="grid-dot" cx="80" cy="80" r="1.2"/>
+    <circle class="grid-dot" cx="160" cy="80" r="1.2"/>
+    <circle class="grid-dot" cx="240" cy="80" r="1.2"/>
+    <circle class="grid-dot" cx="320" cy="80" r="1.2"/>
+    <circle class="grid-dot" cx="400" cy="80" r="1.2"/>
+    <circle class="grid-dot" cx="480" cy="80" r="1.2"/>
+    <circle class="grid-dot" cx="560" cy="80" r="1.2"/>
+    <circle class="grid-dot" cx="640" cy="80" r="1.2"/>
+    <circle class="grid-dot" cx="720" cy="80" r="1.2"/>
+    <circle class="grid-dot" cx="80" cy="160" r="1.2"/>
+    <circle class="grid-dot" cx="160" cy="160" r="1.2"/>
+    <circle class="grid-dot" cx="240" cy="160" r="1.2"/>
+    <circle class="grid-dot" cx="320" cy="160" r="1.2"/>
+    <circle class="grid-dot" cx="400" cy="160" r="1.2"/>
+    <circle class="grid-dot" cx="480" cy="160" r="1.2"/>
+    <circle class="grid-dot" cx="560" cy="160" r="1.2"/>
+    <circle class="grid-dot" cx="640" cy="160" r="1.2"/>
+    <circle class="grid-dot" cx="720" cy="160" r="1.2"/>
+    <circle class="grid-dot" cx="80" cy="240" r="1.2"/>
+    <circle class="grid-dot" cx="160" cy="240" r="1.2"/>
+    <circle class="grid-dot" cx="240" cy="240" r="1.2"/>
+    <circle class="grid-dot" cx="400" cy="240" r="1.2"/>
+    <circle class="grid-dot" cx="560" cy="240" r="1.2"/>
+    <circle class="grid-dot" cx="640" cy="240" r="1.2"/>
+    <circle class="grid-dot" cx="720" cy="240" r="1.2"/>
+    <circle class="grid-dot" cx="80" cy="320" r="1.2"/>
+    <circle class="grid-dot" cx="160" cy="320" r="1.2"/>
+    <circle class="grid-dot" cx="640" cy="320" r="1.2"/>
+    <circle class="grid-dot" cx="720" cy="320" r="1.2"/>
+    <circle class="grid-dot" cx="80" cy="400" r="1.2"/>
+    <circle class="grid-dot" cx="160" cy="400" r="1.2"/>
+    <circle class="grid-dot" cx="640" cy="400" r="1.2"/>
+    <circle class="grid-dot" cx="720" cy="400" r="1.2"/>
+    <circle class="grid-dot" cx="80" cy="480" r="1.2"/>
+    <circle class="grid-dot" cx="160" cy="480" r="1.2"/>
+    <circle class="grid-dot" cx="640" cy="480" r="1.2"/>
+    <circle class="grid-dot" cx="720" cy="480" r="1.2"/>
+    <circle class="grid-dot" cx="80" cy="560" r="1.2"/>
+    <circle class="grid-dot" cx="160" cy="560" r="1.2"/>
+    <circle class="grid-dot" cx="240" cy="560" r="1.2"/>
+    <circle class="grid-dot" cx="400" cy="560" r="1.2"/>
+    <circle class="grid-dot" cx="560" cy="560" r="1.2"/>
+    <circle class="grid-dot" cx="640" cy="560" r="1.2"/>
+    <circle class="grid-dot" cx="720" cy="560" r="1.2"/>
+    <circle class="grid-dot" cx="80" cy="640" r="1.2"/>
+    <circle class="grid-dot" cx="160" cy="640" r="1.2"/>
+    <circle class="grid-dot" cx="240" cy="640" r="1.2"/>
+    <circle class="grid-dot" cx="320" cy="640" r="1.2"/>
+    <circle class="grid-dot" cx="400" cy="640" r="1.2"/>
+    <circle class="grid-dot" cx="480" cy="640" r="1.2"/>
+    <circle class="grid-dot" cx="560" cy="640" r="1.2"/>
+    <circle class="grid-dot" cx="640" cy="640" r="1.2"/>
+    <circle class="grid-dot" cx="720" cy="640" r="1.2"/>
+    <circle class="grid-dot" cx="80" cy="720" r="1.2"/>
+    <circle class="grid-dot" cx="160" cy="720" r="1.2"/>
+    <circle class="grid-dot" cx="240" cy="720" r="1.2"/>
+    <circle class="grid-dot" cx="320" cy="720" r="1.2"/>
+    <circle class="grid-dot" cx="400" cy="720" r="1.2"/>
+    <circle class="grid-dot" cx="480" cy="720" r="1.2"/>
+    <circle class="grid-dot" cx="560" cy="720" r="1.2"/>
+    <circle class="grid-dot" cx="640" cy="720" r="1.2"/>
+    <circle class="grid-dot" cx="720" cy="720" r="1.2"/>
+  </g>
+
+  <!-- Corner bracket decorations -->
+  <path class="corner-mark" d="M40 70 L40 40 L70 40"/>
+  <path class="corner-mark" d="M730 40 L760 40 L760 70"/>
+  <path class="corner-mark" d="M40 730 L40 760 L70 760"/>
+  <path class="corner-mark" d="M730 760 L760 760 L760 730"/>
+
+  <!-- 12 language tick marks around the logo (top arc area) -->
+  <!-- Representing 12 SA languages as small radial indicators -->
+  <g opacity="0.7">
+    <!-- 12 tick marks in a partial ring around the mark -->
+    <line class="lang-active" x1="400" y1="68" x2="400" y2="82"/>
+    <line class="lang-active" x1="448" y1="72" x2="444" y2="86"/>
+    <line class="lang-tick" x1="492" y1="84" x2="484" y2="96"/>
+    <line class="lang-tick" x1="528" y1="105" x2="516" y2="114"/>
+    <line class="lang-tick" x1="554" y1="134" x2="540" y2="140"/>
+    <line class="lang-tick" x1="568" y1="168" x2="554" y2="172"/>
+    <line class="lang-tick" x1="352" y1="72" x2="356" y2="86"/>
+    <line class="lang-tick" x1="308" y1="84" x2="316" y2="96"/>
+    <line class="lang-tick" x1="272" y1="105" x2="284" y2="114"/>
+    <line class="lang-tick" x1="246" y1="134" x2="260" y2="140"/>
+    <line class="lang-tick" x1="232" y1="168" x2="246" y2="172"/>
+    <line class="lang-active" x1="226" y1="206" x2="240" y2="208"/>
+  </g>
+
+  <!-- MAIN GEOMETRIC MARK — nodes at precise intersections -->
+  <!-- Node positions (12 nodes for 12 languages, 12 links concept) -->
+  <!-- N1=top-center, N2=top-right, N3=right-high, N4=right-low, N5=bottom-right,
+       N6=bottom-center, N7=bottom-left, N8=left-low, N9=left-high, N10=center-top,
+       N11=center-mid, N12=center-bottom -->
+
+  <!-- Glow layer (drawn first, behind) -->
+  <g filter="url(#line-glow)">
+    <!-- Outer star / polygon links -->
+    <polyline class="mark-line-glow" points="400,130 540,200 560,360 460,470 340,470 240,360 260,200 400,130"/>
+    <!-- Inner cross links -->
+    <line class="mark-line-glow" x1="400" y1="130" x2="460" y2="470"/>
+    <line class="mark-line-glow" x1="400" y1="130" x2="240" y2="360"/>
+    <line class="mark-line-glow" x1="260" y1="200" x2="560" y2="360"/>
+    <line class="mark-line-glow" x1="540" y1="200" x2="240" y2="360"/>
+    <line class="mark-line-glow" x1="260" y1="200" x2="460" y2="470"/>
+    <line class="mark-line-glow" x1="540" y1="200" x2="340" y2="470"/>
+    <line class="mark-line-glow" x1="560" y1="360" x2="340" y2="470"/>
+  </g>
+
+  <!-- Sharp crisp layer (drawn on top) -->
+  <!-- Outer heptagonal form -->
+  <polyline class="mark-line" points="400,130 540,200 560,360 460,470 340,470 240,360 260,200 400,130"/>
+  <!-- Cross-linking lines (the 12 links concept) -->
+  <line class="mark-line" x1="400" y1="130" x2="460" y2="470"/>
+  <line class="mark-line" x1="400" y1="130" x2="240" y2="360"/>
+  <line class="mark-line" x1="260" y1="200" x2="560" y2="360"/>
+  <line class="mark-line" x1="540" y1="200" x2="240" y2="360"/>
+  <line class="mark-line" x1="260" y1="200" x2="460" y2="470"/>
+  <line class="mark-line" x1="540" y1="200" x2="340" y2="470"/>
+  <line class="mark-line" x1="560" y1="360" x2="340" y2="470"/>
+
+  <!-- Accent accent lines in lighter blue -->
+  <line class="mark-line-accent" x1="400" y1="130" x2="340" y2="470" opacity="0.5"/>
+  <line class="mark-line-accent" x1="260" y1="200" x2="340" y2="470" opacity="0.4"/>
+
+  <!-- Node dots at each vertex (12 nodes) -->
+  <g filter="url(#glow)">
+    <!-- Node 1: top center -->
+    <circle class="node-dot-outer" cx="400" cy="130" r="8"/>
+    <circle class="node-dot" cx="400" cy="130" r="4"/>
+    <!-- Node 2: top right -->
+    <circle class="node-dot-outer" cx="540" cy="200" r="8"/>
+    <circle class="node-dot" cx="540" cy="200" r="4"/>
+    <!-- Node 3: right -->
+    <circle class="node-dot-outer" cx="560" cy="360" r="8"/>
+    <circle class="node-dot" cx="560" cy="360" r="4"/>
+    <!-- Node 4: bottom right -->
+    <circle class="node-dot-outer" cx="460" cy="470" r="8"/>
+    <circle class="node-dot" cx="460" cy="470" r="4"/>
+    <!-- Node 5: bottom left -->
+    <circle class="node-dot-outer" cx="340" cy="470" r="8"/>
+    <circle class="node-dot" cx="340" cy="470" r="4"/>
+    <!-- Node 6: left -->
+    <circle class="node-dot-outer" cx="240" cy="360" r="8"/>
+    <circle class="node-dot" cx="240" cy="360" r="4"/>
+    <!-- Node 7: top left -->
+    <circle class="node-dot-outer" cx="260" cy="200" r="8"/>
+    <circle class="node-dot" cx="260" cy="200" r="4"/>
+    <!-- Interior intersections - slightly smaller -->
+    <circle fill="#1E90FF" cx="400" cy="300" r="3"/>
+    <circle fill="#1E90FF" cx="356" cy="340" r="2.5"/>
+    <circle fill="#1E90FF" cx="444" cy="340" r="2.5"/>
+    <circle fill="#1E90FF" cx="340" cy="265" r="2.5"/>
+    <circle fill="#1E90FF" cx="460" cy="265" r="2.5"/>
+  </g>
+
+  <!-- Text lockup -->
+  <!-- "12" in white bold, "LINKS" in blue light -->
+  <text class="text-num" x="196" y="600">12</text>
+  <text class="text-brand" x="296" y="600">LINKS</text>
+
+  <!-- Divider line under text -->
+  <line class="divider" x1="196" y1="618" x2="604" y2="618"/>
+
+  <!-- Subtitle -->
+  <text class="text-sub" x="197" y="646" text-anchor="start">FUTURE TECHNOLOGIES</text>
+
+  <!-- Bottom-right version indicator -->
+  <text font-family="Arial" font-size="11" fill="#1E4A6E" x="756" y="770" text-anchor="end">v1</text>
+</svg>

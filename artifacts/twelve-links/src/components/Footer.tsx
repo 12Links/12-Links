@@ -27,7 +27,7 @@ export default function Footer() {
             {/* ── Logo Block ── */}
             <div className="flex items-center gap-3 mb-4">
               <img 
-                src="/Logo.jpg" 
+                src="/12links_logo.svg" 
                 alt="12 Links Logo" 
                 className="w-9 h-9 object-contain" 
               />
