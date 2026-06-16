@@ -35,7 +35,7 @@ export default function Navbar() {
             <img 
             src="/Logo.jpg" 
               alt="12 Links Logo" 
-              className="w-7 h-7 object-contain transition-transform group-hover:scale-105" 
+              className="w-12 h-12 object-contain transition-transform group-hover:scale-105" 
             />
             <span className="text-2xl font-bold tracking-tighter text-white">
               12<span className="text-[#00FF88] transition-colors group-hover:text-[#00FF88]/80">Links</span>
