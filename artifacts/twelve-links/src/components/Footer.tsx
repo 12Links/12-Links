@@ -84,15 +84,18 @@ export default function Footer() {
             </ul>
           </div>
           
-         {/* ── Subscription Form ── */}
+        {/* ── Subscription Form ── */}
 <div>
   <h4 className="text-white font-bold mb-6">Subscribe</h4>
   <p className="text-gray-400 text-sm mb-4">Get updates on our platform and opportunities.</p>
   <div className="flex gap-2">
     <input 
       type="email" 
-      id="webpushr-email-input"
       placeholder="Email address" 
+      onChange={(e) => {
+        const w = window as any;
+        w.webpushrEmailValue = e.target.value;
+      }}
       className="bg-background border border-white/10 rounded-md px-3 py-2 text-sm text-white focus:outline-none focus:border-[#00FF88]/50 w-full" 
     />
     <button 
@@ -100,7 +103,7 @@ export default function Footer() {
       onClick={() => {
         const w = window as any;
         
-        // 1. Inject the Webpushr script immediately if it hasn't loaded yet
+ 
         if (!w.webpushr) {
           w.webpushr = w.webpushr || function() { (w.webpushr.q = w.webpushr.q || []).push(arguments); };
           const js = document.createElement("script");
@@ -110,10 +113,9 @@ export default function Footer() {
           w.webpushr('setup', {'key': 'BPdDd3iPbNoUtUJjQMXFt59J5nevtVku6Jtw67QVfxPV7ozzo2tdUIPEO9Z5t2U3hqBZSGQpCLz4Yp4G4MxYpiM'});
         }
 
-        // 2. Grab the input text value and trigger the alert safely
-        const emailEl = document.getElementById('webpushr-email-input') as any;
-        if (emailEl && emailEl.value) {
-          w.webpushr('email', emailEl.value);
+    
+        if (w.webpushrEmailValue) {
+          w.webpushr('email', w.webpushrEmailValue);
         }
         
         if (typeof w.webpushr === 'function') {
@@ -126,7 +128,7 @@ export default function Footer() {
     </button>
   </div>
 </div>
-        
+          
         {/* ── Bottom Info Bar ── */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 font-mono">
           <p>© 2026 12 Links. All rights reserved.</p>
