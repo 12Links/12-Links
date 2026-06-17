@@ -8,6 +8,17 @@ const inputCls =
   "w-full bg-background border border-white/10 rounded-md px-4 py-3 text-white focus:outline-none focus:border-[#00FF88]/50 focus:ring-1 focus:ring-[#00FF88]/50 transition-colors placeholder-gray-600";
 const labelCls = "block text-sm font-medium text-gray-400 mb-2";
 
+// Define strict prop types for sub-forms to satisfy Vite's compiler
+interface FormProps {
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  loading: boolean;
+}
+
+interface DefaultFormProps extends FormProps {
+  subject: string;
+  setSubject: (s: string) => void;
+}
+
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div>
@@ -19,7 +30,7 @@ function Field({ label, required, children }: { label: string; required?: boolea
   );
 }
 
-function AIForm({ onSubmit, loading }: { onSubmit: (e: React.FormEvent) => void; loading: boolean }) {
+function AIForm({ onSubmit, loading }: FormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-5">
       <input type="hidden" name="inquiry_type" value="AI Solution Request" />
@@ -76,7 +87,7 @@ function AIForm({ onSubmit, loading }: { onSubmit: (e: React.FormEvent) => void;
   );
 }
 
-function TalentForm({ onSubmit, loading }: { onSubmit: (e: React.FormEvent) => void; loading: boolean }) {
+function TalentForm({ onSubmit, loading }: FormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-5">
       <input type="hidden" name="inquiry_type" value="Talent Partnership" />
@@ -122,7 +133,7 @@ function TalentForm({ onSubmit, loading }: { onSubmit: (e: React.FormEvent) => v
   );
 }
 
-function EnterpriseForm({ onSubmit, loading }: { onSubmit: (e: React.FormEvent) => void; loading: boolean }) {
+function EnterpriseForm({ onSubmit, loading }: FormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-5">
       <input type="hidden" name="inquiry_type" value="Enterprise Inquiry" />
@@ -171,7 +182,7 @@ function EnterpriseForm({ onSubmit, loading }: { onSubmit: (e: React.FormEvent) 
   );
 }
 
-function GeneralForm({ onSubmit, loading }: { onSubmit: (e: React.FormEvent) => void; loading: boolean }) {
+function GeneralForm({ onSubmit, loading }: FormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-5">
       <input type="hidden" name="inquiry_type" value="General Inquiry" />
@@ -194,17 +205,7 @@ function GeneralForm({ onSubmit, loading }: { onSubmit: (e: React.FormEvent) => 
   );
 }
 
-function DefaultForm({
-  onSubmit,
-  loading,
-  subject,
-  setSubject,
-}: {
-  onSubmit: (e: React.FormEvent) => void;
-  loading: boolean;
-  subject: string;
-  setSubject: (s: string) => void;
-}) {
+function DefaultForm({ onSubmit, loading, subject, setSubject }: DefaultFormProps) {
   const inquiryTypes = [
     { id: "ai", label: "AI Solution Request" },
     { id: "talent", label: "Talent Partnership" },
@@ -309,18 +310,18 @@ export default function Contact() {
   };
 
   const renderForm = () => {
-    const props = { onSubmit: handleSubmit, loading };
+    const baseProps = { onSubmit: handleSubmit, loading };
     switch (subject) {
       case "ai":
-        return <AIForm {...props} />;
+        return <AIForm {...baseProps} />;
       case "talent":
-        return <TalentForm {...props} />;
+        return <TalentForm {...baseProps} />;
       case "enterprise":
-        return <EnterpriseForm {...props} />;
+        return <EnterpriseForm {...baseProps} />;
       case "general":
-        return <GeneralForm {...props} />;
+        return <GeneralForm {...baseProps} />;
       default:
-        return <DefaultForm {...props} subject={subject} setSubject={setSubject} />;
+        return <DefaultForm {...baseProps} subject={subject} setSubject={setSubject} />;
     }
   };
 
@@ -399,7 +400,7 @@ export default function Contact() {
             <div className="bg-card border border-white/5 p-8 rounded-2xl">
               <h3 className="text-xl font-bold text-white mb-6">Contact Details</h3>
               <div className="space-y-4 text-gray-400 font-mono text-sm">
-                <p><span className="text-[#00FF88]">Email:</span> 12links.co.za</p>
+                <p><span className="text-[#00FF88]">Email:</span> info@twelvelinks.co.za</p>
                 <p><span className="text-[#00FF88]">HQ:</span> Johannesburg, South Africa</p>
                 <p><span className="text-[#00FF88]">Response:</span> Within 24 hours</p>
                 <p><span className="text-[#00FF88]">Coverage:</span> Pan-African, Global</p>
