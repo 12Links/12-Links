@@ -20,10 +20,6 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/5 border border-[#00FF88]/30 rounded-full px-4 py-1.5 text-xs font-mono text-[#00FF88] uppercase tracking-widest mb-6 self-start">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00FF88] animate-pulse" />
-            Student-Built · Production-Grade
-          </div>
 
           <h1 className="text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.05] mb-6">
             Delivering<br />
