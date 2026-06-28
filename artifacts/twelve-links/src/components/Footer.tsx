@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { Linkedin, Github, ShieldCheck, FileText } from "lucide-react";
+import { Linkedin,Twitter, X, Github, ShieldCheck, FileText } from "lucide-react";
 
 export default function Footer() {
   const [activeDoc, setActiveDoc] = useState<"privacy" | "terms" | null>(null);
