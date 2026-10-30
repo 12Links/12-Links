@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { Linkedin, Twitter, X, Github, ShieldCheck, FileText, ArrowUp, Copy, Check, Sparkles } from "lucide-react";
+import { Linkedin, Github, ShieldCheck, FileText, ArrowUp, Copy, Check, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Footer() {
@@ -40,152 +40,140 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#07090F] border-t border-white/10 pt-16 pb-8 relative z-10 text-foreground">
+    <footer className="bg-[#0B0D12] border-t border-white/10 pt-16 pb-12 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
           
-          {/* Brand Info (Cols 1-5) */}
+          {/* Brand & Mission (Cols 1-5) */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3 mb-2">
               <img 
                 src="/12links_logo.svg" 
                 alt="12 Links Logo" 
-                className="w-10 h-10 object-contain" 
+                className="w-9 h-9 object-contain" 
               />
-              <span className="text-2xl sm:text-3xl font-black tracking-tighter text-white">
-                12<span className="text-[#00FF88]">Links</span>
+              <span className="text-2xl font-bold tracking-tight text-white">
+                12<span className="text-emerald-400">Links</span>
               </span>
             </div>
             
-            <p className="text-gray-400 text-sm font-light max-w-sm leading-relaxed">
-              Engineering Africa's digital frontier. Custom enterprise AI, full-stack software systems, and data pipelines built with student-led agility and enterprise discipline.
+            <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
+              Custom AI models, software systems, and data pipelines built for African businesses by 7 university engineers in Pretoria & Johannesburg.
             </p>
 
-            {/* Operational Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-mono text-gray-300">
-              <span className="w-2 h-2 rounded-full bg-[#00FF88] animate-pulse" />
-              <span>Pods Operational • Pretoria & Johannesburg Hubs</span>
+            <div className="text-xs text-gray-400 pt-1">
+              <span>Operating from Gauteng, South Africa • Delivering Pan-African Solutions</span>
             </div>
             
-            {/* Social Icons */}
-            <div className="flex gap-3 pt-2">
+            {/* Social & Verified Links */}
+            <div className="flex items-center gap-3 pt-2">
               <a 
                 href="https://www.linkedin.com/company/12-links/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#00FF88] hover:border-[#00FF88]/50 transition-all hover:scale-105"
-                aria-label="12 Links LinkedIn"
+                className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all"
+                aria-label="12 Links on LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://x.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#00FF88] hover:border-[#00FF88]/50 transition-all hover:scale-105"
-                aria-label="12 Links X"
-              >
-                <Twitter className="w-4 h-4" />
               </a>
               <a 
                 href="https://github.com/12Links/12-Links" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#00FF88] hover:border-[#00FF88]/50 transition-all hover:scale-105"
-                aria-label="12 Links GitHub"
+                className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all"
+                aria-label="12 Links on GitHub"
               >
                 <Github className="w-4 h-4" />
+              </a>
+              <a 
+                href="mailto:info@12links.co.za" 
+                className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all"
+                aria-label="Email 12 Links"
+              >
+                <Mail className="w-4 h-4" />
               </a>
             </div>
           </div>
           
-          {/* Navigation Links (Cols 6-8) */}
+          {/* Navigation (Cols 6-8) */}
           <div className="md:col-span-3">
-            <h4 className="text-white font-mono text-xs font-bold uppercase tracking-wider mb-5 text-[#00FF88]">
-              Platform Navigation
+            <h4 className="text-white text-xs font-semibold uppercase tracking-wider mb-4">
+              Navigation
             </h4>
-            <ul className="space-y-3 text-gray-400 text-xs font-mono">
-              <li><Link href="/" className="hover:text-[#00FF88] transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-[#00FF88] transition-colors">About & Team</Link></li>
-              <li><Link href="/services" className="hover:text-[#00FF88] transition-colors">Services & Pods</Link></li>
-              <li><Link href="/industries" className="hover:text-[#00FF88] transition-colors">Industries Served</Link></li>
-              <li><Link href="/contact" className="hover:text-[#00FF88] transition-colors">Project Intake</Link></li>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">About the Team</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">Services & Capabilities</Link></li>
+              <li><Link href="/industries" className="hover:text-white transition-colors">Industries</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact & Scoping</Link></li>
             </ul>
           </div>
 
-          {/* Quick Inquiry / Contact Details (Cols 9-12) */}
+          {/* Contact & Direct Channel (Cols 9-12) */}
           <div className="md:col-span-4 space-y-3">
-            <h4 className="text-white font-mono text-xs font-bold uppercase tracking-wider mb-5 text-[#FFB800]">
-              Direct Inquiries
+            <h4 className="text-white text-xs font-semibold uppercase tracking-wider mb-4">
+              Get in Touch
             </h4>
-            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2.5 text-xs font-mono">
+            <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 space-y-2.5 text-xs">
               <div className="flex items-center justify-between">
                 <span className="text-gray-400">Email:</span>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[#00FF88]">info@12links.co.za</span>
+                  <span className="text-emerald-400 font-medium">info@12links.co.za</span>
                   <button 
                     type="button" 
                     onClick={copyEmail}
                     className="p-1 hover:text-white text-gray-400"
-                    title="Copy Email"
+                    title="Copy Email Address"
                   >
-                    {copied ? <Check className="w-3 h-3 text-[#00FF88]" /> : <Copy className="w-3 h-3" />}
+                    {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   </button>
                 </div>
               </div>
               <div className="flex items-center justify-between text-gray-400">
                 <span>Location:</span>
-                <span className="text-gray-300">Gauteng, South Africa</span>
+                <span className="text-gray-300">Pretoria & Johannesburg</span>
               </div>
               <div className="flex items-center justify-between text-gray-400">
-                <span>Compliance:</span>
-                <span className="text-[#00FF88]">POPIA Act Compliant</span>
+                <span>Data Privacy:</span>
+                <span className="text-gray-300">POPIA Act No. 4 Compliant</span>
               </div>
             </div>
             
             <button
               type="button"
               onClick={scrollToTop}
-              className="mt-3 inline-flex items-center gap-2 text-xs font-mono text-gray-400 hover:text-white transition-colors"
+              className="mt-3 inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors"
             >
-              <ArrowUp className="w-3.5 h-3.5 text-[#00FF88]" /> Back to Top
+              <ArrowUp className="w-3.5 h-3.5" /> Back to top
             </button>
           </div>
         </div>
 
-        {/* ── Bottom Info Bar ── */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-400 font-mono">
-          <p>© 2026 12 Links (Pty) Ltd. All rights reserved.</p>
+        {/* ── Bottom Legal Bar ── */}
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+          <p>© 2026 12 Links (Pty) Ltd. Built in South Africa.</p>
           
-          <div className="flex items-center gap-4">
-            <span className="text-[#FFB800] flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" /> Built in South Africa
-            </span>
-            <span className="text-gray-700">|</span>
-            <span>Pretoria & Johannesburg</span>
-          </div>
-          
-          <div className="flex gap-4">
-            <button 
-              type="button"
-              onClick={() => setActiveDoc("privacy")}
-              className="text-gray-400 hover:text-[#00FF88] transition-colors cursor-pointer"
-            >
-              Privacy Policy
-            </button>
-            <span className="text-gray-700">•</span>
+          <div className="flex items-center gap-6">
             <button 
               type="button"
               onClick={() => setActiveDoc("terms")}
-              className="text-gray-400 hover:text-[#00FF88] transition-colors cursor-pointer"
+              className="text-gray-400 hover:text-white transition-colors cursor-pointer"
             >
               Terms of Service
+            </button>
+            <span className="text-gray-600">•</span>
+            <button 
+              type="button"
+              onClick={() => setActiveDoc("privacy")}
+              className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+            >
+              Privacy Policy
             </button>
           </div>
         </div>
       </div>
 
-      {/* ── FULL-SCREEN MODAL OVERLAY (PRIVACY & TERMS) ── */}
+      {/* ── LEGAL MODAL OVERLAY (VERIFIED CORRECT MAPPING) ── */}
       <AnimatePresence mode="wait">
         {activeDoc && (
           <div 
@@ -193,40 +181,40 @@ export default function Footer() {
             role="dialog"
             aria-modal="true"
           >
-            {/* Backdrop Layer */}
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setActiveDoc(null)}
-              className="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
+              className="absolute inset-0 bg-black/75 backdrop-blur-sm cursor-pointer"
             />
 
-            {/* Sliding Content Container */}
+            {/* Content Drawer */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
-              className="relative w-full max-w-2xl bg-[#0B0F19] border-l border-white/10 shadow-2xl h-screen flex flex-col z-10 overflow-hidden"
+              transition={{ type: "tween", duration: 0.28, ease: "easeOut" }}
+              className="relative w-full max-w-2xl bg-[#12151D] border-l border-white/10 shadow-2xl h-screen flex flex-col z-10 overflow-hidden"
             >
               {/* Header */}
-              <div className="flex justify-between items-center px-6 sm:px-10 py-6 border-b border-white/10 bg-[#0B0F19] shrink-0">
+              <div className="flex justify-between items-center px-6 sm:px-8 py-5 border-b border-white/10 bg-[#12151D] shrink-0">
                 <div className="flex items-center gap-3">
-                  {activeDoc === "privacy" ? (
+                  {activeDoc === "terms" ? (
                     <>
-                      <ShieldCheck className="w-6 h-6 text-[#00FF88] shrink-0" />
+                      <FileText className="w-5 h-5 text-emerald-400 shrink-0" />
                       <div>
-                        <h3 className="text-xl font-bold text-white tracking-tight">Privacy Policy</h3>
-                        <p className="text-xs text-gray-500 font-mono">POPIA Compliant • 2026 Edition</p>
+                        <h3 className="text-lg font-bold text-white tracking-tight">Terms of Service</h3>
+                        <p className="text-xs text-gray-400">Engagement & Delivery Governance • 2026</p>
                       </div>
                     </>
                   ) : (
                     <>
-                      <FileText className="w-6 h-6 text-[#FFB800] shrink-0" />
+                      <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
                       <div>
-                        <h3 className="text-xl font-bold text-white tracking-tight">Terms of Service</h3>
-                        <p className="text-xs text-gray-500 font-mono">Service Delivery Governance • 2026</p>
+                        <h3 className="text-lg font-bold text-white tracking-tight">Privacy Policy</h3>
+                        <p className="text-xs text-gray-400">POPIA Act No. 4 Compliance • 2026</p>
                       </div>
                     </>
                   )}
@@ -235,66 +223,70 @@ export default function Footer() {
                 <button 
                   type="button"
                   onClick={() => setActiveDoc(null)}
-                  className="p-2 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white rounded-full transition-colors cursor-pointer"
+                  className="p-2 text-gray-400 hover:text-white bg-white/5 rounded-lg transition-colors cursor-pointer"
                   aria-label="Close document"
                 >
-                  <X className="w-5 h-5" />
+                  ✕
                 </button>
               </div>
 
-              {/* Scrollable Content */}
-              <div className="flex-1 overflow-y-auto px-6 sm:px-10 py-6 text-gray-300 space-y-6 text-sm font-light leading-relaxed">
-                {activeDoc === "privacy" ? (
+              {/* Scrollable Legal Copy */}
+              <div className="flex-1 overflow-y-auto px-6 sm:px-8 py-6 text-gray-300 space-y-5 text-sm leading-relaxed">
+                {activeDoc === "terms" ? (
                   <>
-                    <p className="italic text-gray-400 bg-white/5 p-4 rounded-xl border border-white/5">
-                      At 12 Links, safeguarding your corporate and personal records is foundational. This policy explains how we process information in full accordance with the South African Protection of Personal Information Act (POPIA), No. 4 of 2013.
+                    <p className="text-gray-400 bg-white/5 p-4 rounded-xl border border-white/5">
+                      Welcome to 12 Links. By engaging our engineering services, accessing this platform, or signing a project statement of work, you accept these operational delivery terms.
                     </p>
                     <div className="space-y-2">
-                      <h4 className="text-white font-bold font-mono text-xs uppercase tracking-wider text-[#00FF88]">1. Information We Collect</h4>
-                      <p>We only collect data strictly necessary to scope, architect, and execute software delivery projects. This includes corporate identifiers and stakeholder contact details provided through our project intake channels.</p>
+                      <h4 className="text-white font-semibold text-xs uppercase tracking-wider text-emerald-400">1. Scope of Engagement</h4>
+                      <p>12 Links provides custom software engineering, machine learning modeling, and data architecture services. Final deliverable specifications, sprint schedules, and milestone payment schedules are governed by customized Statements of Work (SOW) executed between 12 Links (Pty) Ltd and the client.</p>
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-white font-bold font-mono text-xs uppercase tracking-wider text-[#00FF88]">2. Purpose of Processing</h4>
-                      <p>Records are processed solely to prepare architectural blueprints, establish project milestones, assign engineering pods, and provide production delivery updates.</p>
+                      <h4 className="text-white font-semibold text-xs uppercase tracking-wider text-emerald-400">2. Intellectual Property Rights</h4>
+                      <p>Upon delivery and final milestone sign-off, all custom software code, machine learning model architectures, and project artifacts created specifically for the client are 100% owned by the client. 12 Links retains no proprietary claim to client IP.</p>
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-white font-bold font-mono text-xs uppercase tracking-wider text-[#00FF88]">3. Data Security & Storage</h4>
-                      <p>Our infrastructure applies industry-standard TLS encryption in transit and secure cloud repositories at rest. We never sell, distribute, or expose client records to third-party marketing brokers.</p>
+                      <h4 className="text-white font-semibold text-xs uppercase tracking-wider text-emerald-400">3. Milestone Acceptance & Warranty</h4>
+                      <p>Work is delivered in transparent, pre-agreed milestone phases. Clients review and test functional deliverables at each gate. Every deployment includes an initial 30-day post-launch warranty period to resolve any system defects.</p>
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-white font-bold font-mono text-xs uppercase tracking-wider text-[#00FF88]">4. Your POPIA Rights</h4>
-                      <p>Under POPIA regulations, you retain full rights to inspect, update, or request the immediate deletion of your active records by contacting <span className="text-[#00FF88] underline">info@12links.co.za</span>.</p>
+                      <h4 className="text-white font-semibold text-xs uppercase tracking-wider text-emerald-400">4. Governing Law</h4>
+                      <p>These terms and all bilateral service agreements are interpreted and governed under the laws of the Republic of South Africa, subject to the jurisdiction of South African courts.</p>
                     </div>
                   </>
                 ) : (
                   <>
-                    <p className="italic text-gray-400 bg-white/5 p-4 rounded-xl border border-white/5">
-                      Welcome to 12 Links. By engaging our platform or submitting project scopes, you accept our standard service and engagement guidelines.
+                    <p className="text-gray-400 bg-white/5 p-4 rounded-xl border border-white/5">
+                      12 Links is committed to protecting corporate and personal data in strict compliance with South Africa's Protection of Personal Information Act (POPIA), Act No. 4 of 2013.
                     </p>
                     <div className="space-y-2">
-                      <h4 className="text-white font-bold font-mono text-xs uppercase tracking-wider text-[#FFB800]">1. Scope of Engagement</h4>
-                      <p>Information on this website serves an architectural and capability-demonstration purpose. Formal engineering engagements are governed solely by customized, bilateral Statements of Work (SOW) with milestone acceptance criteria.</p>
+                      <h4 className="text-white font-semibold text-xs uppercase tracking-wider text-emerald-400">1. Information We Collect</h4>
+                      <p>We collect only the business contact details, organizational identifiers, and project descriptions provided voluntarily through our project intake forms or direct email communications.</p>
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-white font-bold font-mono text-xs uppercase tracking-wider text-[#FFB800]">2. Intellectual Property Rights</h4>
-                      <p>Upon final milestone sign-off and settlement, 100% of custom software, models, and codebases developed for your engagement belong exclusively to you. Platform branding and proprietary tooling remain property of 12 Links (Pty) Ltd.</p>
+                      <h4 className="text-white font-semibold text-xs uppercase tracking-wider text-emerald-400">2. Purpose of Data Processing</h4>
+                      <p>Your details are processed strictly to prepare project proposals, scope technical architectures, schedule consultations, and maintain project delivery communications. We never sell or lease client information to third-party marketing entities.</p>
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-white font-bold font-mono text-xs uppercase tracking-wider text-[#FFB800]">3. Governing Law</h4>
-                      <p>These terms are governed and interpreted under the sovereign laws of the Republic of South Africa. Any legal disputes are subject to the exclusive jurisdiction of South African courts.</p>
+                      <h4 className="text-white font-semibold text-xs uppercase tracking-wider text-emerald-400">3. Data Security</h4>
+                      <p>All data submitted through our intake forms is encrypted in transit via modern TLS protocols and stored securely. We apply strict access controls across all internal engineering communication channels.</p>
+                    </div>
+                    <div className="space-y-2">
+                      <h4 className="text-white font-semibold text-xs uppercase tracking-wider text-emerald-400">4. Your Rights Under POPIA</h4>
+                      <p>You have the right to request access to your personal information, request corrections, or request complete deletion of your data from our systems at any time by emailing <span className="text-emerald-400">info@12links.co.za</span>.</p>
                     </div>
                   </>
                 )}
               </div>
 
-              {/* Sticky Bottom Close Action */}
-              <div className="p-6 sm:px-10 border-t border-white/10 bg-[#0B0F19] flex justify-end shrink-0">
+              {/* Close Footer */}
+              <div className="p-4 sm:px-8 border-t border-white/10 bg-[#12151D] flex justify-end shrink-0">
                 <button
                   type="button"
                   onClick={() => setActiveDoc(null)}
-                  className="px-6 py-2.5 bg-[#00FF88] hover:bg-[#00FF88]/90 text-black font-mono font-bold tracking-wider rounded-lg text-xs uppercase transition-all cursor-pointer"
+                  className="px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg text-xs transition-colors cursor-pointer"
                 >
-                  Understood & Close
+                  Close
                 </button>
               </div>
             </motion.div>

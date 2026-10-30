@@ -1,366 +1,300 @@
-import { motion } from "framer-motion";
 import { useState } from "react";
+import { Link } from "wouter";
 import { 
+  ArrowRight, 
+  CheckCircle2, 
+  ChevronDown, 
   Code2, 
   Brain, 
   Database, 
-  Smartphone, 
-  BarChart3, 
-  Users, 
-  ChevronDown, 
-  ClipboardList, 
-  UserCheck, 
-  GitBranch, 
-  ShieldCheck, 
-  Headphones, 
-  ArrowRight,
+  Smartphone,
+  ShieldCheck,
   HelpCircle,
-  Check
+  Terminal
 } from "lucide-react";
-import { Link } from "wouter";
 
 export default function Services() {
-  const [expanded, setExpanded] = useState<number | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string>("all");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const categories = [
-    { id: "all", label: "All Capabilities" },
-    { id: "ai", label: "AI & Machine Learning" },
-    { id: "engineering", label: "Software & Mobile" },
-    { id: "data", label: "Data Architecture" },
-    { id: "consulting", label: "Strategy & Advisory" },
-  ];
-
-  const services = [
+  const capabilities = [
     {
-      id: "custom-software",
-      category: "ai",
-      title: "Custom Software & AI Development",
-      gradient: "from-blue-900 to-cyan-900",
-      icon: Code2,
-      detail: "We design and build custom software solutions powered by artificial intelligence. From intelligent automation to full-stack applications, our verified developers deliver production-ready software that solves real business problems. Our development process follows a blueprint-driven approach with milestone-based delivery and client approval gates.",
-      features: ["AI-powered automation", "Full-stack web & mobile apps", "API development & integration", "Machine learning model deployment"],
-      stack: ["Python", "PyTorch", "Next.js", "FastAPI", "PostgreSQL", "Docker"]
+      id: "ai-systems",
+      title: "Applied AI & Custom Machine Learning",
+      tag: "Intelligent Systems",
+      description: "We design, train, and deploy production machine learning models tailored to your proprietary data. From real-time transaction anomaly detection to computer vision on factory lines, our models run with low latency and measurable business impact.",
+      features: [
+        "Real-time fraud and risk scoring models",
+        "Document parsing and natural language information extraction",
+        "Computer vision quality inspection on edge devices",
+        "Predictive churn, yield, and demand forecasting"
+      ],
+      deliverables: "Trained model weights, containerized FastAPI inference endpoint, automated retraining scripts, and telemetry dashboard.",
+      tech: ["Python", "PyTorch", "FastAPI", "Scikit-Learn", "Docker", "Hugging Face"],
+      uiPreview: {
+        title: "Model Inference Endpoint",
+        code: `@app.post("/v1/predict/risk")
+async def score_transaction(payload: TransactionData):
+    features = feature_pipeline.transform(payload)
+    risk_score = risk_model.predict_proba(features)[0][1]
+    
+    return {
+        "transaction_id": payload.txn_id,
+        "risk_score": float(risk_score),
+        "decision": "HOLD" if risk_score > 0.75 else "APPROVE",
+        "inference_latency_ms": 34.2
+    }`
+      }
     },
     {
-      id: "ai-consulting",
-      category: "consulting",
-      title: "Tech & AI Consulting",
-      gradient: "from-purple-900 to-indigo-900",
-      icon: Brain,
-      detail: "Strategic technology consulting to help organizations navigate the AI landscape. We assess your current systems, identify automation opportunities, design AI roadmaps, and guide your team through implementation — from proof-of-concept to production deployment.",
-      features: ["AI readiness assessment", "Technology roadmap design", "Proof-of-concept development", "Digital transformation strategy"],
-      stack: ["Feasibility Audits", "Model Selection", "Cost Optimization", "POPIA Strategy"]
-    },
-    {
-      id: "information-management",
-      category: "data",
-      title: "Information Management Solutions",
-      gradient: "from-teal-900 to-green-900",
-      icon: Database,
-      detail: "Comprehensive data engineering, analytics infrastructure, and information management systems. We help organizations collect, store, process, and derive actionable insights from their data — building pipelines, dashboards, and reporting systems that drive informed decision-making.",
-      features: ["Data pipeline architecture", "Business intelligence dashboards", "Database design & optimization", "Real-time analytics"],
-      stack: ["Apache Airflow", "DuckDB", "BigQuery", "Supabase", "Grafana"]
-    },
-    {
-      id: "mobile-development",
-      category: "engineering",
-      title: "Mobile App Development",
-      gradient: "from-orange-900 to-red-900",
-      icon: Smartphone,
-      detail: "High-performance native and cross-platform mobile applications for iOS and Android. Our mobile development team builds intuitive, scalable apps with beautiful UX — from MVP to enterprise-scale solutions — delivered with full source code and documentation.",
-      features: ["iOS & Android development", "React Native cross-platform", "UI/UX design included", "App Store deployment support"],
-      stack: ["React Native", "Expo", "TypeScript", "TailwindCSS", "Offline Sync"]
-    },
-    {
-      id: "ai-data-analysis",
-      category: "ai",
-      title: "AI Data Analysis & Modeling",
-      gradient: "from-cyan-900 to-blue-900",
-      icon: BarChart3,
-      detail: "Advanced data analysis powered by machine learning and statistical modeling. We turn raw data into predictive models, pattern recognition systems, and automated decision engines — giving your organization a competitive intelligence advantage driven by real evidence.",
-      features: ["Predictive modeling", "Natural language processing", "Computer vision", "Fraud detection systems"],
-      stack: ["Scikit-Learn", "Hugging Face", "Pandas", "OpenCV", "TensorFlow"]
-    },
-    {
-      id: "tech-partnership",
-      category: "consulting",
-      title: "Embedded Technology Pods",
-      gradient: "from-green-900 to-emerald-900",
-      icon: Users,
-      detail: "Long-term technology partnerships for businesses that need an accountable, embedded engineering capability. We provide ongoing development, maintenance, and strategic technology leadership — acting as your external CTO and delivery team in one.",
-      features: ["Ongoing development & support", "Strategic tech leadership", "Product roadmap planning", "Team augmentation"],
-      stack: ["Dedicated Pods", "Sprint Velocity SLAs", "Daily Standups", "CI/CD DevOps"]
-    }
-  ];
-
-  const filteredServices = services.filter((s) => {
-    if (activeCategory === "all") return true;
-    return s.category === activeCategory;
+      id: "web-mobile",
+      title: "Full-Stack Web & Mobile Platforms",
+      tag: "Product Engineering",
+      description: "High-performance web applications and native mobile apps built for the African digital ecosystem. We prioritize clean responsive design, low-bandwidth optimization, and offline-first data sync so your users can transact even in remote areas.",
+      features: [
+        "Cross-platform iOS and Android apps with React Native",
+        "Modern Next.js & React enterprise web platforms",
+        "Offline-first SQLite local caching with automatic cloud sync",
+        "Integrated payment gateways (Stripe, Paystack, Peach Payments, OZOW)"
+      ],
+      deliverables: "Full TypeScript source code, published App Store / Play Store builds, responsive web deployment, and documented REST/GraphQL APIs.",
+      tech: ["React Native", "Next.js", "TypeScript", "TailwindCSS", "PostgreSQL", "Node.js"],
+      uiPreview: {
+        title: "Offline Sync Architecture",
+        code: `// Offline-first local transaction buffer
+export async function queueLocalAction(action: ClientAction) {
+  await localDb.insert(actionQueue).values({
+    id: generateId(),
+    payload: JSON.stringify(action),
+    synced: false,
+    timestamp: Date.now()
   });
 
-  const clientBenefits = [
-    {
-      icon: ClipboardList,
-      title: "Scoped Blueprint",
-      desc: "A detailed business requirements document, milestone plan, and success metrics before any work begins."
+  if (navigator.onLine) {
+    await triggerBackgroundSync();
+  }
+}`
+      }
     },
     {
-      icon: UserCheck,
-      title: "Dedicated Lead",
-      desc: "A single accountable project lead who manages your team, communicates daily, and is your one point of contact."
+      id: "data-infrastructure",
+      title: "Data Pipelines & Business Intelligence",
+      tag: "Data Architecture",
+      description: "We help organizations organize scattered spreadsheets and legacy SQL databases into clean, automated data pipelines. Get real-time dashboards that your leadership team can trust for daily operational decisions.",
+      features: [
+        "Automated ETL pipelines extracting data from internal and external sources",
+        "High-performance analytical databases with DuckDB and BigQuery",
+        "POPIA-compliant data anonymization and secure storage at rest",
+        "Executive business intelligence dashboards with live KPI tracking"
+      ],
+      deliverables: "Automated pipeline DAGs, SQL migration scripts, role-based access control, and executive reporting views.",
+      tech: ["Apache Airflow", "DuckDB", "PostgreSQL", "BigQuery", "Supabase", "Grafana"],
+      uiPreview: {
+        title: "ETL Pipeline DAG Spec",
+        code: `with DAG('daily_financial_reconciliation', schedule='@daily') as dag:
+    extract_banking_logs = PythonOperator(task_id='extract')
+    anonymize_pii_popia = PythonOperator(task_id='anonymize')
+    compute_daily_reconcile = PostgresOperator(task_id='reconcile')
+    notify_finance_lead = SlackOperator(task_id='notify')
+
+    extract_banking_logs >> anonymize_pii_popia >> compute_daily_reconcile >> notify_finance_lead`
+      }
     },
     {
-      icon: GitBranch,
-      title: "Milestone Delivery",
-      desc: "Work is delivered in approved milestones. You review and sign off before the next phase begins."
-    },
-    {
-      icon: ShieldCheck,
-      title: "Compliance Review",
-      desc: "Every project includes a compliance and security review pathway to ensure your solution meets regulatory standards."
-    },
-    {
-      icon: BarChart3,
-      title: "Impact Dashboard",
-      desc: "ROI and KPI dashboards track delivery metrics, performance, and business outcomes in real time."
-    },
-    {
-      icon: Headphones,
-      title: "Post-Launch Support",
-      desc: "A dedicated support and performance audit window after deployment — we don't disappear after go-live."
-    },
+      id: "embedded-pods",
+      title: "Dedicated Engineering Pods",
+      tag: "Team Augmentation",
+      description: "Need an accountable development team without the overhead of lengthy agency retainers? We assemble dedicated student builder pods led by a senior tech lead to accelerate your feature backlog or build an MVP sprint.",
+      features: [
+        "Dedicated lead engineer as your single accountable point of contact",
+        "Bi-weekly sprint demos with working software deployments",
+        "Daily asynchronous standups and direct Slack/Discord integration",
+        "Seamless Git workflow with branch protection and automated testing"
+      ],
+      deliverables: "Bi-weekly milestone handovers, clean PRs with code reviews, and direct developer communication.",
+      tech: ["GitHub Actions", "Docker", "Agile Sprints", "Milestone Approvals", "Code Reviews"],
+      uiPreview: {
+        title: "Sprint Delivery Framework",
+        code: `[Sprint Cadence]
+Week 1: Architecture review -> Data contracts -> Sprint kickoff
+Week 2: Core feature development -> Unit testing -> CI validation
+Milestone Gate: Client staging demo -> Acceptance sign-off
+Production: Automated blue/green deploy -> 30-day warranty window`
+      }
+    }
   ];
 
   const faqs = [
     {
       q: "Who owns the intellectual property and source code?",
-      a: "You do. 100%. Upon completion and milestone approval, full source code repositories, architectural documentation, CI/CD scripts, and deployment keys are transferred unconditionally to your organization."
+      a: "You do. 100%. Upon completion and milestone approval, all custom software repositories, model weights, deployment scripts, and architectural documentation belong exclusively to your organization."
     },
     {
-      q: "How does the milestone-based payment model work?",
-      a: "Every engagement is divided into functional sprint milestones (e.g., Gate 1: Architecture, Gate 2: MVP Alpha, Gate 3: Integration, Gate 4: Production). You review, test, and approve each milestone deliverable before proceeding to the next."
+      q: "How does your milestone-based pricing work?",
+      a: "We break every project into clear, functional milestones (e.g., Gate 1: Architecture, Gate 2: Core Backend, Gate 3: UI & Integration, Gate 4: Production Handover). You review, test, and approve each deliverable before paying for that milestone."
     },
     {
-      q: "How are 12 Links engineering pods structured?",
-      a: "Each pod is custom-assembled based on your blueprint: an Engineering Director / Tech Lead, dedicated Fullstack and AI/Data Engineers, and a QA Specialist. You communicate directly with your dedicated lead."
+      q: "How does working with a student-led team benefit our business?",
+      a: "You get exceptionally motivated, cutting-edge engineers working directly on your code without the bloated overhead, layers of account managers, or marked-up hourly rates of traditional consultancies. Every team member has verified real-world code output."
     },
     {
-      q: "Are solutions compliant with South African data laws (POPIA)?",
-      a: "Yes. All data pipelines, cloud deployments, and authentication modules follow POPIA (Protection of Personal Information Act No. 4 of 2013) standards, including localized data residency options."
+      q: "Are your cloud deployments compliant with South African POPIA laws?",
+      a: "Yes. All data storage, user authentication, and data pipelines comply with POPIA Act No. 4 of 2013, including hosting options in South African cloud regions (e.g. AWS Cape Town af-south-1) for localized data residency."
     },
     {
-      q: "What happens after our system goes live?",
-      a: "Every delivery includes a standard 30-day post-launch warranty and monitoring window. We also offer continuous maintenance, model fine-tuning, and SLA-backed retainer partnerships."
+      q: "What support do we receive after our platform goes live?",
+      a: "Every engagement includes an automatic 30-day post-launch warranty window where our team resolves any functional bugs at zero extra cost. We also provide ongoing maintenance and retainer partnerships if needed."
     }
   ];
 
   return (
-    <div className="pb-24 bg-[#0A0A0F] text-foreground min-h-screen">
-      {/* ── PAGE HERO ── */}
-      <section className="pt-24 pb-16 text-center px-4 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[400px] bg-[#00FF88]/5 rounded-full blur-[130px] pointer-events-none" />
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10">
-          <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#00FF88] px-3.5 py-1 rounded-full bg-[#00FF88]/10 border border-[#00FF88]/20 inline-block mb-4">
-            Production-Ready Capabilities
-          </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
-            Our Services & Engineering Pods
+    <div className="bg-[#0F1117] text-gray-200 min-h-screen py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="max-w-3xl mb-16">
+          <div className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-2">
+            Capabilities
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+            Production engineering services.
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto mb-8 leading-relaxed">
-            End-to-end technology delivery, applied AI models, and custom software — engineered specifically for African enterprise realities.
+          <p className="text-gray-300 text-lg leading-relaxed font-normal">
+            We assemble dedicated student engineering pods to build production systems from scratch or eliminate critical bottlenecks in your existing stack.
           </p>
-        </motion.div>
-      </section>
-
-      {/* ── CATEGORY FILTER TABS ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="flex flex-wrap items-center justify-center gap-2 border-b border-white/10 pb-6">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider transition-all ${
-                activeCategory === cat.id
-                  ? "bg-[#00FF88] text-black font-bold shadow-md shadow-[#00FF88]/20"
-                  : "bg-card/40 border border-white/10 text-gray-400 hover:text-white hover:border-white/30"
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
         </div>
-      </section>
 
-      {/* ── SERVICES GRID ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-28">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredServices.map((srv, idx) => (
-            <motion.div
-              key={srv.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
-              className="bg-[#12141D] rounded-2xl overflow-hidden border border-white/10 flex flex-col shadow-xl shadow-black/50 hover:border-[#00FF88]/40 transition-all group"
+        {/* Asymmetric 2-Column Capability Showcase */}
+        <div className="space-y-20 mb-24">
+          {capabilities.map((item) => (
+            <div 
+              key={item.id}
+              className="grid lg:grid-cols-12 gap-10 items-start p-8 sm:p-10 rounded-2xl bg-[#141721] border border-white/10"
             >
-              <div className={`h-40 bg-gradient-to-br ${srv.gradient} flex items-center justify-center relative overflow-hidden`}>
-                <div className="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white to-transparent" />
-                <srv.icon className="w-16 h-16 text-white opacity-90 relative z-10 group-hover:scale-110 transition-transform duration-300" />
-              </div>
-              
-              <div className="p-6 flex-grow flex flex-col">
-                <h3 className="text-xl font-bold text-white mb-3">{srv.title}</h3>
-                
-                {/* Tech tags preview */}
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {srv.stack.slice(0, 4).map((tech, tIdx) => (
-                    <span key={tIdx} className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-gray-300 border border-white/5">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+              {/* Left Column: Scope & Features (7 Cols) */}
+              <div className="lg:col-span-7 space-y-4">
+                <span className="text-xs font-medium text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2.5 py-1 rounded">
+                  {item.tag}
+                </span>
 
-                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${expanded === idx ? "max-h-[500px] mb-4 opacity-100" : "max-h-0 opacity-0"}`}>
-                  <p className="text-xs text-gray-300 leading-relaxed mb-4 font-light">{srv.detail}</p>
-                  <ul className="space-y-2 mb-4">
-                    {srv.features.map((feat, fidx) => (
-                      <li key={fidx} className="text-xs text-gray-400 flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#00FF88] mt-1.5 shrink-0" />
-                        {feat}
+                <h2 className="text-2xl sm:text-3xl font-bold text-white leading-snug">
+                  {item.title}
+                </h2>
+
+                <p className="text-gray-300 text-sm leading-relaxed font-normal">
+                  {item.description}
+                </p>
+
+                <div className="pt-2">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
+                    Key Deliverables:
+                  </div>
+                  <ul className="space-y-2">
+                    {item.features.map((feat, fIdx) => (
+                      <li key={fIdx} className="flex items-start gap-2 text-xs text-gray-300 font-normal">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <span>{feat}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
-                  <button
-                    type="button"
-                    onClick={() => setExpanded(expanded === idx ? null : idx)}
-                    className="text-[#00FF88] text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1 hover:text-white transition-colors"
-                  >
-                    {expanded === idx ? "Hide Details" : "View Blueprint"} 
-                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${expanded === idx ? "rotate-180" : ""}`} />
-                  </button>
+                <div className="p-3 bg-white/[0.02] border border-white/5 rounded-lg text-xs text-gray-300 pt-3">
+                  <span className="font-semibold text-white">What You Receive: </span>
+                  {item.deliverables}
+                </div>
 
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {item.tech.map((t, tIdx) => (
+                    <span key={tIdx} className="font-mono text-[11px] px-2 py-0.5 rounded bg-white/5 text-gray-300 border border-white/5">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="pt-4">
                   <Link
-                    href={`/contact?service=${encodeURIComponent(srv.title)}`}
-                    className="text-xs text-gray-400 hover:text-white font-mono flex items-center gap-1 group/btn"
+                    href={`/contact?service=${encodeURIComponent(item.title)}`}
+                    className="inline-flex items-center gap-2 text-xs font-medium text-emerald-400 hover:text-white transition-colors"
                   >
-                    Scope Project <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
+                    Scope a {item.title} Project <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
 
-      {/* ── WHAT CLIENTS GET ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-28">
-        <div className="text-center mb-16">
-          <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#00FF88] mb-2 inline-block">
-            Delivery Assurance
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">What Every Client Receives</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto font-light text-sm sm:text-base">
-            Every engagement operates under these four foundational pillars — regardless of engagement size.
-          </p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {clientBenefits.map((b, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className="bg-card/40 border border-white/10 rounded-2xl p-6 hover:border-[#00FF88]/30 transition-all group backdrop-blur-sm"
-            >
-              <div className="w-11 h-11 rounded-xl bg-[#00FF88]/10 border border-[#00FF88]/20 flex items-center justify-center mb-5 group-hover:bg-[#00FF88]/20 transition-colors">
-                <b.icon className="w-5 h-5 text-[#00FF88]" />
+              {/* Right Column: Real Architecture / Code Snippet Frame (5 Cols) */}
+              <div className="lg:col-span-5">
+                <div className="rounded-xl border border-white/10 bg-[#0E1017] overflow-hidden">
+                  <div className="px-4 py-2.5 bg-[#12151F] border-b border-white/10 flex items-center justify-between">
+                    <span className="text-xs font-mono text-gray-400">{item.uiPreview.title}</span>
+                    <span className="text-[10px] text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-800/40 font-mono">
+                      Production Spec
+                    </span>
+                  </div>
+                  <div className="p-4 overflow-x-auto text-xs font-mono text-gray-300 bg-[#0A0C12] leading-relaxed">
+                    <pre>
+                      <code>{item.uiPreview.code}</code>
+                    </pre>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-base font-bold text-white mb-2">{b.title}</h3>
-              <p className="text-gray-400 text-xs sm:text-sm leading-relaxed font-light">{b.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </section>
 
-      {/* ── CLIENT FAQ ACCORDION ── */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-28">
-        <div className="text-center mb-12">
-          <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#00FF88] mb-2 inline-block">
-            Client Clarity
-          </span>
-          <h2 className="text-3xl font-bold text-white mb-3">Frequently Asked Questions</h2>
-          <p className="text-gray-400 text-sm font-light">
-            Clear answers about pricing, IP ownership, sprint velocity, and governance.
-          </p>
-        </div>
+        {/* Clear FAQ Accordion */}
+        <div className="max-w-3xl mx-auto mb-20">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Frequently Asked Questions</h2>
+            <p className="text-gray-400 text-sm font-normal">
+              Direct, honest answers about our pricing, intellectual property, and pod velocity.
+            </p>
+          </div>
 
-        <div className="space-y-4">
-          {faqs.map((faq, i) => {
-            const isOpen = openFaq === i;
-            return (
-              <div
-                key={i}
-                className="bg-card/40 border border-white/10 rounded-xl overflow-hidden transition-colors hover:border-white/20 backdrop-blur-sm"
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenFaq(isOpen ? null : i)}
-                  className="w-full text-left px-6 py-4 flex items-center justify-between text-white font-medium text-sm sm:text-base gap-4"
+          <div className="space-y-3">
+            {faqs.map((faq, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <div
+                  key={i}
+                  className="rounded-xl bg-[#141721] border border-white/10 overflow-hidden"
                 >
-                  <span className="flex items-center gap-3">
-                    <HelpCircle className="w-4 h-4 text-[#00FF88] shrink-0" />
-                    {faq.q}
-                  </span>
-                  <ChevronDown className={`w-4 h-4 text-gray-400 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
-                </button>
-                {isOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="px-6 pb-5 pt-1 text-xs sm:text-sm text-gray-300 leading-relaxed font-light border-t border-white/5"
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(isOpen ? null : i)}
+                    className="w-full text-left px-5 py-4 flex items-center justify-between text-white font-medium text-sm gap-4"
                   >
-                    {faq.a}
-                  </motion.div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ── BOTTOM CTA ── */}
-      <section className="text-center px-4 max-w-5xl mx-auto">
-        <div className="bg-card/50 border border-white/10 p-10 sm:p-14 rounded-3xl backdrop-blur-md relative overflow-hidden">
-          <div className="absolute top-0 right-1/4 w-60 h-60 bg-[#00FF88]/10 rounded-full blur-3xl pointer-events-none" />
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to initialize your next project?</h2>
-          <p className="text-gray-400 max-w-xl mx-auto mb-8 text-sm sm:text-base font-light">
-            Receive a formal architecture proposal, line-item budget, and sprint milestones within 24 hours.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link 
-              href="/contact" 
-              className="inline-flex items-center justify-center gap-2 bg-[#00FF88] text-black font-bold px-8 py-3.5 rounded-lg hover:bg-[#00FF88]/90 transition-all text-xs font-mono uppercase tracking-wider shadow-lg shadow-[#00FF88]/20"
-            >
-              Start a Project <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link 
-              href="/industries" 
-              className="border border-white/20 text-white hover:border-[#00FF88]/50 hover:bg-white/5 px-8 py-3.5 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all"
-            >
-              Explore Industries
-            </Link>
+                    <span>{faq.q}</span>
+                    <ChevronDown className={`w-4 h-4 text-gray-400 shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {isOpen && (
+                    <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-gray-300 leading-relaxed font-normal border-t border-white/5">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
-      </section>
+
+        {/* Closing Banner */}
+        <div className="p-8 sm:p-12 rounded-2xl bg-[#141721] border border-white/10 text-center max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+            Ready to scope your engineering requirements?
+          </h2>
+          <p className="text-gray-300 text-sm mb-6 font-normal leading-relaxed">
+            Tell us what you need built. An engineering lead will review your scope and provide a milestone proposal within 24 hours.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-6 py-3 rounded-lg text-sm transition-colors"
+          >
+            Start a Project
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+      </div>
     </div>
   );
 }

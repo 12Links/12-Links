@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, ShieldCheck } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
 export default function Navbar() {
@@ -16,12 +16,10 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile drawer on route change
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -43,40 +41,39 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50">
-      {/* Skip to Content for Accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] bg-[#00FF88] text-black px-4 py-2 rounded font-bold text-xs uppercase"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] bg-emerald-500 text-white px-4 py-2 rounded font-medium text-xs"
       >
         Skip to main content
       </a>
 
       <nav
         aria-label="Main Navigation"
-        className={`w-full transition-all duration-300 ${
+        className={`w-full transition-all duration-200 ${
           scrolled
-            ? "bg-[#0A0A0F]/90 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/40 py-3"
+            ? "bg-[#0F1117]/95 backdrop-blur-md border-b border-white/10 shadow-sm py-3.5"
             : "bg-transparent border-b border-transparent py-5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             
-            {/* ── Navbar Brand Block ── */}
+            {/* Brand Logo */}
             <div className="flex-shrink-0">
-              <Link href="/" className="flex items-center gap-3 group" aria-label="12 Links Homepage">
+              <Link href="/" className="flex items-center gap-2.5 group" aria-label="12 Links Homepage">
                 <img 
                   src="/12links_logo.svg" 
                   alt="12 Links Logo" 
-                  className="w-10 h-10 object-contain transition-transform group-hover:scale-105" 
+                  className="w-9 h-9 object-contain transition-transform group-hover:scale-105" 
                 />
-                <span className="text-2xl font-bold tracking-tighter text-white">
-                  12<span className="text-[#00FF88] transition-colors group-hover:text-[#00FF88]/80">Links</span>
+                <span className="text-xl font-bold tracking-tight text-white">
+                  12<span className="text-emerald-400">Links</span>
                 </span>
               </Link>
             </div>
             
-            {/* ── Navigation Links (Desktop) ── */}
+            {/* Desktop Navigation Links */}
             <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
               {links.map((link) => {
                 const isActive = location === link.href;
@@ -84,63 +81,56 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`relative px-3.5 py-2 rounded-lg text-xs font-mono font-medium tracking-wider uppercase transition-colors ${
+                    className={`relative px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
                       isActive
-                        ? "text-[#00FF88]"
+                        ? "text-white bg-white/10"
                         : "text-gray-300 hover:text-white hover:bg-white/5"
                     }`}
                   >
                     {link.name}
-                    {isActive && (
-                      <motion.div
-                        layoutId="nav-pill"
-                        className="absolute inset-0 bg-[#00FF88]/10 border border-[#00FF88]/30 rounded-lg -z-10"
-                        transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                      />
-                    )}
                   </Link>
                 );
               })}
             </div>
 
-            {/* ── Right CTA Button (Desktop) ── */}
+            {/* Desktop Right CTA */}
             <div className="hidden md:flex items-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-[#00FF88] text-black font-bold px-4 py-2 rounded-lg hover:bg-[#00FF88]/90 transition-all text-xs font-mono tracking-wider uppercase shadow-md shadow-[#00FF88]/20 group"
+                className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors shadow-sm"
               >
                 Start a Project
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
             
-            {/* ── Mobile Hamburger Toggle ── */}
+            {/* Mobile Menu Toggle */}
             <div className="md:hidden flex items-center">
               <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-gray-300 hover:text-white p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#00FF88]"
+                className="text-gray-300 hover:text-white p-2 rounded-lg focus:outline-none"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
               >
-                {isOpen ? <X className="h-6 w-6 text-[#00FF88]" /> : <Menu className="h-6 w-6" />}
+                {isOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6" />}
               </button>
             </div>
 
           </div>
         </div>
 
-        {/* ── Mobile Drawer ── */}
+        {/* Mobile Drawer */}
         <AnimatePresence>
           {isOpen && (
             <motion.div 
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25 }}
-              className="md:hidden bg-[#0A0A0F]/98 backdrop-blur-2xl border-b border-white/10 overflow-hidden"
+              transition={{ duration: 0.2 }}
+              className="md:hidden bg-[#0F1117] border-b border-white/10 overflow-hidden"
             >
-              <div className="px-4 pt-4 pb-6 space-y-2">
+              <div className="px-4 pt-3 pb-6 space-y-1.5">
                 {links.map((link) => {
                   const isActive = location === link.href;
                   return (
@@ -148,9 +138,9 @@ export default function Navbar() {
                       key={link.name}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className={`block px-4 py-3 rounded-lg text-sm font-mono tracking-wider uppercase transition-colors ${
+                      className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                         isActive 
-                          ? "text-[#00FF88] bg-[#00FF88]/10 border border-[#00FF88]/30 font-bold" 
+                          ? "text-white bg-white/10 font-semibold" 
                           : "text-gray-300 hover:text-white hover:bg-white/5"
                       }`}
                     >
@@ -159,11 +149,11 @@ export default function Navbar() {
                   );
                 })}
 
-                <div className="pt-4 border-t border-white/10">
+                <div className="pt-3 border-t border-white/10 mt-2">
                   <Link
                     href="/contact"
                     onClick={() => setIsOpen(false)}
-                    className="w-full flex items-center justify-center gap-2 bg-[#00FF88] text-black font-bold px-4 py-3.5 rounded-lg text-xs font-mono uppercase tracking-wider"
+                    className="w-full flex items-center justify-center gap-2 bg-emerald-500 text-white font-medium px-4 py-3 rounded-lg text-sm transition-colors"
                   >
                     Start a Project
                     <ArrowRight className="w-4 h-4" />
