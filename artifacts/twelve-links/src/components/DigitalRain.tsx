@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 export default function DigitalRain() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -7,50 +7,76 @@ export default function DigitalRain() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let animationId: number;
+    let width = (canvas.width = canvas.parentElement?.offsetWidth || window.innerWidth);
+    let height = (canvas.height = canvas.parentElement?.offsetHeight || window.innerHeight);
+
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      if (!canvas) return;
+      width = canvas.width = canvas.parentElement?.offsetWidth || window.innerWidth;
+      height = canvas.height = canvas.parentElement?.offsetHeight || window.innerHeight;
     };
-    resize();
-    window.addEventListener('resize', resize);
 
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%""\'#&_(),.;:?!\\|{}<>[]^~';
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops: number[] = [];
+    window.addEventListener("resize", resize);
 
-    for (let x = 0; x < columns; x++) {
-      drops[x] = 1;
-    }
+    const chars = "01101001011100101011010100110110100110012LINKS<>{}[]$#_+-=*/";
+    const fontSize = 13;
+    const columns = Math.floor(width / fontSize);
+    const drops: number[] = Array.from({ length: columns }, () => Math.floor(Math.random() * -50));
 
-    const draw = () => {
-      ctx.fillStyle = 'rgba(10, 10, 15, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    let lastDraw = 0;
+    const fpsInterval = 1000 / 24; // 24 FPS for subtle, smooth, battery-friendly ambient effect
 
-      ctx.fillStyle = '#00FF88';
-      ctx.font = fontSize + 'px monospace';
+    const draw = (timestamp: number) => {
+      animationId = requestAnimationFrame(draw);
+
+      const elapsed = timestamp - lastDraw;
+      if (elapsed < fpsInterval) return;
+      lastDraw = timestamp - (elapsed % fpsInterval);
+
+      ctx.fillStyle = "rgba(10, 10, 15, 0.1)";
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.fillStyle = "#00FF88";
+      ctx.font = `${fontSize}px 'Space Mono', monospace`;
 
       for (let i = 0; i < drops.length; i++) {
         const text = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        // Subtle gradient effect for leading characters
+        if (drops[i] % 10 === 0) {
+          ctx.fillStyle = "#FFFFFF";
+        } else {
+          ctx.fillStyle = "rgba(0, 255, 136, 0.75)";
+        }
+
+        ctx.fillText(text, x, y);
+
+        if (y > height && Math.random() > 0.985) {
           drops[i] = 0;
         }
         drops[i]++;
       }
     };
 
-    const interval = setInterval(draw, 33);
+    animationId = requestAnimationFrame(draw);
 
     return () => {
-      clearInterval(interval);
-      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", resize);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="matrix-canvas" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.14] mix-blend-screen z-0"
+      aria-hidden="true"
+    />
+  );
 }

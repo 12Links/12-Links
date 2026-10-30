@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 function star(cx: number, cy: number, R: number, r: number): string {
   const pts: string[] = [];
@@ -16,7 +17,7 @@ function FlagSVG({ code }: { code: string }) {
   switch (code) {
     case "za":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="South Africa">
           <rect width="120" height="80" fill="#DE3831" />
           <rect y="53" width="120" height="27" fill="#0032A0" />
           <rect y="26" width="120" height="28" fill="#007A4D" />
@@ -32,7 +33,7 @@ function FlagSVG({ code }: { code: string }) {
       );
     case "ng":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="Nigeria">
           <rect width="40" height="80" fill="#008751" />
           <rect x="40" width="40" height="80" fill="#fff" />
           <rect x="80" width="40" height="80" fill="#008751" />
@@ -40,7 +41,7 @@ function FlagSVG({ code }: { code: string }) {
       );
     case "gh":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="Ghana">
           <rect width="120" height="27" fill="#CF0921" />
           <rect y="27" width="120" height="26" fill="#FCD116" />
           <rect y="53" width="120" height="27" fill="#006B3F" />
@@ -49,7 +50,7 @@ function FlagSVG({ code }: { code: string }) {
       );
     case "ke":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="Kenya">
           <rect width="120" height="27" fill="#BB0000" />
           <rect y="27" width="120" height="26" fill="#006600" />
           <rect y="53" width="120" height="27" fill="#BB0000" />
@@ -67,7 +68,7 @@ function FlagSVG({ code }: { code: string }) {
       );
     case "rw":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="Rwanda">
           <rect width="120" height="80" fill="#20603D" />
           <rect width="120" height="50" fill="#FAD201" />
           <rect width="120" height="33" fill="#20A0D0" />
@@ -81,7 +82,7 @@ function FlagSVG({ code }: { code: string }) {
       );
     case "eg":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="Egypt">
           <rect width="120" height="27" fill="#CE1126" />
           <rect y="27" width="120" height="26" fill="#fff" />
           <rect y="53" width="120" height="27" fill="#000" />
@@ -91,7 +92,7 @@ function FlagSVG({ code }: { code: string }) {
       );
     case "et":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="Ethiopia">
           <rect width="120" height="27" fill="#078930" />
           <rect y="27" width="120" height="26" fill="#FCDD09" />
           <rect y="53" width="120" height="27" fill="#DA121A" />
@@ -101,7 +102,7 @@ function FlagSVG({ code }: { code: string }) {
       );
     case "sn":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="Senegal">
           <rect width="40" height="80" fill="#00853F" />
           <rect x="40" width="40" height="80" fill="#FDEF42" />
           <rect x="80" width="40" height="80" fill="#E31B23" />
@@ -110,7 +111,7 @@ function FlagSVG({ code }: { code: string }) {
       );
     case "tz":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="Tanzania">
           <polygon points="0,0 120,0 120,22 0,80" fill="#1EB53A" />
           <polygon points="0,58 120,22 120,80 0,80" fill="#00A3DD" />
           <polygon points="0,0 120,0 120,32 0,80" fill="#000" />
@@ -123,7 +124,7 @@ function FlagSVG({ code }: { code: string }) {
       );
     case "ug":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="Uganda">
           {["#000","#FCDC04","#DE3108","#000","#FCDC04","#DE3108"].map((c, i) => (
             <rect key={i} y={i * (80/6)} width="120" height={80/6 + 0.5} fill={c} />
           ))}
@@ -135,14 +136,14 @@ function FlagSVG({ code }: { code: string }) {
       );
     case "ma":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="Morocco">
           <rect width="120" height="80" fill="#C1272D" />
           <polygon points={star(60, 40, 13, 5.5)} fill="none" stroke="#006233" strokeWidth="1.8" strokeLinejoin="round" />
         </svg>
       );
     case "ci":
       return (
-        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox={v} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-label="Côte d'Ivoire">
           <rect width="40" height="80" fill="#F77F00" />
           <rect x="40" width="40" height="80" fill="#fff" />
           <rect x="80" width="40" height="80" fill="#009A00" />
@@ -154,18 +155,18 @@ function FlagSVG({ code }: { code: string }) {
 }
 
 const FLAGS = [
-  { x: 310, y: 230, size: 72, delay: 0,    code: "za", name: "South Africa", isSA: true  },
-  { x: 175, y: 70,  size: 54, delay: 0.1,  code: "gh", name: "Ghana"        },
-  { x: 310, y: 55,  size: 54, delay: 0.25, code: "ng", name: "Nigeria"      },
-  { x: 485, y: 65,  size: 54, delay: 0.15, code: "ke", name: "Kenya"        },
-  { x: 530, y: 195, size: 54, delay: 0.35, code: "et", name: "Ethiopia"     },
-  { x: 510, y: 320, size: 54, delay: 0.5,  code: "rw", name: "Rwanda"       },
-  { x: 415, y: 410, size: 54, delay: 0.6,  code: "tz", name: "Tanzania"     },
-  { x: 230, y: 390, size: 54, delay: 0.7,  code: "ug", name: "Uganda"       },
-  { x:  85, y: 300, size: 54, delay: 0.45, code: "sn", name: "Senegal"      },
-  { x:  65, y: 165, size: 54, delay: 0.2,  code: "ci", name: "Côte d'Ivoire"},
-  { x: 380, y: 125, size: 54, delay: 0.3,  code: "eg", name: "Egypt"        },
-  { x: 170, y: 225, size: 54, delay: 0.55, code: "ma", name: "Morocco"      },
+  { x: 310, y: 230, size: 76, delay: 0,    code: "za", name: "South Africa", isSA: true, hub: "Pretoria & JHB Primary Hub" },
+  { x: 175, y: 70,  size: 54, delay: 0.1,  code: "gh", name: "Ghana", hub: "Accra Tech Node" },
+  { x: 310, y: 55,  size: 54, delay: 0.25, code: "ng", name: "Nigeria", hub: "Lagos Tech Ecosystem" },
+  { x: 485, y: 65,  size: 54, delay: 0.15, code: "ke", name: "Kenya", hub: "Nairobi Silicon Savannah" },
+  { x: 530, y: 195, size: 54, delay: 0.35, code: "et", name: "Ethiopia", hub: "Addis Ababa AI Center" },
+  { x: 510, y: 320, size: 54, delay: 0.5,  code: "rw", name: "Rwanda", hub: "Kigali Innovation Hub" },
+  { x: 415, y: 410, size: 54, delay: 0.6,  code: "tz", name: "Tanzania", hub: "Dar es Salaam Node" },
+  { x: 230, y: 390, size: 54, delay: 0.7,  code: "ug", name: "Uganda", hub: "Kampala Innovation Lab" },
+  { x:  85, y: 300, size: 54, delay: 0.45, code: "sn", name: "Senegal", hub: "Dakar Digital Gateway" },
+  { x:  65, y: 165, size: 54, delay: 0.2,  code: "ci", name: "Côte d'Ivoire", hub: "Abidjan Tech Node" },
+  { x: 380, y: 125, size: 54, delay: 0.3,  code: "eg", name: "Egypt", hub: "Cairo Smart Center" },
+  { x: 170, y: 225, size: 54, delay: 0.55, code: "ma", name: "Morocco", hub: "Casablanca Nearshore" },
 ];
 
 const CONNECTIONS: [number, number, string][] = [
@@ -192,74 +193,211 @@ const W = 590;
 const H = 470;
 
 export default function AfricanFlags() {
-  return (
-    <div className="relative pointer-events-none select-none" style={{ width: W, height: H }}>
-      <div className="absolute rounded-full blur-[90px] opacity-25 pointer-events-none"
-        style={{ width: 380, height: 320, left: "52%", top: "48%",
-          background: "radial-gradient(circle, #7c3aed 0%, #1e40af 55%, transparent 100%)",
-          transform: "translate(-50%,-50%)" }} />
-      <div className="absolute rounded-full blur-[60px] opacity-15 pointer-events-none"
-        style={{ width: 220, height: 220, left: "53%", top: "49%",
-          background: "radial-gradient(circle, #00FF88 0%, transparent 100%)",
-          transform: "translate(-50%,-50%)" }} />
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
-      <svg className="absolute inset-0" width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ overflow: "visible" }}>
+  return (
+    <div className="relative select-none w-full max-w-[590px] aspect-[590/470] mx-auto">
+      {/* Ambient background glows */}
+      <div
+        className="absolute rounded-full blur-[90px] opacity-25 pointer-events-none"
+        style={{
+          width: "65%",
+          height: "65%",
+          left: "52%",
+          top: "48%",
+          background: "radial-gradient(circle, #7c3aed 0%, #1e40af 55%, transparent 100%)",
+          transform: "translate(-50%,-50%)",
+        }}
+      />
+      <div
+        className="absolute rounded-full blur-[60px] opacity-20 pointer-events-none"
+        style={{
+          width: "40%",
+          height: "40%",
+          left: "53%",
+          top: "49%",
+          background: "radial-gradient(circle, #00FF88 0%, transparent 100%)",
+          transform: "translate(-50%,-50%)",
+        }}
+      />
+
+      {/* Connection Lines SVG */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox={`0 0 ${W} ${H}`}
+        style={{ overflow: "visible" }}
+      >
         <defs>
-          <filter id="glow-line">
+          <filter id="glow-line" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="1.8" result="blur" />
-            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
           </filter>
         </defs>
+
         {CONNECTIONS.map(([a, b, color], i) => {
-          const fa = FLAGS[a]; const fb = FLAGS[b];
+          const fa = FLAGS[a];
+          const fb = FLAGS[b];
           const isSALine = a === 0 || b === 0;
+          const isHighlighted = hoveredIdx === a || hoveredIdx === b;
           return (
-            <motion.line key={i} x1={fa.x} y1={fa.y} x2={fb.x} y2={fb.y}
-              stroke={color} strokeWidth={isSALine ? 1.1 : 0.65} filter="url(#glow-line)"
-              initial={{ opacity: 0.05 }}
-              animate={{ opacity: [0.1, isSALine ? 0.65 : 0.35, 0.1] }}
-              transition={{ duration: 2.4 + (i % 5) * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.12 }}
+            <motion.line
+              key={i}
+              x1={fa.x}
+              y1={fa.y}
+              x2={fb.x}
+              y2={fb.y}
+              stroke={isHighlighted ? "#00FF88" : color}
+              strokeWidth={isHighlighted ? 2 : isSALine ? 1.2 : 0.75}
+              filter="url(#glow-line)"
+              initial={{ opacity: 0.1 }}
+              animate={{
+                opacity: isHighlighted ? 0.9 : [0.15, isSALine ? 0.7 : 0.35, 0.15],
+              }}
+              transition={{
+                duration: 2.5 + (i % 5) * 0.4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.08,
+              }}
             />
           );
         })}
-        {CONNECTIONS.filter(([a, b]) => a === 0 || b === 0).slice(0, 8).map(([a, b], i) => {
-          const fa = FLAGS[a]; const fb = FLAGS[b];
+
+        {/* Pulse particles along primary hubs */}
+        {CONNECTIONS.filter(([a, b]) => a === 0 || b === 0).slice(0, 10).map(([a, b], i) => {
+          const fa = FLAGS[a];
+          const fb = FLAGS[b];
           return (
-            <motion.circle key={`p-${i}`} cx={0} cy={0} r="2.2" fill="#00FF88" filter="url(#glow-line)"
-              animate={{ opacity: [0, 0.9, 0], x: [fa.x, fb.x], y: [fa.y, fb.y] }}
-              transition={{ duration: 1.8 + i * 0.35, repeat: Infinity, ease: "linear", delay: i * 0.5 }}
+            <motion.circle
+              key={`p-${i}`}
+              cx={0}
+              cy={0}
+              r="2.5"
+              fill="#00FF88"
+              filter="url(#glow-line)"
+              animate={{
+                opacity: [0, 1, 0],
+                x: [fa.x, fb.x],
+                y: [fa.y, fb.y],
+              }}
+              transition={{
+                duration: 2.2 + i * 0.3,
+                repeat: Infinity,
+                ease: "linear",
+                delay: i * 0.4,
+              }}
             />
           );
         })}
       </svg>
 
-      {FLAGS.map((flag, i) => (
-        <motion.div key={i} className="absolute"
-          style={{ left: flag.x, top: flag.y, width: flag.size, height: flag.size, transform: "translate(-50%,-50%)", zIndex: flag.isSA ? 10 : 5 }}
-          animate={{ y: [0, flag.isSA ? -5 : -9, 0] }}
-          transition={{ duration: flag.isSA ? 3.8 : 3 + flag.delay * 0.8, repeat: Infinity, ease: "easeInOut", delay: flag.delay }}
-        >
-          <div className="absolute inset-0 rounded-full" style={{
-            boxShadow: flag.isSA
-              ? "0 0 28px 8px rgba(0,255,136,0.55), 0 0 60px 12px rgba(0,255,136,0.2)"
-              : "0 0 16px 4px rgba(129,140,248,0.45), 0 0 30px 6px rgba(129,140,248,0.15)"
-          }} />
-          <div className="absolute rounded-full" style={{
-            inset: -3,
-            background: "radial-gradient(circle at 35% 35%, rgba(60,60,100,0.7) 0%, rgba(8,8,18,0.97) 100%)",
-            boxShadow: "inset 0 0 10px rgba(0,0,0,0.8)"
-          }} />
-          <div className="absolute rounded-full overflow-hidden" style={{ inset: 3, boxShadow: "inset 0 2px 6px rgba(0,0,0,0.5)" }}>
-            <FlagSVG code={flag.code} />
+      {/* Flag Node Elements positioned proportionally */}
+      {FLAGS.map((flag, i) => {
+        const isHovered = hoveredIdx === i;
+        const leftPercent = (flag.x / W) * 100;
+        const topPercent = (flag.y / H) * 100;
+        const sizeRem = flag.isSA ? "clamp(3.5rem, 8vw, 4.8rem)" : "clamp(2.5rem, 6vw, 3.4rem)";
+
+        return (
+          <div
+            key={i}
+            className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10 group"
+            style={{
+              left: `${leftPercent}%`,
+              top: `${topPercent}%`,
+              zIndex: flag.isSA ? 20 : isHovered ? 30 : 10,
+            }}
+            onMouseEnter={() => setHoveredIdx(i)}
+            onMouseLeave={() => setHoveredIdx(null)}
+            onClick={() => setHoveredIdx(isHovered ? null : i)}
+          >
+            <motion.div
+              style={{
+                width: sizeRem,
+                height: sizeRem,
+              }}
+              animate={{
+                y: [0, flag.isSA ? -4 : -7, 0],
+                scale: isHovered ? 1.15 : 1,
+              }}
+              transition={{
+                y: {
+                  duration: flag.isSA ? 3.8 : 3 + flag.delay * 0.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: flag.delay,
+                },
+                scale: { duration: 0.2 },
+              }}
+              className="relative flex items-center justify-center"
+            >
+              {/* Outer Glow Halo */}
+              <div
+                className="absolute inset-0 rounded-full transition-all duration-300"
+                style={{
+                  boxShadow: flag.isSA
+                    ? isHovered
+                      ? "0 0 35px 12px rgba(0,255,136,0.8)"
+                      : "0 0 26px 8px rgba(0,255,136,0.55), 0 0 50px 10px rgba(0,255,136,0.25)"
+                    : isHovered
+                    ? "0 0 25px 8px rgba(0,255,136,0.7)"
+                    : "0 0 14px 3px rgba(129,140,248,0.45)",
+                }}
+              />
+
+              {/* Node Border Ring */}
+              <div
+                className={`absolute inset-[-3px] rounded-full transition-colors ${
+                  flag.isSA || isHovered ? "border-2 border-[#00FF88]" : "border border-white/20"
+                }`}
+                style={{
+                  background:
+                    "radial-gradient(circle at 35% 35%, rgba(60,60,100,0.7) 0%, rgba(8,8,18,0.97) 100%)",
+                }}
+              />
+
+              {/* Inner Flag SVG */}
+              <div
+                className="absolute inset-[3px] rounded-full overflow-hidden shadow-inner"
+              >
+                <FlagSVG code={flag.code} />
+              </div>
+            </motion.div>
+
+            {/* South Africa Permanent Tag or Tooltip */}
+            {flag.isSA && !isHovered && (
+              <div
+                className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] font-mono font-bold tracking-[0.2em] whitespace-nowrap uppercase text-[#00FF88] px-2 py-0.5 rounded bg-black/60 backdrop-blur-sm border border-[#00FF88]/30 pointer-events-none"
+                style={{ textShadow: "0 0 8px #00FF88" }}
+              >
+                Primary Hub
+              </div>
+            )}
+
+            {/* Interactive Tooltip Card */}
+            <AnimatePresence>
+              {isHovered && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 4, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-1.5 rounded-lg bg-[#0F111A]/95 border border-[#00FF88]/50 shadow-xl shadow-black/80 whitespace-nowrap pointer-events-none z-50 text-center"
+                >
+                  <p className="text-white font-bold text-xs flex items-center justify-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#00FF88] animate-ping" />
+                    {flag.name}
+                  </p>
+                  <p className="text-[10px] text-gray-400 font-mono">{flag.hub}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-          {flag.isSA && (
-            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] font-bold tracking-[0.2em] whitespace-nowrap uppercase"
-              style={{ color: "#00FF88", textShadow: "0 0 8px #00FF88" }}>
-              South Africa
-            </div>
-          )}
-        </motion.div>
-      ))}
+        );
+      })}
     </div>
   );
 }

@@ -19,7 +19,7 @@ function ScrollToTop() {
   const [location] = useLocation();
   
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [location]);
 
   return null;
@@ -29,7 +29,7 @@ function Router() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex-grow pt-20">
+      <main id="main-content" className="flex-grow pt-20">
         <ScrollToTop />
         <Switch>
           <Route path="/" component={Hero} />
