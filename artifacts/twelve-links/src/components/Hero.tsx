@@ -4,14 +4,17 @@ import {
   CheckCircle2, 
   ChevronRight,
   ShieldCheck,
-  ExternalLink,
-  Terminal,
-  Activity,
+  Code2,
+  Brain,
+  Smartphone,
+  Cloud,
   Layers,
   Cpu,
-  MapPin
+  MapPin,
+  Sparkles
 } from "lucide-react";
 import { Link } from "wouter";
+import TechVisualizer from "./TechVisualizer";
 
 export default function Hero() {
   const founders = [
@@ -24,47 +27,44 @@ export default function Hero() {
     { name: "Zila Aphane", role: "CMO & Analytics", image: "/team/zila.jpg" },
   ];
 
-  const caseStudies = [
+  const capabilities = [
     {
-      id: "paypulse",
-      title: "PayPulse — Transaction Fraud & Mobile Money Engine",
-      category: "Fintech & Banking",
-      summary: "Real-time anomaly scoring for African payment switches, flagging SIM-swap attacks and unauthorized velocity spikes before fund settlement.",
-      impact: "38ms mean latency • 31% reduction in unauthorized transactions",
-      stack: ["Python", "FastAPI", "Scikit-Learn", "Redis", "PostgreSQL", "AWS Cape Town"],
-      uiType: "fintech"
+      icon: Brain,
+      title: "Applied AI & Custom Intelligent Systems",
+      description: "Fine-tuned language models, retrieval-augmented generation (RAG) pipelines, computer vision inspection, and domain-specific AI agents built on your private enterprise data.",
+      stack: ["Python", "PyTorch", "FastAPI", "LangChain", "Hugging Face", "Ollama"]
     },
     {
-      id: "agriyield",
-      title: "AgriYield — Satellite Crop Intelligence & Soil Telemetry",
-      category: "Agriculture & AgriTech",
-      summary: "Offline-first field diagnostics combining Sentinel-2 satellite NDVI imagery with ground IoT moisture probes for Free State & Limpopo farming co-ops.",
-      impact: "40% earlier drought stress detection • Works 100% offline in rural zones",
-      stack: ["PyTorch", "OpenEO", "React", "DuckDB", "SQLite Offline-Sync"],
-      uiType: "agri"
+      icon: Code2,
+      title: "Full-Stack Web & Enterprise SaaS",
+      description: "High-performance web applications, customer portals, and internal operations dashboards designed for rapid responsiveness, clean UX, and high concurrent load.",
+      stack: ["React", "Next.js", "TypeScript", "Node.js", "PostgreSQL", "TailwindCSS"]
     },
     {
-      id: "pulseclinic",
-      title: "PulseClinic — Decentralized Triage & Stockout Monitor",
-      category: "Healthcare & Public Health",
-      summary: "Patient triage routing and chronic medication inventory monitor deployed to reduce outpatient congestion and prevent critical drug stockouts.",
-      impact: "52% reduction in intake wait times • Zero unnotified chronic stockouts",
-      stack: ["React Native", "Node.js", "Express", "Supabase", "Africa's Talking SMS"],
-      uiType: "health"
+      icon: Smartphone,
+      title: "Mobile & Offline-First Applications",
+      description: "Cross-platform iOS and Android apps engineered for African connectivity realities — featuring local SQLite caching, graceful degradation, and seamless background sync.",
+      stack: ["React Native", "Flutter", "SQLite", "Firebase", "WebSockets"]
+    },
+    {
+      icon: Cloud,
+      title: "Cloud Infrastructure, APIs & DevOps",
+      description: "Automated CI/CD pipelines, containerized microservices, and secure cloud environments configured on AWS Cape Town (af-south-1) and Azure with POPIA data governance.",
+      stack: ["Docker", "Kubernetes", "AWS Cape Town", "GitHub Actions", "Terraform"]
     }
   ];
 
   return (
     <div className="bg-[#0F1117] text-gray-200">
       
-      {/* ── 1. HERO SECTION (LEFT-ALIGNED, EDITORIAL, HUMAN) ── */}
+      {/* ── 1. HERO SECTION (LEFT-ALIGNED, EDITORIAL, TECH VISUALIZER) ── */}
       <section className="pt-16 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-white/10">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Column: Bold Typography & Clear Mission */}
           <div className="lg:col-span-7">
             <div className="flex items-center gap-2 text-xs text-emerald-400 font-medium mb-5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Student Builders • Pretoria & Johannesburg Innovation Corridor</span>
             </div>
 
@@ -79,16 +79,16 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-3.5 mb-10">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-6 py-3.5 rounded-lg text-sm transition-colors shadow-sm"
+                className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-6 py-3.5 rounded-lg text-sm transition-colors shadow-sm cursor-pointer"
               >
                 Start a Project
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
-                href="#case-studies"
-                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-gray-200 font-medium px-6 py-3.5 rounded-lg text-sm transition-colors"
+                href="#capabilities"
+                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-gray-200 font-medium px-6 py-3.5 rounded-lg text-sm transition-colors cursor-pointer"
               >
-                View Case Studies
+                Explore Capabilities
               </a>
             </div>
 
@@ -106,70 +106,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Real Software UI Terminal Frame (PayPulse Live Preview) */}
+          {/* Right Column: Interactive Tech Visualizer with High-Tech Vibes */}
           <div className="lg:col-span-5">
-            <div className="rounded-xl border border-white/15 bg-[#141721] overflow-hidden shadow-2xl">
-              {/* Window Header */}
-              <div className="px-4 py-3 bg-[#181B26] border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-rose-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-amber-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="text-xs text-gray-400 font-mono ml-2">paypulse-scoring.internal</span>
-                </div>
-                <span className="text-[11px] text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-2 py-0.5 rounded">
-                  Live Production Stream
-                </span>
-              </div>
-
-              {/* Window Body: Real UI Telemetry */}
-              <div className="p-5 space-y-4 text-xs font-mono">
-                <div className="grid grid-cols-2 gap-3 pb-3 border-b border-white/10">
-                  <div className="p-3 bg-white/[0.02] border border-white/5 rounded-lg">
-                    <span className="text-gray-400 block text-[11px]">Model Scoring Latency</span>
-                    <span className="text-lg font-bold text-white">38.2 ms</span>
-                  </div>
-                  <div className="p-3 bg-white/[0.02] border border-white/5 rounded-lg">
-                    <span className="text-gray-400 block text-[11px]">Risk Accuracy</span>
-                    <span className="text-lg font-bold text-emerald-400">99.4%</span>
-                  </div>
-                </div>
-
-                {/* Live Stream Rows */}
-                <div className="space-y-2">
-                  <div className="text-[11px] text-gray-400 uppercase tracking-wider">Recent Scored Events</div>
-                  
-                  <div className="p-2.5 rounded bg-white/[0.02] border border-white/5 flex items-center justify-between">
-                    <div>
-                      <span className="text-white">TXN_7821_ZAR</span>
-                      <span className="text-gray-400 block text-[10px]">SASSA Card • ATM Withdrawal JHB</span>
-                    </div>
-                    <span className="text-emerald-400 bg-emerald-900/30 px-2 py-0.5 rounded text-[11px]">CLEARED (0.02)</span>
-                  </div>
-
-                  <div className="p-2.5 rounded bg-white/[0.02] border border-white/5 flex items-center justify-between">
-                    <div>
-                      <span className="text-white">TXN_7822_ZAR</span>
-                      <span className="text-gray-400 block text-[10px]">Mobile Money Remit • SIM Switch</span>
-                    </div>
-                    <span className="text-rose-400 bg-rose-900/30 px-2 py-0.5 rounded text-[11px]">HELD (0.89)</span>
-                  </div>
-
-                  <div className="p-2.5 rounded bg-white/[0.02] border border-white/5 flex items-center justify-between">
-                    <div>
-                      <span className="text-white">TXN_7823_ZAR</span>
-                      <span className="text-gray-400 block text-[10px]">Instant EFT • Merchant Gateway</span>
-                    </div>
-                    <span className="text-emerald-400 bg-emerald-900/30 px-2 py-0.5 rounded text-[11px]">CLEARED (0.04)</span>
-                  </div>
-                </div>
-
-                <div className="text-[11px] text-gray-400 pt-2 flex items-center justify-between border-t border-white/10">
-                  <span>Stack: FastAPI + Scikit-Learn</span>
-                  <span className="text-gray-400">AWS Cape Town (af-south-1)</span>
-                </div>
-              </div>
-            </div>
+            <TechVisualizer />
           </div>
 
         </div>
@@ -216,140 +155,83 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* ── 3. REAL PROOF OF WORK / CASE STUDIES (REPLACING ABSTRACT WIDGETS) ── */}
-      <section id="case-studies" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-white/10">
+      {/* ── 3. CORE CAPABILITIES (HONEST WHAT-WE-BUILD ARCHITECTURE) ── */}
+      <section id="capabilities" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-white/10">
         <div className="max-w-3xl mb-16">
           <div className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-2">
-            Proof of Work
+            What We Build
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4">
-            Real software built for African operating realities.
+            Full-stack engineering and custom AI systems.
           </h2>
           <p className="text-gray-300 leading-relaxed font-normal">
-            Every solution we deliver is engineered around local infrastructure constraints: erratic network coverage, high transaction volumes, and stringent data protection laws.
+            We partner with businesses to build modern software from scratch or unblock existing engineering bottlenecks. Here is what we specialize in delivering:
           </p>
         </div>
 
-        {/* 3 Detailed Case Study Rows */}
-        <div className="space-y-16">
-          {caseStudies.map((project, idx) => (
-            <div 
-              key={project.id}
-              className="grid lg:grid-cols-12 gap-8 items-center p-8 rounded-2xl bg-[#141721] border border-white/10"
-            >
-              {/* Text Info (6 Cols) */}
-              <div className="lg:col-span-6 space-y-4">
-                <span className="text-xs font-medium text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2.5 py-1 rounded">
-                  {project.category}
-                </span>
-                
-                <h3 className="text-2xl font-bold text-white leading-snug">
-                  {project.title}
-                </h3>
-                
-                <p className="text-gray-300 text-sm leading-relaxed font-normal">
-                  {project.summary}
-                </p>
-
-                <div className="p-3 rounded-lg bg-white/[0.02] border border-white/5 text-xs text-gray-200">
-                  <span className="font-semibold text-white">Measured Impact: </span>
-                  {project.impact}
+        {/* 4 Core Capability Cards */}
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
+          {capabilities.map((cap, idx) => {
+            const Icon = cap.icon;
+            return (
+              <div 
+                key={idx}
+                className="p-8 rounded-2xl bg-[#141721] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">
+                    {cap.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm leading-relaxed mb-6 font-normal">
+                    {cap.description}
+                  </p>
                 </div>
 
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {project.stack.map((tech, tIdx) => (
-                    <span key={tIdx} className="text-xs font-mono px-2 py-0.5 rounded bg-white/5 text-gray-300 border border-white/5">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="pt-2">
-                  <Link 
-                    href={`/contact?project=${encodeURIComponent(project.title)}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-400 hover:text-white transition-colors"
-                  >
-                    Discuss similar project scope <ChevronRight className="w-3.5 h-3.5" />
-                  </Link>
+                <div>
+                  <div className="text-[11px] text-gray-400 font-mono mb-2 uppercase tracking-wider">
+                    Core Technologies
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {cap.stack.map((tech, tIdx) => (
+                      <span 
+                        key={tIdx} 
+                        className="text-xs font-mono px-2.5 py-1 rounded bg-white/5 text-gray-300 border border-white/5"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
+            );
+          })}
+        </div>
 
-              {/* UI Mockup Frame (6 Cols) */}
-              <div className="lg:col-span-6">
-                <div className="rounded-xl border border-white/10 bg-[#0E1017] p-5 space-y-4">
-                  {project.uiType === "fintech" && (
-                    <div className="space-y-3 font-mono text-xs">
-                      <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                        <span className="text-white font-semibold">Payment Gateway Fraud Telemetry</span>
-                        <span className="text-emerald-400">Engine Active</span>
-                      </div>
-                      <div className="space-y-1.5 text-gray-300 text-[11px]">
-                        <div className="flex justify-between">
-                          <span>Rule 1: SIM-Swap Temporal Variance</span>
-                          <span className="text-emerald-400">PASSED (0.01)</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Rule 2: Geolocation Velocity Mismatch</span>
-                          <span className="text-amber-400">REVIEW (0.64)</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Rule 3: SASSA Card Bulk Retry Anomaly</span>
-                          <span className="text-rose-400">BLOCKED (0.98)</span>
-                        </div>
-                      </div>
-                      <div className="p-3 bg-white/[0.03] rounded border border-white/5 text-[10px] text-gray-400">
-                        POST /api/v1/scoring • 200 OK • Response payload signed with client HMAC key
-                      </div>
-                    </div>
-                  )}
-
-                  {project.uiType === "agri" && (
-                    <div className="space-y-3 font-mono text-xs">
-                      <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                        <span className="text-white font-semibold">Limpopo Sector 4 Crop Telemetry</span>
-                        <span className="text-emerald-400">Sync: Offline Queue</span>
-                      </div>
-                      <div className="grid grid-cols-2 gap-2 text-[11px]">
-                        <div className="p-2.5 bg-white/[0.02] rounded border border-white/5">
-                          <span className="text-gray-400 block">NDVI Vegetation</span>
-                          <span className="text-white font-bold text-sm">0.78 (Optimal)</span>
-                        </div>
-                        <div className="p-2.5 bg-white/[0.02] rounded border border-white/5">
-                          <span className="text-gray-400 block">Root Moisture</span>
-                          <span className="text-emerald-400 font-bold text-sm">41% Field Cap</span>
-                        </div>
-                      </div>
-                      <div className="p-3 bg-white/[0.03] rounded border border-white/5 text-[10px] text-gray-400">
-                        Local SQLite database storing 1,420 field data points; auto-syncs on GSM reconnect.
-                      </div>
-                    </div>
-                  )}
-
-                  {project.uiType === "health" && (
-                    <div className="space-y-3 font-mono text-xs">
-                      <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                        <span className="text-white font-semibold">Clinic Dispense & Triage Live</span>
-                        <span className="text-emerald-400">Gauteng Region</span>
-                      </div>
-                      <div className="space-y-2 text-[11px]">
-                        <div className="flex justify-between items-center p-2 rounded bg-white/[0.02] border border-white/5">
-                          <span>Antiretroviral Meds Stock:</span>
-                          <span className="text-emerald-400 font-semibold">1,240 Packs (Adequate)</span>
-                        </div>
-                        <div className="flex justify-between items-center p-2 rounded bg-white/[0.02] border border-white/5">
-                          <span>Insulin Regular Stock:</span>
-                          <span className="text-amber-400 font-semibold">84 Vials (Reorder Triggered)</span>
-                        </div>
-                      </div>
-                      <div className="p-3 bg-white/[0.03] rounded border border-white/5 text-[10px] text-gray-400">
-                        Patient SMS notifications dispatched in English, isiZulu & Sesotho.
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+        {/* Transparent Founding Partner Advantage Callout */}
+        <div className="p-8 sm:p-10 rounded-2xl bg-gradient-to-r from-[#141721] to-[#181B26] border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Founding Cohort • Pioneer Client Terms</span>
             </div>
-          ))}
+            <h3 className="text-xl sm:text-2xl font-bold text-white">
+              Launch your product with our founding engineering team.
+            </h3>
+            <p className="text-gray-300 text-sm leading-relaxed font-normal">
+              We are actively building our portfolio of long-term commercial partners. Early clients work directly with our top 7 builders with prioritized sprint turnaround, dedicated founder attention, and preferential pilot rates.
+            </p>
+          </div>
+
+          <Link
+            href="/contact"
+            className="shrink-0 inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-6 py-3.5 rounded-lg text-sm transition-colors cursor-pointer"
+          >
+            Discuss a Pioneer Project
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 
@@ -372,7 +254,7 @@ export default function Hero() {
             <div className="text-xs font-semibold text-emerald-400 mb-2">Stage 01</div>
             <h3 className="text-lg font-bold text-white mb-2">Scoping & Architecture Spec</h3>
             <p className="text-gray-300 text-sm leading-relaxed font-normal">
-              We sit down with your engineers and business leads to audit current systems, define data contracts, and establish a fixed milestone budget before a single line of code is written.
+              We sit down with your team to audit requirements, map system architecture, and agree on a fixed milestone scope before any code is committed.
             </p>
           </div>
 
@@ -406,14 +288,14 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-7 py-3.5 rounded-lg text-sm transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-7 py-3.5 rounded-lg text-sm transition-colors cursor-pointer"
             >
               Start a Project
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="mailto:info@12links.co.za"
-              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-gray-200 font-medium px-6 py-3.5 rounded-lg text-sm transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-gray-200 font-medium px-6 py-3.5 rounded-lg text-sm transition-colors cursor-pointer"
             >
               Email info@12links.co.za
             </a>
