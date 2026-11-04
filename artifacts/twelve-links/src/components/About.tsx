@@ -12,8 +12,12 @@ import {
   GraduationCap,
   ShieldCheck,
   Code2,
-  Cpu
+  Cpu,
+  Mail,
+  Copy,
+  Check
 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface TeamMember {
   name: string;
@@ -23,11 +27,15 @@ interface TeamMember {
   focus: string;
   university: string;
   credentials: string;
+  email: string;
   github: string;
   linkedin: string;
 }
 
 export default function About() {
+  const { toast } = useToast();
+  const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
+
   const team: TeamMember[] = [
     { 
       name: "Tebello Mohohoma", 
@@ -37,7 +45,8 @@ export default function About() {
       focus: "Predictive Modeling & Executive Strategy",
       university: "University of Pretoria (UP)",
       credentials: "BSc Computer Science & Data Science",
-      github: "https://github.com/12Links",
+      email: "Matmohohoma68@gmail.com",
+      github: "https://github.com/Matome",
       linkedin: "https://www.linkedin.com/company/12-links/"
     },
     { 
@@ -48,7 +57,8 @@ export default function About() {
       focus: "Machine Learning & Distributed Systems",
       university: "University of Pretoria (UP)",
       credentials: "BSc Information Technology // AI Systems",
-      github: "https://github.com/12Links",
+      email: "devthrivepty@gmail.com",
+      github: "https://github.com/NuttyDev",
       linkedin: "https://www.linkedin.com/company/12-links/"
     },
     { 
@@ -57,9 +67,10 @@ export default function About() {
       bio: "Directs agile sprint velocity, engineering high-throughput web and mobile platforms with resilient offline-first SQLite synchronization and human-centered UX.", 
       image: "/team/jackyn.png",
       focus: "Fullstack Architecture & Sprint Velocity",
-      university: "University of the Witwatersrand (Wits)",
+      university: "University of Pretoria (UP)",
       credentials: "BSc Computer Science & Software Engineering",
-      github: "https://github.com/12Links",
+      email: "jackympoka22@gmail.com",
+      github: "https://github.com/Jackympoka",
       linkedin: "https://www.linkedin.com/company/12-links/"
     },
     { 
@@ -70,7 +81,8 @@ export default function About() {
       focus: "Information Security & Financial Governance",
       university: "University of Pretoria (UP)",
       credentials: "BCom Financial Management & InfoSec Governance",
-      github: "https://github.com/12Links",
+      email: "magezalesego@gmail.com",
+      github: "https://github.com/magezalesego",
       linkedin: "https://www.linkedin.com/company/12-links/"
     },
     { 
@@ -81,7 +93,8 @@ export default function About() {
       focus: "Cloud Security & Quality Assurance",
       university: "University of Pretoria (UP)",
       credentials: "BSc Information Technology // Cloud Security",
-      github: "https://github.com/12Links",
+      email: "Lwandiso1234@users.noreply.github.com",
+      github: "https://github.com/Lwandiso1234",
       linkedin: "https://www.linkedin.com/company/12-links/"
     },
     { 
@@ -92,7 +105,8 @@ export default function About() {
       focus: "Client Scoping & Strategic Alliances",
       university: "University of Pretoria (UP)",
       credentials: "BSc Computer Science & Ecosystem Partnerships",
-      github: "https://github.com/12Links",
+      email: "savuzwampayipheli590@gmail.com",
+      github: "https://github.com/Savuzwa-Mpayipheli",
       linkedin: "https://www.linkedin.com/company/12-links/"
     },
     { 
@@ -101,12 +115,23 @@ export default function About() {
       bio: "Analyzes system telemetry, user behavioral patterns, and predictive growth metrics to optimize product conversions and regional market adoption.", 
       image: "/team/zila.jpg",
       focus: "Market Intelligence & Telemetry Analytics",
-      university: "University of the Witwatersrand (Wits)",
+      university: "University of Pretoria (UP)",
       credentials: "BSc Mathematical Statistics & Data Science",
-      github: "https://github.com/12Links",
+      email: "207455937+SelloAphanee@users.noreply.github.com",
+      github: "https://github.com/SelloAphanee",
       linkedin: "https://www.linkedin.com/company/12-links/"
     }
   ];
+
+  const handleCopyEmail = (email: string) => {
+    navigator.clipboard.writeText(email);
+    setCopiedEmail(email);
+    toast({
+      title: "Email Copied",
+      description: `${email} has been copied to your clipboard.`,
+    });
+    setTimeout(() => setCopiedEmail(null), 2000);
+  };
 
   return (
     <div className="bg-background text-foreground min-h-screen py-16 transition-colors">
@@ -115,26 +140,26 @@ export default function About() {
         {/* ── Page Header ── */}
         <div className="max-w-3xl mb-16">
           <div className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span>About 12 Links</span>
+            <GraduationCap className="w-4 h-4 text-emerald-400" />
+            <span>University of Pretoria (UP) Founders // Gauteng Innovation Hub</span>
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-foreground tracking-tight mb-4">
-            Engineering Africa's digital frontier from Gauteng.
+            Engineering Africa's digital frontier from Pretoria.
           </h1>
           <p className="text-muted-foreground text-lg leading-relaxed font-normal">
-            We are an agile engineering studio founded by university-trained computer scientists and systems architects based in Pretoria and Johannesburg. We build production software and custom AI for African enterprises with milestone-based transparency and 100% source code ownership.
+            We are 7 systems architects and software engineers from the <strong>University of Pretoria (UP)</strong>. We build production software, mobile applications, and custom AI systems for African enterprise with milestone-based transparency and 100% source code ownership.
           </p>
         </div>
 
-        {/* ── Origin Story Narrative (Reframed from Home) ── */}
+        {/* ── Origin Story Narrative ── */}
         <div className="grid lg:grid-cols-12 gap-12 items-start mb-24 pb-16 border-b border-border">
           <div className="lg:col-span-5 space-y-4 text-sm text-muted-foreground leading-relaxed font-normal">
             <span className="text-xs font-mono text-emerald-400 uppercase font-semibold">The Origin Story</span>
             <h2 className="text-2xl font-bold text-foreground leading-tight">
-              From University CS Labs to Enterprise Delivery
+              From University of Pretoria Labs to Enterprise Delivery
             </h2>
             <p>
-              In university computer science and data science labs across Pretoria and Johannesburg, our founders saw two broken extremes in software development:
+              In university computer science and data science labs at the <strong>University of Pretoria (UP)</strong>, our founders saw two broken extremes in software development:
             </p>
             <p>
               On one side were multinational consultancies charging exorbitant monthly retainers, moving at glacial bureaucratic speeds, and delivering bloated legacy codebases. On the other side were fragmented gig freelancers with zero architectural accountability or long-term defect warranty.
@@ -185,7 +210,7 @@ export default function About() {
             <div className="flex items-center justify-between pt-2 text-xs text-muted-foreground border-t border-border">
               <span className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Operating Hubs: Lynnwood (Pretoria) & Rosebank (Johannesburg)</span>
+                <span>Founding Ecosystem: University of Pretoria & Gauteng Innovation Corridor</span>
               </span>
               <Link href="/trust" className="text-emerald-400 font-semibold hover:text-foreground">
                 Review Trust Center →
@@ -201,10 +226,10 @@ export default function About() {
               Leadership & Systems Architects
             </div>
             <h2 className="text-3xl font-bold text-foreground tracking-tight mb-3">
-              Meet the 7 Founding Engineers.
+              The 7 University of Pretoria Builders.
             </h2>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              When you engage 12 Links, you collaborate directly with the engineers designing and writing your code. Every profile is backed by verified university credentials and active public repositories.
+              When you engage 12 Links, you collaborate directly with the engineers designing and writing your code. Every profile is backed by verified University of Pretoria (UP) credentials, direct GitHub profiles, and individual contact emails.
             </p>
           </div>
 
@@ -212,7 +237,7 @@ export default function About() {
             {team.map((member, idx) => (
               <div 
                 key={idx}
-                className="p-6 rounded-2xl bg-card border border-border hover:border-emerald-500/40 transition-all flex flex-col justify-between"
+                className="p-6 rounded-2xl bg-card border border-border hover:border-emerald-500/40 transition-all flex flex-col justify-between space-y-5"
               >
                 <div>
                   <div className="flex items-center gap-4 mb-4">
@@ -228,7 +253,7 @@ export default function About() {
                       <h3 className="text-base font-bold text-foreground leading-tight">{member.name}</h3>
                       <p className="text-xs text-emerald-400 font-medium leading-tight mt-0.5">{member.role}</p>
                       <span className="text-[11px] text-muted-foreground flex items-center gap-1 mt-1 font-mono">
-                        <GraduationCap className="w-3 h-3 text-muted-foreground" />
+                        <GraduationCap className="w-3 h-3 text-emerald-400" />
                         {member.university}
                       </span>
                     </div>
@@ -238,13 +263,28 @@ export default function About() {
                     {member.bio}
                   </p>
 
-                  <div className="p-2.5 rounded-lg bg-background border border-border text-[11px] font-mono text-muted-foreground space-y-1">
+                  <div className="p-3 rounded-xl bg-background border border-border text-[11px] font-mono text-muted-foreground space-y-1.5">
                     <div><strong className="text-foreground">Focus:</strong> {member.focus}</div>
                     <div className="text-[10px] text-muted-foreground/80 truncate">{member.credentials}</div>
+                    
+                    {/* Direct Verified Email */}
+                    <div className="pt-1.5 border-t border-border flex items-center justify-between text-[10px]">
+                      <span className="text-foreground font-semibold truncate max-w-[190px]">
+                        {member.email}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleCopyEmail(member.email)}
+                        className="text-muted-foreground hover:text-emerald-400 p-0.5 cursor-pointer"
+                        title="Copy direct email"
+                      >
+                        {copiedEmail === member.email ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                      </button>
+                    </div>
                   </div>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-border flex items-center justify-between">
+                <div className="pt-4 border-t border-border flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <a
                       href={member.linkedin}
@@ -262,14 +302,23 @@ export default function About() {
                       rel="noopener noreferrer"
                       className="p-1.5 rounded-lg bg-background border border-border text-muted-foreground hover:text-emerald-400 hover:border-emerald-500/40 transition-all"
                       aria-label={`${member.name} GitHub`}
-                      title="Verified GitHub Repositories"
+                      title="Verified GitHub Profile"
                     >
                       <Github className="w-3.5 h-3.5" />
                     </a>
+                    <a
+                      href={`mailto:${member.email}?subject=${encodeURIComponent(`Technical Inquiry for ${member.name}`)}`}
+                      className="p-1.5 rounded-lg bg-background border border-border text-muted-foreground hover:text-emerald-400 hover:border-emerald-500/40 transition-all"
+                      aria-label={`Email ${member.name} directly`}
+                      title={`Email ${member.email}`}
+                    >
+                      <Mail className="w-3.5 h-3.5" />
+                    </a>
                   </div>
 
+                  {/* Route to Contact Page with specific consultant & their verified email */}
                   <Link
-                    href={`/contact?consultant=${encodeURIComponent(member.name)}`}
+                    href={`/contact?consultant=${encodeURIComponent(member.name)}&email=${encodeURIComponent(member.email)}`}
                     className="text-[11px] font-semibold text-emerald-400 hover:text-foreground inline-flex items-center gap-1"
                   >
                     Request Call <ArrowRight className="w-3 h-3" />
@@ -286,7 +335,7 @@ export default function About() {
             Ready to partner with an engineering team that delivers?
           </h3>
           <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-            Schedule a 20-minute technical discovery call to review your product roadmap, cloud architecture, and compliance requirements.
+            Schedule a 20-minute technical discovery call to review your product roadmap, cloud architecture, and compliance requirements with our University of Pretoria engineering leads.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link

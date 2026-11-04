@@ -15,7 +15,9 @@ import {
   ChevronRight,
   Send,
   Building,
-  CheckCircle2
+  CheckCircle2,
+  GraduationCap,
+  UserCheck
 } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
@@ -27,6 +29,10 @@ export default function Contact() {
   const [selectedDate, setSelectedDate] = useState<string>("Tomorrow");
   const [selectedSlot, setSelectedSlot] = useState<string>("10:00 AM SAST");
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
+
+  // Dedicated Consultant Routing State (From Team Member GitHub / UP Credentials)
+  const [consultant, setConsultant] = useState<string | null>(null);
+  const [consultantEmail, setConsultantEmail] = useState<string | null>(null);
 
   // Scoping Form State
   const [formData, setFormData] = useState({
@@ -44,7 +50,16 @@ export default function Contact() {
     if (typeof window !== "undefined") {
       const searchParams = new URLSearchParams(window.location.search);
       const proj = searchParams.get("project") || searchParams.get("service") || searchParams.get("industry");
-      const consultant = searchParams.get("consultant");
+      const cons = searchParams.get("consultant");
+      const consMail = searchParams.get("email");
+
+      if (cons) {
+        setConsultant(cons);
+      }
+      if (consMail) {
+        setConsultantEmail(consMail);
+      }
+
       if (proj) {
         setFormData(prev => ({
           ...prev,
@@ -52,10 +67,10 @@ export default function Contact() {
         }));
         setActiveTab("scope");
       }
-      if (consultant) {
+      if (cons) {
         setFormData(prev => ({
           ...prev,
-          message: `Hi 12 Links team, I would like to schedule a technical consultation with ${consultant}.`
+          message: `Hi 12 Links team, I would like to schedule a technical consultation with ${cons}${consMail ? ` (${consMail})` : ""}.`
         }));
       }
     }
@@ -83,9 +98,21 @@ export default function Contact() {
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setBookingConfirmed(true);
+
+    const routingText = consultant ? ` with ${consultant}` : "";
+    const emailTarget = consultantEmail || "info@12links.co.za";
+
+    // Direct mailto link preparation to notify the engineer and client
+    const subject = encodeURIComponent(`20-Minute Technical Discovery Call${routingText}`);
+    const body = encodeURIComponent(
+      `Hi ${consultant || "12 Links Team"},\n\nI have scheduled a 20-minute technical discovery call for ${selectedDate} at ${selectedSlot}.\n\nPlease send the Google Meet / Teams calendar invite.\n\nThank you!`
+    );
+
+    window.location.href = `mailto:${emailTarget}?cc=info@12links.co.za&subject=${subject}&body=${body}`;
+
     toast({
       title: "Technical Discovery Call Scheduled",
-      description: `Reserved for ${selectedDate} at ${selectedSlot}. A calendar invite has been queued for dispatch.`,
+      description: `Reserved for ${selectedDate} at ${selectedSlot}${routingText}. A direct calendar invite has been queued.`,
     });
   };
 
@@ -97,17 +124,20 @@ export default function Contact() {
     const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "";
     const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
 
-    const payloadSummary = `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\nVertical: ${formData.vertical}\nTimeline: ${formData.timeline}\nBudget Tier: ${formData.budget}\nTarget Cloud: ${formData.cloud}\n\nProject Scope:\n${formData.message}`;
+    const assignedConsultantInfo = consultant ? `\nAssigned Consultant: ${consultant} (${consultantEmail || "info@12links.co.za"})` : "";
+    const payloadSummary = `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}${assignedConsultantInfo}\nVertical: ${formData.vertical}\nTimeline: ${formData.timeline}\nBudget Tier: ${formData.budget}\nTarget Cloud: ${formData.cloud}\n\nProject Scope:\n${formData.message}`;
+
+    const ccParam = consultantEmail ? `?cc=${consultantEmail}&` : "?";
 
     if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
       // Direct email client fallback
       const subject = encodeURIComponent(`12 Links Scoping Scope from ${formData.name} (${formData.company || "Enterprise"})`);
       const body = encodeURIComponent(payloadSummary);
-      window.location.href = `mailto:info@12links.co.za?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:info@12links.co.za${ccParam}subject=${subject}&body=${body}`;
 
       toast({
         title: "Dispatching via Email Client",
-        description: "Your structured project scope has been drafted to info@12links.co.za.",
+        description: `Your structured project scope has been drafted to info@12links.co.za${consultantEmail ? ` (CC: ${consultantEmail})` : ""}.`,
       });
       setLoading(false);
       return;
@@ -126,6 +156,8 @@ export default function Contact() {
           budget: formData.budget,
           cloud: formData.cloud,
           message: formData.message,
+          consultant: consultant || "General Engineering",
+          consultant_email: consultantEmail || "info@12links.co.za",
           summary: payloadSummary
         },
         PUBLIC_KEY
@@ -133,7 +165,7 @@ export default function Contact() {
 
       toast({
         title: "Project Scope Transmitted",
-        description: "Our systems architects will evaluate your requirements and send a formal response within 24 hours.",
+        description: `Our systems architects${consultant ? ` and ${consultant}` : ""} will evaluate your requirements and send a formal response within 24 hours.`,
       });
 
       setFormData({
@@ -149,7 +181,7 @@ export default function Contact() {
     } catch (err) {
       const subject = encodeURIComponent(`12 Links Inquiry from ${formData.name}`);
       const body = encodeURIComponent(payloadSummary);
-      window.location.href = `mailto:info@12links.co.za?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:info@12links.co.za${ccParam}subject=${subject}&body=${body}`;
     } finally {
       setLoading(false);
     }
@@ -162,14 +194,14 @@ export default function Contact() {
         {/* ── Page Header ── */}
         <div className="max-w-3xl mb-14">
           <div className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span>Direct Engineering Intake</span>
+            <GraduationCap className="w-4 h-4 text-emerald-400" />
+            <span>University of Pretoria (UP) Systems Engineering Hub</span>
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-foreground tracking-tight mb-4">
-            Connect with our systems architects.
+            Connect directly with our engineering team.
           </h1>
           <p className="text-muted-foreground text-lg leading-relaxed font-normal">
-            Whether you want to schedule an immediate 20-minute technical discovery call or submit a detailed project specification for architecture review, our engineering leads respond within 24 hours.
+            Whether you want to schedule an immediate 20-minute technical discovery call or submit a detailed project specification for architecture review, our University of Pretoria systems architects respond within 24 hours.
           </p>
         </div>
 
@@ -242,7 +274,7 @@ export default function Contact() {
                 <div className="p-3.5 rounded-xl bg-background border border-border space-y-1">
                   <div className="flex items-center justify-between">
                     <strong className="text-foreground">Pretoria Engineering Lab</strong>
-                    <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">Gauteng Core</span>
+                    <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">UP Campus Ecosystem</span>
                   </div>
                   <p className="text-muted-foreground text-[11px] leading-relaxed">
                     Lynnwood Bridge Office Park, 4 Daventry St, Lynnwood Manor, Pretoria, 0081
@@ -262,14 +294,14 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Procurement & Governance Assurance */}
+            {/* University & Governance Assurance */}
             <div className="p-5 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 text-xs text-muted-foreground space-y-2">
               <div className="flex items-center gap-2 text-emerald-400 font-semibold">
                 <ShieldCheck className="w-4 h-4" />
-                <span>Enterprise Governance Assurance</span>
+                <span>University of Pretoria Engineering Discipline</span>
               </div>
               <p className="leading-relaxed">
-                All communications and scope submissions are held in strict confidence under mutual non-disclosure agreements (NDA). In-country data storage complies fully with POPIA Act No. 4 (2013).
+                All 7 founding builders attend the <strong>University of Pretoria (UP)</strong>. All communications, NDA scopes, and technical proposals are held in strict legal confidence with local in-country data storage compliant with POPIA Act No. 4 (2013).
               </p>
             </div>
 
@@ -279,6 +311,37 @@ export default function Contact() {
           <div className="lg:col-span-7">
             <div className="p-8 rounded-2xl bg-card border border-border shadow-xl space-y-6">
               
+              {/* Dedicated Consultant Routing Banner (If Selected) */}
+              {consultant && (
+                <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                  <div className="space-y-0.5">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">
+                      <UserCheck className="w-3.5 h-3.5" />
+                      Dedicated Consultant Selected // University of Pretoria
+                    </div>
+                    <div className="text-sm font-bold text-foreground">
+                      Direct Discovery Call with {consultant}
+                    </div>
+                    {consultantEmail && (
+                      <div className="text-muted-foreground font-mono text-[11px] flex items-center gap-1.5 pt-0.5">
+                        <span>Direct Email:</span>
+                        <strong className="text-foreground">{consultantEmail}</strong>
+                      </div>
+                    )}
+                  </div>
+
+                  {consultantEmail && (
+                    <a
+                      href={`mailto:${consultantEmail}?subject=${encodeURIComponent(`Technical Call Request for ${consultant}`)}`}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 text-white font-medium text-xs hover:bg-emerald-600 transition-colors shrink-0"
+                    >
+                      <Mail className="w-3.5 h-3.5" />
+                      Email Directly
+                    </a>
+                  )}
+                </div>
+              )}
+
               {/* Mode Toggle Header */}
               <div className="flex items-center gap-2 p-1 rounded-xl bg-background border border-border">
                 <button
@@ -315,7 +378,7 @@ export default function Contact() {
                       Schedule a 20-Minute Technical Discovery Call
                     </h3>
                     <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      Select an available engineering slot with our Pretoria and Johannesburg leads. We meet over Google Meet or Microsoft Teams.
+                      Select an available engineering slot with our University of Pretoria team{consultant ? ` (${consultant})` : ""}. We meet over Google Meet or Microsoft Teams.
                     </p>
                   </div>
 
@@ -326,8 +389,13 @@ export default function Contact() {
                       </div>
                       <h4 className="text-lg font-bold text-foreground">Discovery Call Reserved!</h4>
                       <p className="text-xs text-muted-foreground max-w-md mx-auto leading-relaxed">
-                        We have reserved <strong>{selectedDate}</strong> at <strong>{selectedSlot}</strong>. A calendar invite with video link has been sent to your inbox.
+                        We have reserved <strong>{selectedDate}</strong> at <strong>{selectedSlot}</strong>{consultant ? ` with ${consultant}` : ""}. A calendar invite with direct meeting link has been prepared.
                       </p>
+                      {consultantEmail && (
+                        <p className="text-[11px] font-mono text-emerald-400">
+                          Routed to: {consultantEmail}
+                        </p>
+                      )}
                       <button
                         type="button"
                         onClick={() => setBookingConfirmed(false)}
@@ -410,6 +478,7 @@ export default function Contact() {
                         <label className="text-xs font-medium text-foreground">Discussion Topic (Optional)</label>
                         <input
                           type="text"
+                          defaultValue={consultant ? `Technical Discovery with ${consultant}` : ""}
                           placeholder="e.g. Architecture review for AWS Cape Town migration"
                           className="w-full px-3.5 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors"
                         />
@@ -419,7 +488,7 @@ export default function Contact() {
                         type="submit"
                         className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-xl text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                       >
-                        Confirm 20-Minute Technical Call
+                        Confirm 20-Minute Technical Call {consultant ? `with ${consultant}` : ""}
                         <ArrowRight className="w-4 h-4" />
                       </button>
                     </form>
@@ -555,7 +624,7 @@ export default function Contact() {
                     disabled={loading}
                     className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-medium rounded-xl text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                   >
-                    {loading ? "Transmitting Scope..." : "Submit Project Scope for Architecture Review"}
+                    {loading ? "Transmitting Scope..." : `Submit Project Scope for Architecture Review${consultant ? ` (${consultant})` : ""}`}
                     <Send className="w-3.5 h-3.5" />
                   </button>
                 </form>

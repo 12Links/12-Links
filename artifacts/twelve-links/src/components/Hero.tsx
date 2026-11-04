@@ -58,7 +58,7 @@ export default function Hero() {
           <div className="lg:col-span-7">
             <div className="flex items-center gap-2 text-xs text-emerald-400 font-medium mb-5">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Production AI & Distributed Software Systems // South Africa</span>
+              <span>University of Pretoria (UP) Systems Engineering // AWS Cape Town af-south-1</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-6">

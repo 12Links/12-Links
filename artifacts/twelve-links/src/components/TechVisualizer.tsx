@@ -586,7 +586,7 @@ export default function TechVisualizer() {
           <span className="hidden sm:inline">POPIA Act No. 4 (2013)</span>
         </div>
         <span className="text-emerald-400 font-medium">
-          Pretoria & Johannesburg Hubs
+          Pretoria (UP Hub) & Johannesburg
         </span>
       </div>
 
