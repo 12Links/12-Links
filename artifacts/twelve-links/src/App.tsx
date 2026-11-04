@@ -3,6 +3,7 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "./context/ThemeContext";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -10,6 +11,9 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Industries from "./components/Industries";
 import Contact from "./components/Contact";
+import Work from "./components/Work";
+import Trust from "./components/Trust";
+import Insights from "./components/Insights";
 import Footer from "./components/Footer";
 import NotFound from "./pages/not-found";
 
@@ -27,7 +31,7 @@ function ScrollToTop() {
 
 function Router() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0F1117]">
+    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors">
       <Navbar />
       <main id="main-content" className="flex-grow pt-20">
         <ScrollToTop />
@@ -37,6 +41,12 @@ function Router() {
           <Route path="/services" component={Services} />
           <Route path="/industries" component={Industries} />
           <Route path="/contact" component={Contact} />
+          <Route path="/work" component={Work} />
+          <Route path="/case-studies" component={Work} />
+          <Route path="/trust" component={Trust} />
+          <Route path="/security" component={Trust} />
+          <Route path="/insights" component={Insights} />
+          <Route path="/research" component={Insights} />
           <Route component={NotFound} />
         </Switch>
       </main>
@@ -47,16 +57,18 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <div className="dark bg-[#0F1117] text-gray-100 min-h-screen font-sans selection:bg-emerald-500 selection:text-white">
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <Router />
-          </WouterRouter>
-        </div>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <div className="min-h-screen font-sans selection:bg-emerald-500 selection:text-white bg-background text-foreground transition-colors duration-200">
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <Router />
+            </WouterRouter>
+          </div>
+          <Toaster />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 

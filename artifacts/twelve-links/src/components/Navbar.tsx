@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Sun, Moon, Sparkles } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
+  const { resolvedTheme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,11 +34,12 @@ export default function Navbar() {
   }, [isOpen]);
 
   const links = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
+    { name: "Work", href: "/work" },
     { name: "Services", href: "/services" },
     { name: "Industries", href: "/industries" },
-    { name: "Contact", href: "/contact" },
+    { name: "Insights", href: "/insights" },
+    { name: "Trust & Security", href: "/trust" },
+    { name: "About", href: "/about" },
   ];
 
   return (
@@ -52,8 +55,8 @@ export default function Navbar() {
         aria-label="Main Navigation"
         className={`w-full transition-all duration-200 ${
           scrolled
-            ? "bg-[#0F1117]/95 backdrop-blur-md border-b border-white/10 shadow-sm py-3.5"
-            : "bg-transparent border-b border-transparent py-5"
+            ? "bg-background/90 backdrop-blur-md border-b border-border shadow-sm py-3"
+            : "bg-transparent border-b border-transparent py-4 sm:py-5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,26 +68,26 @@ export default function Navbar() {
                 <img 
                   src="/12links_logo.svg" 
                   alt="12 Links Logo" 
-                  className="w-9 h-9 object-contain transition-transform group-hover:scale-105" 
+                  className="w-8 h-8 sm:w-9 sm:h-9 object-contain transition-transform group-hover:scale-105" 
                 />
-                <span className="text-xl font-bold tracking-tight text-white">
+                <span className="text-xl font-bold tracking-tight text-foreground">
                   12<span className="text-emerald-400">Links</span>
                 </span>
               </Link>
             </div>
             
             {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
+            <div className="hidden lg:flex items-center space-x-1 xl:space-x-1.5">
               {links.map((link) => {
                 const isActive = location === link.href;
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`relative px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    className={`relative px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors ${
                       isActive
-                        ? "text-white bg-white/10"
-                        : "text-gray-300 hover:text-white hover:bg-white/5"
+                        ? "text-foreground bg-muted font-semibold"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     }`}
                   >
                     {link.name}
@@ -93,72 +96,102 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* Desktop Right CTA */}
-            <div className="hidden md:flex items-center gap-4">
+            {/* Desktop Right Controls (Theme Toggle + CTA) */}
+            <div className="hidden md:flex items-center gap-3">
+              {/* Theme Toggle */}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="p-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                title={resolvedTheme === "dark" ? "Switch to High-Contrast Light Mode" : "Switch to Deep Dark Mode"}
+                aria-label="Toggle Theme"
+              >
+                {resolvedTheme === "dark" ? (
+                  <Sun className="w-4 h-4 text-amber-400" />
+                ) : (
+                  <Moon className="w-4 h-4 text-emerald-600" />
+                )}
+              </button>
+
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors shadow-sm"
+                className="inline-flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2 rounded-lg text-xs xl:text-sm transition-colors shadow-sm cursor-pointer"
               >
                 Start a Project
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
             
-            {/* Mobile Menu Toggle */}
-            <div className="md:hidden flex items-center">
+            {/* Mobile Header Controls */}
+            <div className="flex lg:hidden items-center gap-2">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="p-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                aria-label="Toggle Theme"
+              >
+                {resolvedTheme === "dark" ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-emerald-600" />}
+              </button>
+
               <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-gray-300 hover:text-white p-2 rounded-lg focus:outline-none"
+                className="text-muted-foreground hover:text-foreground p-2 rounded-lg focus:outline-none cursor-pointer"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
               >
-                {isOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6" />}
+                {isOpen ? <X className="h-6 w-6 text-foreground" /> : <Menu className="h-6 w-6" />}
               </button>
             </div>
 
           </div>
         </div>
 
-        {/* Mobile Drawer */}
+        {/* Mobile Navigation Drawer */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden bg-[#0F1117] border-b border-white/10 overflow-hidden"
+              className="lg:hidden border-b border-border bg-background/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-2"
             >
-              <div className="px-4 pt-3 pb-6 space-y-1.5">
+              <div className="flex flex-col space-y-1">
+                <Link
+                  href="/"
+                  className={`px-3 py-2 rounded-lg text-sm font-medium ${
+                    location === "/" ? "text-foreground bg-muted font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  Home
+                </Link>
                 {links.map((link) => {
                   const isActive = location === link.href;
                   return (
                     <Link
                       key={link.name}
                       href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                        isActive 
-                          ? "text-white bg-white/10 font-semibold" 
-                          : "text-gray-300 hover:text-white hover:bg-white/5"
+                      className={`px-3 py-2 rounded-lg text-sm font-medium ${
+                        isActive
+                          ? "text-foreground bg-muted font-semibold"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                       }`}
                     >
                       {link.name}
                     </Link>
                   );
                 })}
+              </div>
 
-                <div className="pt-3 border-t border-white/10 mt-2">
-                  <Link
-                    href="/contact"
-                    onClick={() => setIsOpen(false)}
-                    className="w-full flex items-center justify-center gap-2 bg-emerald-500 text-white font-medium px-4 py-3 rounded-lg text-sm transition-colors"
-                  >
-                    Start a Project
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
+              <div className="pt-3 border-t border-border">
+                <Link
+                  href="/contact"
+                  className="w-full flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2.5 rounded-lg text-sm transition-colors cursor-pointer"
+                >
+                  Schedule a Technical Call
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </motion.div>
           )}

@@ -7,10 +7,14 @@ import {
   Code2, 
   Brain, 
   Database, 
-  Smartphone,
-  ShieldCheck,
-  HelpCircle,
-  Terminal
+  Smartphone, 
+  ShieldCheck, 
+  HelpCircle, 
+  Terminal,
+  Layers,
+  Server,
+  Lock,
+  Workflow
 } from "lucide-react";
 
 export default function Services() {
@@ -23,15 +27,21 @@ export default function Services() {
       tag: "Intelligent Systems",
       description: "We design, train, and deploy production machine learning models tailored to your proprietary data. From real-time transaction anomaly detection to computer vision on factory lines, our models run with low latency and measurable business impact.",
       features: [
-        "Real-time fraud and risk scoring models",
-        "Document parsing and natural language information extraction",
-        "Computer vision quality inspection on edge devices",
-        "Predictive churn, yield, and demand forecasting"
+        "Real-time fraud and risk scoring models with sub-40ms decisioning",
+        "Domain-specific RAG vector search pipelines within POPIA boundaries",
+        "Computer vision quality inspection on edge devices (NVIDIA Jetson)",
+        "Predictive churn, yield, and demand forecasting algorithms"
       ],
       deliverables: "Trained model weights, containerized FastAPI inference endpoint, automated retraining scripts, and telemetry dashboard.",
-      tech: ["Python", "PyTorch", "FastAPI", "Scikit-Learn", "Docker", "Hugging Face"],
+      tech: ["Python", "PyTorch", "FastAPI", "PGvector", "Docker", "Hugging Face"],
+      pipeline: [
+        { name: "Ingestion", tech: "FastAPI / TLS 1.3", latency: "< 5ms" },
+        { name: "Feature Store", tech: "Redis In-Memory", latency: "< 3ms" },
+        { name: "Model Inference", tech: "Triton / PyTorch", latency: "18ms" },
+        { name: "Audit Vault", tech: "Postgres (af-south-1)", latency: "2ms" }
+      ],
       uiPreview: {
-        title: "Model Inference Endpoint",
+        title: "FastAPI Inference Endpoint",
         code: `@app.post("/v1/predict/risk")
 async def score_transaction(payload: TransactionData):
     features = feature_pipeline.transform(payload)
@@ -41,7 +51,7 @@ async def score_transaction(payload: TransactionData):
         "transaction_id": payload.txn_id,
         "risk_score": float(risk_score),
         "decision": "HOLD" if risk_score > 0.75 else "APPROVE",
-        "inference_latency_ms": 34.2
+        "inference_latency_ms": 31.8
     }`
       }
     },
@@ -51,15 +61,21 @@ async def score_transaction(payload: TransactionData):
       tag: "Product Engineering",
       description: "High-performance web applications and native mobile apps built for the African digital ecosystem. We prioritize clean responsive design, low-bandwidth optimization, and offline-first data sync so your users can transact even in remote areas.",
       features: [
-        "Cross-platform iOS and Android apps with React Native",
-        "Modern Next.js & React enterprise web platforms",
-        "Offline-first SQLite local caching with automatic cloud sync",
-        "Integrated payment gateways (Stripe, Paystack, Peach Payments, OZOW)"
+        "Cross-platform iOS and Android apps with React Native & Flutter",
+        "Modern Next.js & React enterprise web platforms with sub-second page loads",
+        "Offline-first SQLite local caching with automatic background synchronization",
+        "Integrated payment gateways (Stripe, Paystack, Peach Payments, OZOW, EFT)"
       ],
       deliverables: "Full TypeScript source code, published App Store / Play Store builds, responsive web deployment, and documented REST/GraphQL APIs.",
       tech: ["React Native", "Next.js", "TypeScript", "TailwindCSS", "PostgreSQL", "Node.js"],
+      pipeline: [
+        { name: "Client UI", tech: "Next.js / React Native", latency: "60 FPS" },
+        { name: "Local Store", tech: "SQLite + CRDT", latency: "0ms (Offline)" },
+        { name: "API Gateway", tech: "Node / TypeScript", latency: "< 12ms" },
+        { name: "Cloud Sync", tech: "PostgreSQL (Cape Town)", latency: "24ms" }
+      ],
       uiPreview: {
-        title: "Offline Sync Architecture",
+        title: "Offline Sync Queue Buffer",
         code: `// Offline-first local transaction buffer
 export async function queueLocalAction(action: ClientAction) {
   await localDb.insert(actionQueue).values({
@@ -81,13 +97,19 @@ export async function queueLocalAction(action: ClientAction) {
       tag: "Data Architecture",
       description: "We help organizations organize scattered spreadsheets and legacy SQL databases into clean, automated data pipelines. Get real-time dashboards that your leadership team can trust for daily operational decisions.",
       features: [
-        "Automated ETL pipelines extracting data from internal and external sources",
-        "High-performance analytical databases with DuckDB and BigQuery",
-        "POPIA-compliant data anonymization and secure storage at rest",
-        "Executive business intelligence dashboards with live KPI tracking"
+        "Automated ETL pipelines extracting data from internal and external banking sources",
+        "High-performance analytical databases with DuckDB and PostgreSQL",
+        "POPIA-compliant data anonymization, pseudonymization, and secure storage at rest",
+        "Executive business intelligence dashboards with live KPI tracking and alerts"
       ],
       deliverables: "Automated pipeline DAGs, SQL migration scripts, role-based access control, and executive reporting views.",
       tech: ["Apache Airflow", "DuckDB", "PostgreSQL", "BigQuery", "Supabase", "Grafana"],
+      pipeline: [
+        { name: "Source Extract", tech: "SFTP / Banking APIs", latency: "Scheduled" },
+        { name: "PII Anonymizer", tech: "POPIA Tokenizer", latency: "< 10ms" },
+        { name: "Analytical DB", tech: "DuckDB / Parquet", latency: "< 5ms" },
+        { name: "Executive Dash", tech: "Grafana / React", latency: "Real-Time" }
+      ],
       uiPreview: {
         title: "ETL Pipeline DAG Spec",
         code: `with DAG('daily_financial_reconciliation', schedule='@daily') as dag:
@@ -106,12 +128,18 @@ export async function queueLocalAction(action: ClientAction) {
       description: "Need an accountable development team without the overhead of lengthy agency retainers? We assemble dedicated student builder pods led by a senior tech lead to accelerate your feature backlog or build an MVP sprint.",
       features: [
         "Dedicated lead engineer as your single accountable point of contact",
-        "Bi-weekly sprint demos with working software deployments",
+        "Bi-weekly sprint demos with working software deployments and test gates",
         "Daily asynchronous standups and direct Slack/Discord integration",
         "Seamless Git workflow with branch protection and automated testing"
       ],
       deliverables: "Bi-weekly milestone handovers, clean PRs with code reviews, and direct developer communication.",
       tech: ["GitHub Actions", "Docker", "Agile Sprints", "Milestone Approvals", "Code Reviews"],
+      pipeline: [
+        { name: "Sprint Spec", tech: "Architecture Audit", latency: "Week 1" },
+        { name: "Code Sprint", tech: "PRs + CI Pipeline", latency: "Week 2" },
+        { name: "Testing Gate", tech: "Staging Demo", latency: "Gate Review" },
+        { name: "Handover", tech: "100% IP Assignment", latency: "Day 30 SLA" }
+      ],
       uiPreview: {
         title: "Sprint Delivery Framework",
         code: `[Sprint Cadence]
@@ -133,12 +161,8 @@ Production: Automated blue/green deploy -> 30-day warranty window`
       a: "We break every project into clear, functional milestones (e.g., Gate 1: Architecture, Gate 2: Core Backend, Gate 3: UI & Integration, Gate 4: Production Handover). You review, test, and approve each deliverable before paying for that milestone."
     },
     {
-      q: "How does working with a student-led team benefit our business?",
-      a: "You get exceptionally motivated, cutting-edge engineers working directly on your code without the bloated overhead, layers of account managers, or marked-up hourly rates of traditional consultancies. Every team member has verified real-world code output."
-    },
-    {
       q: "Are your cloud deployments compliant with South African POPIA laws?",
-      a: "Yes. All data storage, user authentication, and data pipelines comply with POPIA Act No. 4 of 2013, including hosting options in South African cloud regions (e.g. AWS Cape Town af-south-1) for localized data residency."
+      a: "Yes. All data storage, user authentication, and data pipelines comply with POPIA Act No. 4 of 2013, including in-country data residency on AWS Cape Town (af-south-1) with AES-256 encryption."
     },
     {
       q: "What support do we receive after our platform goes live?",
@@ -147,50 +171,51 @@ Production: Automated blue/green deploy -> 30-day warranty window`
   ];
 
   return (
-    <div className="bg-[#0F1117] text-gray-200 min-h-screen py-16">
+    <div className="bg-background text-foreground min-h-screen py-16 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
+        {/* ── Page Header ── */}
         <div className="max-w-3xl mb-16">
-          <div className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-2">
-            Capabilities
+          <div className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <span>Engineering Capabilities</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-foreground tracking-tight mb-4">
             Production engineering services.
           </h1>
-          <p className="text-gray-300 text-lg leading-relaxed font-normal">
-            We assemble dedicated student engineering pods to build production systems from scratch or eliminate critical bottlenecks in your existing stack.
+          <p className="text-muted-foreground text-lg leading-relaxed font-normal">
+            We assemble dedicated systems engineering pods to build production software from scratch or eliminate critical bottlenecks in your existing infrastructure.
           </p>
         </div>
 
-        {/* Asymmetric 2-Column Capability Showcase */}
+        {/* ── Asymmetric 2-Column Capability Showcase ── */}
         <div className="space-y-20 mb-24">
           {capabilities.map((item) => (
             <div 
               key={item.id}
-              className="grid lg:grid-cols-12 gap-10 items-start p-8 sm:p-10 rounded-2xl bg-[#141721] border border-white/10"
+              className="grid lg:grid-cols-12 gap-10 items-start p-8 sm:p-10 rounded-2xl bg-card border border-border hover:border-emerald-500/30 transition-all shadow-sm"
             >
-              {/* Left Column: Scope & Features (7 Cols) */}
-              <div className="lg:col-span-7 space-y-4">
-                <span className="text-xs font-medium text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2.5 py-1 rounded">
+              {/* Left Column: Scope & Features (Cols 1-7) */}
+              <div className="lg:col-span-7 space-y-5">
+                <span className="text-xs font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">
                   {item.tag}
                 </span>
 
-                <h2 className="text-2xl sm:text-3xl font-bold text-white leading-snug">
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground leading-snug">
                   {item.title}
                 </h2>
 
-                <p className="text-gray-300 text-sm leading-relaxed font-normal">
+                <p className="text-muted-foreground text-sm leading-relaxed font-normal">
                   {item.description}
                 </p>
 
-                <div className="pt-2">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
+                <div className="space-y-2 pt-2">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-foreground">
                     Key Deliverables:
                   </div>
                   <ul className="space-y-2">
                     {item.features.map((feat, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-2 text-xs text-gray-300 font-normal">
+                      <li key={fIdx} className="flex items-start gap-2 text-xs text-muted-foreground font-normal">
                         <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </li>
@@ -198,76 +223,108 @@ Production: Automated blue/green deploy -> 30-day warranty window`
                   </ul>
                 </div>
 
-                <div className="p-3 bg-white/[0.02] border border-white/5 rounded-lg text-xs text-gray-300 pt-3">
-                  <span className="font-semibold text-white">What You Receive: </span>
+                <div className="p-3.5 bg-background border border-border rounded-xl text-xs text-muted-foreground">
+                  <strong className="text-foreground">What You Receive: </strong>
                   {item.deliverables}
                 </div>
 
                 <div className="flex flex-wrap gap-1.5 pt-2">
                   {item.tech.map((t, tIdx) => (
-                    <span key={tIdx} className="font-mono text-[11px] px-2 py-0.5 rounded bg-white/5 text-gray-300 border border-white/5">
+                    <span key={tIdx} className="font-mono text-[11px] px-2.5 py-1 rounded-md bg-background text-foreground border border-border font-medium">
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-2 flex items-center gap-4">
                   <Link
                     href={`/contact?service=${encodeURIComponent(item.title)}`}
-                    className="inline-flex items-center gap-2 text-xs font-medium text-emerald-400 hover:text-white transition-colors"
+                    className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:text-foreground transition-colors cursor-pointer"
                   >
                     Scope a {item.title} Project <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                  <Link
+                    href="/work"
+                    className="text-xs text-muted-foreground hover:text-foreground inline-flex items-center gap-1 font-mono"
+                  >
+                    View Reference Blueprint →
                   </Link>
                 </div>
               </div>
 
-              {/* Right Column: Real Architecture / Code Snippet Frame (5 Cols) */}
-              <div className="lg:col-span-5">
-                <div className="rounded-xl border border-white/10 bg-[#0E1017] overflow-hidden">
-                  <div className="px-4 py-2.5 bg-[#12151F] border-b border-white/10 flex items-center justify-between">
-                    <span className="text-xs font-mono text-gray-400">{item.uiPreview.title}</span>
-                    <span className="text-[10px] text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-800/40 font-mono">
-                      Production Spec
-                    </span>
-                  </div>
-                  <div className="p-4 overflow-x-auto text-xs font-mono text-gray-300 bg-[#0A0C12] leading-relaxed">
-                    <pre>
-                      <code>{item.uiPreview.code}</code>
-                    </pre>
+              {/* Right Column: Visual Architecture Flow & Production Code Frame (Cols 8-12) */}
+              <div className="lg:col-span-5 space-y-4">
+                
+                {/* Visual Pipeline Flow Diagram */}
+                <div className="p-4 rounded-xl bg-background border border-border space-y-3">
+                  <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                    <Workflow className="w-3.5 h-3.5" />
+                    System Architecture Data Flow:
+                  </span>
+                  
+                  <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                    {item.pipeline.map((p, pIdx) => (
+                      <div key={pIdx} className="p-2.5 rounded-lg bg-card border border-border">
+                        <span className="text-[9px] text-muted-foreground block uppercase">Node 0{pIdx + 1}: {p.name}</span>
+                        <span className="text-[11px] font-bold text-foreground truncate block">{p.tech}</span>
+                        <span className="text-[9px] text-emerald-400 mt-1 block font-semibold">{p.latency}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
+
+                {/* Code Editor Window */}
+                <div className="rounded-xl border border-border bg-background overflow-hidden shadow-lg">
+                  <div className="px-4 py-2.5 bg-muted/30 border-b border-border flex items-center justify-between text-xs font-mono">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                      <span className="text-muted-foreground text-[11px] ml-1">{item.uiPreview.title}</span>
+                    </div>
+                    <span className="text-[10px] text-emerald-400 font-mono">af-south-1</span>
+                  </div>
+
+                  <pre className="p-4 font-mono text-[11px] leading-relaxed text-foreground overflow-x-auto">
+                    {item.uiPreview.code}
+                  </pre>
+                </div>
+
               </div>
+
             </div>
           ))}
         </div>
 
-        {/* Clear FAQ Accordion */}
-        <div className="max-w-3xl mx-auto mb-20">
+        {/* ── Honest Engineering FAQs ── */}
+        <div className="max-w-3xl mx-auto mb-24">
           <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Frequently Asked Questions</h2>
-            <p className="text-gray-400 text-sm font-normal">
-              Direct, honest answers about our pricing, intellectual property, and pod velocity.
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-sm text-muted-foreground font-normal">
+              Direct, transparent answers regarding contracts, code ownership, and our delivery model.
             </p>
           </div>
 
-          <div className="space-y-3">
-            {faqs.map((faq, i) => {
-              const isOpen = openFaq === i;
+          <div className="space-y-4">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaq === index;
               return (
-                <div
-                  key={i}
-                  className="rounded-xl bg-[#141721] border border-white/10 overflow-hidden"
+                <div 
+                  key={index} 
+                  className="rounded-xl border border-border bg-card overflow-hidden transition-all"
                 >
                   <button
                     type="button"
-                    onClick={() => setOpenFaq(isOpen ? null : i)}
-                    className="w-full text-left px-5 py-4 flex items-center justify-between text-white font-medium text-sm gap-4"
+                    onClick={() => setOpenFaq(isOpen ? null : index)}
+                    className="w-full p-5 text-left flex justify-between items-center text-sm font-semibold text-foreground hover:text-emerald-400 transition-colors cursor-pointer"
                   >
                     <span>{faq.q}</span>
-                    <ChevronDown className={`w-4 h-4 text-gray-400 shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`w-4 h-4 text-emerald-400 transition-transform duration-200 shrink-0 ml-4 ${isOpen ? "rotate-180" : ""}`} />
                   </button>
                   {isOpen && (
-                    <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-gray-300 leading-relaxed font-normal border-t border-white/5">
+                    <div className="px-5 pb-5 text-xs text-muted-foreground leading-relaxed border-t border-border pt-3 font-normal">
                       {faq.a}
                     </div>
                   )}
@@ -277,21 +334,29 @@ Production: Automated blue/green deploy -> 30-day warranty window`
           </div>
         </div>
 
-        {/* Closing Banner */}
-        <div className="p-8 sm:p-12 rounded-2xl bg-[#141721] border border-white/10 text-center max-w-3xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-            Ready to scope your engineering requirements?
-          </h2>
-          <p className="text-gray-300 text-sm mb-6 font-normal leading-relaxed">
-            Tell us what you need built. An engineering lead will review your scope and provide a milestone proposal within 24 hours.
+        {/* ── Final CTA ── */}
+        <div className="p-10 rounded-2xl bg-card border border-border text-center max-w-3xl mx-auto shadow-sm">
+          <h3 className="text-2xl font-bold text-foreground mb-3">
+            Ready to design your system architecture?
+          </h3>
+          <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+            Schedule a 20-minute consultation with our lead engineers to map your data contracts and receive a milestone proposal within 24 hours.
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-6 py-3 rounded-lg text-sm transition-colors"
-          >
-            Start a Project
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-6 py-3 rounded-xl text-xs transition-colors cursor-pointer"
+            >
+              Schedule a Technical Call
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+            <Link
+              href="/trust"
+              className="inline-flex items-center justify-center gap-2 border border-border hover:bg-muted text-foreground font-medium px-6 py-3 rounded-xl text-xs transition-colors cursor-pointer"
+            >
+              Review Trust & Governance Center
+            </Link>
+          </div>
         </div>
 
       </div>
