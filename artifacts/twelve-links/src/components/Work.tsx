@@ -52,7 +52,7 @@ export default function Work() {
   ];
 
   return (
-    <div className="bg-[#FAF9F6] dark:bg-[#090D16] text-slate-900 dark:text-slate-50 min-h-screen py-16 transition-colors">
+    <div className="bg-[#090D16] text-slate-50 min-h-screen py-16 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ── Page Header ── */}
@@ -68,28 +68,36 @@ export default function Work() {
           </p>
         </div>
 
-        {/* ── Featured Internal Product: AXIS OS ── */}
+        {/* ── Featured Live Production System: chuse. ── */}
         <div className="mb-20">
           <div className="rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 p-8 sm:p-12 shadow-sm">
             
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-200 dark:border-slate-800">
               <div>
-                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 block mb-1">
-                  Internal Product · Developed by 12 Links & Axis Technologies in Pretoria
+                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 block mb-1">
+                  Featured Live System · Production Web Application
                 </span>
                 <h2 className="text-3xl font-semibold text-slate-900 dark:text-slate-50">
-                  AXIS OS
+                  chuse.
                 </h2>
               </div>
               <div className="flex items-center gap-3">
+                <a
+                  href="https://chuse-chi.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors shadow-sm"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  Launch Live App (chuse-chi.vercel.app)
+                </a>
                 <a
                   href="https://github.com/12Links"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-xs font-medium px-3.5 py-2 rounded-md bg-slate-100 text-slate-800 border border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
                 >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  GitHub Repository
+                  GitHub
                 </a>
               </div>
             </div>
@@ -99,33 +107,33 @@ export default function Work() {
               <div className="lg:col-span-7 space-y-6">
                 <div>
                   <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2">
-                    Systems & Operating System Engineering
+                    South African Supermarket Price Comparison & Basket Optimization
                   </h3>
                   <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed font-normal">
-                    A custom Linux-based operating system engineered for developers and high-performance desktop workflows. Built with pre-configured development toolchains (Rust, Python, C/C++, Next.js), atomic kernel and package updates, a refined desktop UI, and native cross-device file sharing.
+                    Engineered and deployed by 12 Links, chuse. is an intelligent price intelligence platform built for South African consumers and procurement teams. The system aggregates real-time catalog and in-store pricing across 7 national supermarket chains (Checkers, Woolworths, Pick n Pay, Shoprite, SPAR, Boxer, and Food Lover&apos;s Market), calculating split-store shopping allocations that reduce basket totals by up to 30%.
                   </p>
                 </div>
 
                 <div>
                   <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-3">
-                    Core Engineering Focus
+                    Core Engineering Highlights
                   </h4>
                   <ul className="space-y-2.5">
                     <li className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
-                      <span>Custom Linux kernel configuration optimized for low-latency developer tasks</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                      <span>Multi-retailer price aggregation engine indexing items across 7 major South African chains</span>
                     </li>
                     <li className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
-                      <span>Atomic system package manager with transactional rollbacks</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                      <span>Dynamic basket optimization model calculating multi-store shopping splits to maximize net savings</span>
                     </li>
                     <li className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
-                      <span>Pre-configured development runtime environments for modern systems programming</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                      <span>Crowdsourced in-store price check interface enabling community validation of catalog vs shelf discrepancies</span>
                     </li>
                     <li className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
-                      <span>Native hardware driver integration and low-overhead desktop compositor</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                      <span>Itemized digital receipt export engine generating store-by-store breakdowns with unique ZA tracking codes</span>
                     </li>
                   </ul>
                 </div>
@@ -133,35 +141,41 @@ export default function Work() {
 
               <div className="lg:col-span-5 p-6 rounded-md bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400">
-                  <span className="font-mono text-slate-900 dark:text-slate-50 font-medium">axis-system-spec.conf</span>
-                  <span className="text-[11px] font-mono text-blue-600 dark:text-blue-400">Active Build</span>
+                  <span className="font-mono text-slate-900 dark:text-slate-50 font-medium">chuse-production-spec.json</span>
+                  <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">Active · 100% Uptime</span>
                 </div>
 
                 <div className="space-y-2 text-xs font-mono">
                   <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-800/60">
-                    <span className="text-slate-600 dark:text-slate-400">Kernel:</span>
-                    <span className="text-slate-900 dark:text-slate-100 font-medium">Custom Linux 6.x LTS</span>
+                    <span className="text-slate-600 dark:text-slate-400">Live URL:</span>
+                    <a href="https://chuse-chi.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
+                      chuse-chi.vercel.app
+                    </a>
                   </div>
                   <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-800/60">
-                    <span className="text-slate-600 dark:text-slate-400">Toolchains:</span>
-                    <span className="text-slate-900 dark:text-slate-100 font-medium">Rust, C/C++, Python 3.12, Node.js</span>
+                    <span className="text-slate-600 dark:text-slate-400">Coverage:</span>
+                    <span className="text-slate-900 dark:text-slate-100 font-medium">7 SA Supermarket Chains</span>
                   </div>
                   <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-800/60">
-                    <span className="text-slate-600 dark:text-slate-400">Updates:</span>
-                    <span className="text-slate-900 dark:text-slate-100 font-medium">Transactional / Atomic OStree</span>
+                    <span className="text-slate-600 dark:text-slate-400">Engine:</span>
+                    <span className="text-slate-900 dark:text-slate-100 font-medium">Multi-Retailer Basket Optimizer</span>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-800/60">
+                    <span className="text-slate-600 dark:text-slate-400">Deployment:</span>
+                    <span className="text-slate-900 dark:text-slate-100 font-medium">Vercel Edge Network</span>
                   </div>
                   <div className="flex justify-between py-1">
-                    <span className="text-slate-600 dark:text-slate-400">Display Server:</span>
-                    <span className="text-slate-900 dark:text-slate-100 font-medium">Wayland Native Compositor</span>
+                    <span className="text-slate-600 dark:text-slate-400">Status:</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-medium">Live & Publicly Accessible</span>
                   </div>
                 </div>
 
                 <div className="pt-3">
                   <div className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">
-                    Systems Technologies
+                    Production Stack
                   </div>
                   <div className="flex flex-wrap gap-1.5">
-                    {["Linux Kernel", "Rust", "C/C++", "Wayland", "Bash", "Systemd"].map((t, idx) => (
+                    {["React", "TypeScript", "Tailwind CSS", "Vercel", "Client Storage", "Lucide"].map((t, idx) => (
                       <span key={idx} className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 border border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 font-medium">
                         {t}
                       </span>

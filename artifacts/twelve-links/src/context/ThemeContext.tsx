@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "dark" | "light" | "system";
+type Theme = "dark";
 
 interface ThemeContextType {
   theme: Theme;
-  resolvedTheme: "dark" | "light";
+  resolvedTheme: "dark";
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
   reducedMotion: boolean;
@@ -14,15 +14,8 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("12links-theme") as Theme;
-      if (saved && ["dark", "light", "system"].includes(saved)) {
-        return saved;
-      }
-    }
-    return "light"; // Default to Architectural Light Mode
-  });
+  const [theme] = useState<Theme>("dark");
+  const resolvedTheme: "dark" = "dark";
 
   const [reducedMotion, setReducedMotionState] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
@@ -35,31 +28,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return false;
   });
 
-  const [resolvedTheme, setResolvedTheme] = useState<"dark" | "light">("light");
-
   useEffect(() => {
     const root = document.documentElement;
-    
-    let effective: "dark" | "light" = "dark";
-    if (theme === "system") {
-      effective = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    } else {
-      effective = theme;
-    }
+    root.classList.remove("light");
+    root.classList.add("dark");
+    localStorage.setItem("12links-theme", "dark");
+  }, []);
 
-    setResolvedTheme(effective);
-
-    root.classList.remove("dark", "light");
-    root.classList.add(effective);
-    localStorage.setItem("12links-theme", theme);
-  }, [theme]);
-
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
+  const setTheme = (_newTheme: Theme) => {
+    // Permanent Dark Mode
   };
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === "dark" ? "light" : "dark"));
+    // Permanent Dark Mode
   };
 
   const setReducedMotion = (reduced: boolean) => {

@@ -31,12 +31,14 @@ function ScrollToTop() {
 
 function Router() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#FAF9F6] dark:bg-[#090D16] text-slate-900 dark:text-slate-50 transition-colors">
+    <div className="flex flex-col min-h-screen bg-[#090D16] text-slate-50 transition-colors">
       <Navbar />
       <main id="main-content" className="flex-grow pt-20">
         <ScrollToTop />
         <Switch>
           <Route path="/" component={Hero} />
+          <Route path="/home" component={Hero} />
+          <Route path="/index.html" component={Hero} />
           <Route path="/about" component={About} />
           <Route path="/services" component={Services} />
           <Route path="/industries" component={Industries} />
@@ -60,7 +62,7 @@ function App() {
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <div className="min-h-screen font-sans selection:bg-blue-600 selection:text-white bg-[#FAF9F6] dark:bg-[#090D16] text-slate-900 dark:text-slate-50 transition-colors duration-200">
+          <div className="min-h-screen font-sans selection:bg-blue-600 selection:text-white bg-[#090D16] text-slate-50 transition-colors duration-200">
             <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
               <Router />
             </WouterRouter>

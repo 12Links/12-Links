@@ -45,19 +45,19 @@
 }
 
 :root {
-  /* Architectural Light Mode (Primary Default) */
-  --bg-canvas: #FAF9F6;
-  --bg-surface: #FFFFFF;
-  --bg-subtle: #F1F5F9;
-  --border-hairline: #E2E8F0;
-  --border-strong: #CBD5E1;
-  --text-primary: #0F172A;
-  --text-secondary: #334155;
-  --text-muted: #475569;
-  --accent-primary: #1D4ED8;
-  --accent-primary-hover: #1E40AF;
-  --accent-secondary: #0F172A;
-  --accent-warm: #B45309;
+  /* Matte Carbon Dark Mode (Default) */
+  --bg-canvas: #090D16;
+  --bg-surface: #111827;
+  --bg-subtle: #1E293B;
+  --border-hairline: #1E293B;
+  --border-strong: #334155;
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  --accent-primary: #3B82F6;
+  --accent-primary-hover: #2563EB;
+  --accent-secondary: #F8FAFC;
+  --accent-warm: #D97706;
 }
 
 .dark {

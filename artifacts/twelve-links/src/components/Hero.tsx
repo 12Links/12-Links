@@ -295,7 +295,7 @@ export default function Hero() {
     }
   ];
 
-  // Parallax Scroll Reference for AXIS OS Section
+  // Parallax Scroll Reference for chuse. Showcase Section
   const parallaxRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: parallaxProgress } = useScroll({
     target: parallaxRef,
@@ -312,7 +312,7 @@ export default function Hero() {
   const deliveryScaleY = useSpring(deliveryProgress, { stiffness: 100, damping: 20 });
 
   return (
-    <div className="bg-[#FAF9F6] dark:bg-[#090D16] text-slate-900 dark:text-slate-50 transition-colors relative selection:bg-blue-600 selection:text-white">
+    <div className="bg-[#090D16] text-slate-50 transition-colors relative selection:bg-blue-600 selection:text-white">
       
       {/* ─────────────────────────────────────────────────────────────────
           1. INTERACTIVE BLUEPRINT GRID & SPLIT-WORD 3D HERO SECTION
@@ -325,17 +325,6 @@ export default function Hero() {
         {/* Foreground Content */}
         <div className="relative z-10 max-w-4xl text-left">
           
-          {/* Eyebrow Pill with sliding border beam */}
-          <motion.div
-            initial={{ opacity: 0.01, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100/90 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-xs font-mono font-medium text-slate-600 dark:text-slate-400 mb-6 shadow-sm"
-          >
-            <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400" />
-            <span>SOFTWARE & AI ENGINEERING STUDIO · PRETORIA, SOUTH AFRICA</span>
-          </motion.div>
-
           {/* Monumental Split-Word 3D H1 Headline */}
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.06] mb-6 text-slate-900 dark:text-slate-50">
             {headlineWords.map((word, idx) => (
@@ -409,7 +398,7 @@ export default function Hero() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative p-6 sm:p-8 overflow-hidden bg-[#FAF9F6] dark:bg-[#090D16] transition-colors"
+                className="group relative p-6 sm:p-8 overflow-hidden bg-[#090D16] transition-colors"
               >
                 {/* Expand-on-hover Top Highlight Bar */}
                 <span className="absolute top-0 left-0 h-[2px] w-0 bg-blue-600 dark:bg-blue-400 group-hover:w-full transition-all duration-300" />
@@ -714,7 +703,7 @@ export default function Hero() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────
-          5. FEATURED ENGINEERING SPOTLIGHT: AXIS OS (PARALLAX SHOWCASE)
+          5. FEATURED ENGINEERING SPOTLIGHT: CHUSE. (PRODUCTION PLATFORM)
           ───────────────────────────────────────────────────────────────── */}
       <section ref={parallaxRef} className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-slate-800">
         <div className="rounded-xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 p-8 sm:p-12 shadow-sm overflow-hidden relative">
@@ -723,21 +712,28 @@ export default function Hero() {
             
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="text-xs font-mono font-semibold tracking-wider text-blue-600 dark:text-blue-400 uppercase">
-                FEATURED INTERNAL PRODUCT · BUILT IN PRETORIA
+              <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-blue-600 dark:text-blue-400 uppercase">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>FEATURED PRODUCTION SYSTEM · LIVE APPLICATION</span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
-                AXIS OS: Custom Linux desktop and developer environment.
+                chuse. — South African supermarket price comparison & basket optimizer.
               </h2>
 
               <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed font-normal">
-                Engineered by 12 Links and Axis Technologies in Pretoria, AXIS OS is a custom Linux distribution built for developers and high-performance workflows. It combines pre-configured systems toolchains (Rust, Python, C/C++, Next.js), atomic kernel and package updates, native cross-device file sharing, and a refined desktop interface.
+                Engineered and launched by 12 Links, chuse. is a production grocery intelligence engine tracking real-time prices across South Africa&apos;s leading retailers—including Checkers, Woolworths, Pick n Pay, Shoprite, SPAR, Boxer, and Food Lover&apos;s Market. The platform uses a dynamic integer programming model to optimize multi-store shopping routes, reducing household basket totals by up to 30%.
               </p>
 
               {/* Spec Pills */}
               <div className="flex flex-wrap gap-2 pt-2">
-                {["Linux Kernel", "Atomic Updates", "Native Dev Toolchains", "Hardware Optimization"].map((pill, idx) => (
+                {[
+                  "7 Retailer Feeds",
+                  "Multi-Store Basket Optimizer",
+                  "Real-Time Rand Savings",
+                  "Community Price Checks",
+                  "Exportable Receipts"
+                ].map((pill, idx) => (
                   <span
                     key={idx}
                     className="text-xs font-mono px-3 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 font-medium"
@@ -747,18 +743,28 @@ export default function Hero() {
                 ))}
               </div>
 
-              <div className="pt-4">
+              <div className="pt-4 flex flex-wrap items-center gap-4">
+                <a
+                  href="https://chuse-chi.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2.5 rounded-md text-sm transition-all shadow-sm cursor-pointer"
+                >
+                  <span>Launch Live App</span>
+                  <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+
                 <Link
                   href="/work"
-                  className="group inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                  className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
-                  <span>Explore AXIS OS & Reference Builds</span>
+                  <span>Read Technical Blueprint</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
             </div>
 
-            {/* Right Abstract Geometric Parallax Workspace Wireframe */}
+            {/* Right Abstract Geometric Parallax Basket Optimizer Card */}
             <div className="lg:col-span-5 relative">
               <motion.div
                 style={{ y: parallaxY }}
@@ -767,32 +773,67 @@ export default function Hero() {
                 {/* Window Header */}
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 text-xs">
                   <div className="flex items-center gap-2 font-mono text-slate-700 dark:text-slate-300">
-                    <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400" />
-                    <span>axis-environment.config</span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span>chuse-chi.vercel.app</span>
                   </div>
-                  <span className="text-[11px] font-mono text-slate-500">v2026.4 LTS</span>
+                  <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-medium">Production Live</span>
                 </div>
 
-                {/* Layered Workspace Wireframe Boxes */}
+                {/* Basket Optimizer Comparison Box */}
                 <div className="space-y-2.5">
-                  <div className="p-3 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
-                    <span className="text-slate-900 dark:text-slate-100 font-medium font-mono">Kernel Core</span>
-                    <span className="text-blue-600 dark:text-blue-400 text-[11px] font-mono">Linux 6.x LTS</span>
+                  <div className="p-3.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
+                    <div>
+                      <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-mono tracking-wider">Multi-Store Basket</div>
+                      <div className="text-slate-900 dark:text-slate-50 font-bold text-base font-mono">R 412.50</div>
+                    </div>
+                    <div className="text-right">
+                      <span className="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 font-mono text-xs font-semibold">
+                        Save R 176.50 (30.0%)
+                      </span>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">vs. R 589.00 baseline</div>
+                    </div>
                   </div>
-                  <div className="p-3 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
-                    <span className="text-slate-900 dark:text-slate-100 font-medium font-mono">Toolchain Runtimes</span>
-                    <span className="text-slate-600 dark:text-slate-400 text-[11px] font-mono">Rust · C/C++ · Python</span>
-                  </div>
-                  <div className="p-3 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
-                    <span className="text-slate-900 dark:text-slate-100 font-medium font-mono">System Compositor</span>
-                    <span className="text-slate-600 dark:text-slate-400 text-[11px] font-mono">Native Wayland</span>
+
+                  {/* Retailer Allocation Feed */}
+                  <div className="space-y-1.5 text-xs font-mono">
+                    <div className="p-2.5 rounded bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                        <span className="text-slate-900 dark:text-slate-200 font-medium">Checkers</span>
+                      </div>
+                      <span className="text-slate-600 dark:text-slate-400 text-[11px]">3 items · R 148.00</span>
+                    </div>
+
+                    <div className="p-2.5 rounded bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                        <span className="text-slate-900 dark:text-slate-200 font-medium">Woolworths</span>
+                      </div>
+                      <span className="text-slate-600 dark:text-slate-400 text-[11px]">2 items · R 112.50</span>
+                    </div>
+
+                    <div className="p-2.5 rounded bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                        <span className="text-slate-900 dark:text-slate-200 font-medium">Shoprite</span>
+                      </div>
+                      <span className="text-slate-600 dark:text-slate-400 text-[11px]">4 items · R 152.00</span>
+                    </div>
                   </div>
                 </div>
 
                 {/* Footer spec bar */}
                 <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-500">
-                  <span>Pretoria Lab Build</span>
-                  <span className="text-blue-600 dark:text-blue-400">12 Links & Axis</span>
+                  <span>Gauteng & Western Cape Engine</span>
+                  <a
+                    href="https://chuse-chi.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 font-medium"
+                  >
+                    <span>chuse.live</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
                 </div>
               </motion.div>
             </div>
