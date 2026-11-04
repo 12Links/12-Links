@@ -9,8 +9,7 @@ import {
   Calendar as CalendarIcon, 
   ArrowRight, 
   ShieldCheck, 
-  Send, 
-  UserCheck
+  Send 
 } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
@@ -179,18 +178,18 @@ export default function Contact() {
   };
 
   return (
-    <div className="bg-background text-foreground min-h-screen py-16 transition-colors">
+    <div className="bg-[#FAF9F6] dark:bg-[#090D16] text-slate-900 dark:text-slate-50 min-h-screen py-16 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ── Page Header ── */}
         <div className="max-w-3xl mb-16">
-          <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3">
+          <div className="text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase mb-3">
             CONTACT
           </div>
-          <h1 className="text-4xl sm:text-5xl font-semibold text-foreground tracking-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl font-semibold text-slate-900 dark:text-slate-50 tracking-tight mb-5">
             Start a conversation with our engineering team.
           </h1>
-          <p className="text-secondary text-lg leading-relaxed font-normal">
+          <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed font-normal">
             Tell us about your project, technical challenge, or timeline. A lead engineer in Pretoria will review your inquiry and respond within one business day.
           </p>
         </div>
@@ -201,36 +200,36 @@ export default function Contact() {
           {/* Left Column: Pretoria Details & Studio Information (Cols 1-5) */}
           <div className="lg:col-span-5 space-y-6">
             
-            <div className="p-6 rounded-lg bg-card border border-border space-y-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+            <div className="p-6 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-50 uppercase tracking-wider">
                 Studio & Direct Channels
               </h3>
 
               <div className="space-y-3 text-xs">
                 
                 {/* Location */}
-                <div className="p-3.5 rounded-md bg-muted/40 border border-border space-y-1">
-                  <div className="flex items-center gap-2 text-foreground font-medium">
+                <div className="p-3.5 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-1">
+                  <div className="flex items-center gap-2 text-slate-900 dark:text-slate-50 font-medium">
                     <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                     <span>Studio Location</span>
                   </div>
-                  <p className="text-secondary pl-6">
+                  <p className="text-slate-700 dark:text-slate-300 pl-6">
                     Pretoria, Gauteng, South Africa
                   </p>
                 </div>
 
                 {/* Email */}
-                <div className="flex items-center justify-between p-3.5 rounded-md bg-muted/40 border border-border">
-                  <span className="text-secondary flex items-center gap-2">
+                <div className="flex items-center justify-between p-3.5 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                  <span className="text-slate-600 dark:text-slate-400 flex items-center gap-2">
                     <Mail className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                     <span>Direct Email:</span>
                   </span>
                   <div className="flex items-center gap-1.5">
-                    <span className="text-foreground font-mono font-medium">info@12links.co.za</span>
+                    <span className="text-slate-900 dark:text-slate-50 font-mono font-medium">info@12links.co.za</span>
                     <button
                       type="button"
                       onClick={copyEmail}
-                      className="p-1 hover:text-foreground text-muted-foreground transition-colors cursor-pointer"
+                      className="p-1 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 transition-colors cursor-pointer"
                       title="Copy Email"
                     >
                       {copied ? <Check className="w-3.5 h-3.5 text-blue-600" /> : <Copy className="w-3.5 h-3.5" />}
@@ -239,20 +238,20 @@ export default function Contact() {
                 </div>
 
                 {/* Response SLA */}
-                <div className="flex items-center justify-between p-3.5 rounded-md bg-muted/40 border border-border">
-                  <span className="text-secondary flex items-center gap-2">
+                <div className="flex items-center justify-between p-3.5 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                  <span className="text-slate-600 dark:text-slate-400 flex items-center gap-2">
                     <Clock className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                     <span>Response Window:</span>
                   </span>
-                  <span className="text-foreground font-mono font-medium">Within 1 business day (SAST / UTC+2)</span>
+                  <span className="text-slate-900 dark:text-slate-50 font-mono font-medium">Within 1 business day (SAST / UTC+2)</span>
                 </div>
 
               </div>
             </div>
 
             {/* University & Governance Assurance */}
-            <div className="p-6 rounded-lg bg-card border border-border text-xs text-secondary space-y-3 shadow-sm">
-              <div className="flex items-center gap-2 text-foreground font-semibold">
+            <div className="p-6 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 space-y-3 shadow-sm">
+              <div className="flex items-center gap-2 text-slate-900 dark:text-slate-50 font-semibold">
                 <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 <span>Confidentiality & Governance</span>
               </div>
@@ -265,17 +264,17 @@ export default function Contact() {
 
           {/* Right Column: Interaction Modes (Cols 6-12) */}
           <div className="lg:col-span-7">
-            <div className="p-8 rounded-lg bg-card border border-border shadow-sm space-y-6">
+            <div className="p-8 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
               
               {/* Consultant Banner */}
               {consultant && (
-                <div className="p-4 rounded-md bg-muted border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div className="p-4 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                   <div>
-                    <div className="text-xs font-semibold text-foreground">
+                    <div className="text-xs font-semibold text-slate-900 dark:text-slate-50">
                       Direct consultation requested with {consultant}
                     </div>
                     {consultantEmail && (
-                      <div className="text-muted-foreground font-mono text-[11px] mt-0.5">
+                      <div className="text-slate-600 dark:text-slate-400 font-mono text-[11px] mt-0.5">
                         {consultantEmail}
                       </div>
                     )}
@@ -293,14 +292,14 @@ export default function Contact() {
               )}
 
               {/* Mode Toggle Header */}
-              <div className="flex items-center gap-2 p-1 rounded-md bg-muted border border-border">
+              <div className="flex items-center gap-2 p-1 rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
                 <button
                   type="button"
                   onClick={() => setActiveTab("book")}
                   className={`flex-1 py-2 rounded-md text-xs font-medium transition-colors cursor-pointer flex items-center justify-center gap-2 ${
                     activeTab === "book"
-                      ? "bg-card text-foreground shadow-sm font-semibold"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "bg-white dark:bg-[#111827] text-slate-900 dark:text-slate-50 shadow-sm font-semibold"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
                   }`}
                 >
                   <CalendarIcon className="w-3.5 h-3.5" />
@@ -311,8 +310,8 @@ export default function Contact() {
                   onClick={() => setActiveTab("scope")}
                   className={`flex-1 py-2 rounded-md text-xs font-medium transition-colors cursor-pointer flex items-center justify-center gap-2 ${
                     activeTab === "scope"
-                      ? "bg-card text-foreground shadow-sm font-semibold"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "bg-white dark:bg-[#111827] text-slate-900 dark:text-slate-50 shadow-sm font-semibold"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
                   }`}
                 >
                   <Send className="w-3.5 h-3.5" />
@@ -324,7 +323,7 @@ export default function Contact() {
               {activeTab === "book" && (
                 <form onSubmit={handleBookingSubmit} className="space-y-5">
                   <div>
-                    <label className="text-xs font-medium text-foreground block mb-2">
+                    <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-2">
                       Select Meeting Day (South African Standard Time)
                     </label>
                     <div className="grid grid-cols-3 gap-2">
@@ -335,8 +334,8 @@ export default function Contact() {
                           onClick={() => setSelectedDate(day)}
                           className={`py-2 px-3 rounded-md text-xs font-medium border text-center transition-colors cursor-pointer ${
                             selectedDate === day
-                              ? "border-blue-600 bg-blue-600/10 text-foreground font-semibold"
-                              : "border-border bg-background text-muted-foreground hover:text-foreground"
+                              ? "border-blue-600 bg-blue-600/10 text-slate-900 dark:text-slate-50 font-semibold"
+                              : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
                           }`}
                         >
                           {day}
@@ -346,7 +345,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="text-xs font-medium text-foreground block mb-2">
+                    <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-2">
                       Available SAST Time Slots
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -357,8 +356,8 @@ export default function Contact() {
                           onClick={() => setSelectedSlot(slot)}
                           className={`py-2 px-2.5 rounded-md text-xs font-mono border text-center transition-colors cursor-pointer ${
                             selectedSlot === slot
-                              ? "border-blue-600 bg-blue-600/10 text-foreground font-semibold"
-                              : "border-border bg-background text-muted-foreground hover:text-foreground"
+                              ? "border-blue-600 bg-blue-600/10 text-slate-900 dark:text-slate-50 font-semibold"
+                              : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
                           }`}
                         >
                           {slot}
@@ -367,8 +366,8 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-md bg-muted/40 border border-border text-xs text-secondary leading-relaxed">
-                    Selected consultation: <strong className="text-foreground">{selectedDate} at {selectedSlot}</strong>. Clicking below opens your mail client with pre-filled details to send a direct calendar invite.
+                  <div className="p-4 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                    Selected consultation: <strong className="text-slate-900 dark:text-slate-50">{selectedDate} at {selectedSlot}</strong>. Clicking below opens your mail client with pre-filled details to send a direct calendar invite.
                   </div>
 
                   <button
@@ -386,7 +385,7 @@ export default function Contact() {
                 <form onSubmit={handleScopingSubmit} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-medium text-foreground block mb-1.5">
+                      <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-1.5">
                         Your Name *
                       </label>
                       <input
@@ -394,12 +393,12 @@ export default function Contact() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-md bg-background border border-border text-foreground text-xs focus:outline-none focus:border-blue-600"
-                        placeholder="e.g. Sindi Ndlovu"
+                        className="w-full px-3.5 py-2.5 rounded-md bg-white text-slate-900 placeholder:text-slate-500 border border-slate-300 dark:bg-slate-900 dark:text-slate-50 dark:placeholder:text-slate-400 dark:border-slate-700 text-xs focus:outline-none focus:border-blue-600"
+                        placeholder="Full name"
                       />
                     </div>
                     <div>
-                      <label className="text-xs font-medium text-foreground block mb-1.5">
+                      <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-1.5">
                         Work Email *
                       </label>
                       <input
@@ -407,33 +406,33 @@ export default function Contact() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-md bg-background border border-border text-foreground text-xs focus:outline-none focus:border-blue-600"
-                        placeholder="sindi@enterprise.co.za"
+                        className="w-full px-3.5 py-2.5 rounded-md bg-white text-slate-900 placeholder:text-slate-500 border border-slate-300 dark:bg-slate-900 dark:text-slate-50 dark:placeholder:text-slate-400 dark:border-slate-700 text-xs focus:outline-none focus:border-blue-600"
+                        placeholder="Work email address"
                       />
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-medium text-foreground block mb-1.5">
+                      <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-1.5">
                         Company or Project Name
                       </label>
                       <input
                         type="text"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-md bg-background border border-border text-foreground text-xs focus:outline-none focus:border-blue-600"
-                        placeholder="e.g. Apex Logistics"
+                        className="w-full px-3.5 py-2.5 rounded-md bg-white text-slate-900 placeholder:text-slate-500 border border-slate-300 dark:bg-slate-900 dark:text-slate-50 dark:placeholder:text-slate-400 dark:border-slate-700 text-xs focus:outline-none focus:border-blue-600"
+                        placeholder="Company or organization"
                       />
                     </div>
                     <div>
-                      <label className="text-xs font-medium text-foreground block mb-1.5">
+                      <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-1.5">
                         Primary Industry Vertical
                       </label>
                       <select
                         value={formData.vertical}
                         onChange={(e) => setFormData({ ...formData, vertical: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-md bg-background border border-border text-foreground text-xs focus:outline-none focus:border-blue-600"
+                        className="w-full px-3.5 py-2.5 rounded-md bg-white text-slate-900 border border-slate-300 dark:bg-slate-900 dark:text-slate-50 dark:border-slate-700 text-xs focus:outline-none focus:border-blue-600"
                       >
                         <option>Financial Services & Payments</option>
                         <option>Agriculture & Supply Chain</option>
@@ -445,7 +444,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="text-xs font-medium text-foreground block mb-1.5">
+                    <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-1.5">
                       Project Description & Requirements *
                     </label>
                     <textarea
@@ -453,8 +452,8 @@ export default function Contact() {
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-md bg-background border border-border text-foreground text-xs focus:outline-none focus:border-blue-600 resize-none"
-                      placeholder="Outline your project scope, core technical challenges, and target milestones..."
+                      className="w-full px-3.5 py-2.5 rounded-md bg-white text-slate-900 placeholder:text-slate-500 border border-slate-300 dark:bg-slate-900 dark:text-slate-50 dark:placeholder:text-slate-400 dark:border-slate-700 text-xs focus:outline-none focus:border-blue-600 resize-none leading-relaxed"
+                      placeholder="Briefly describe what you are building, your timeline, and any technical requirements."
                     />
                   </div>
 

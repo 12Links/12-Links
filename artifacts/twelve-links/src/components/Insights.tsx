@@ -2,10 +2,6 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { 
   ArrowRight, 
-  ExternalLink, 
-  Code2, 
-  Calendar, 
-  User, 
   ChevronDown 
 } from "lucide-react";
 
@@ -126,18 +122,18 @@ def compute_velocity_features(account_id: str, current_time: int) -> dict:
   ];
 
   return (
-    <div className="bg-background text-foreground min-h-screen py-16 transition-colors">
+    <div className="bg-[#FAF9F6] dark:bg-[#090D16] text-slate-900 dark:text-slate-50 min-h-screen py-16 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ── Page Header ── */}
         <div className="max-w-3xl mb-16">
-          <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3">
+          <div className="text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase mb-3">
             TECHNICAL NOTES
           </div>
-          <h1 className="text-4xl sm:text-5xl font-semibold text-foreground tracking-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl font-semibold text-slate-900 dark:text-slate-50 tracking-tight mb-5">
             Engineering writeups and technical notes.
           </h1>
-          <p className="text-secondary text-lg leading-relaxed font-normal">
+          <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed font-normal">
             Practical insights on distributed systems, data infrastructure, and machine learning architectures written by our engineers in Pretoria.
           </p>
         </div>
@@ -149,24 +145,24 @@ def compute_velocity_features(account_id: str, current_time: int) -> dict:
             return (
               <article 
                 key={note.id}
-                className="p-8 sm:p-10 rounded-lg bg-card border border-border shadow-sm transition-colors"
+                className="p-8 sm:p-10 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 shadow-sm transition-colors"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-border">
-                  <span className="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-200 dark:border-slate-800">
+                  <span className="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-medium">
                     {note.category}
                   </span>
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-4 text-xs text-slate-600 dark:text-slate-400">
                     <span>{note.authors}</span>
                     <span>·</span>
                     <span>{note.date}</span>
                   </div>
                 </div>
 
-                <h2 className="text-2xl font-semibold text-foreground mb-3">
+                <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
                   {note.title}
                 </h2>
 
-                <p className="text-secondary text-base leading-relaxed mb-6 font-normal">
+                <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed mb-6 font-normal">
                   {note.summary}
                 </p>
 
@@ -181,23 +177,23 @@ def compute_velocity_features(account_id: str, current_time: int) -> dict:
 
                 {/* Expanded Full Article View */}
                 {isExpanded && (
-                  <div className="mt-8 pt-8 border-t border-border space-y-6">
-                    <p className="text-secondary leading-relaxed font-normal">
+                  <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-800 space-y-6">
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                       {note.content.overview}
                     </p>
 
                     {note.content.sections.map((sec, idx) => (
                       <div key={idx} className="space-y-3">
-                        <h3 className="text-base font-semibold text-foreground">
+                        <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
                           {sec.heading}
                         </h3>
-                        <p className="text-sm text-secondary leading-relaxed font-normal">
+                        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                           {sec.body}
                         </p>
 
                         {sec.codeSnippet && (
-                          <div className="mt-3 p-4 rounded-md bg-muted border border-border overflow-x-auto">
-                            <pre className="text-xs font-mono text-foreground leading-relaxed">
+                          <div className="mt-3 p-4 rounded-md bg-slate-100 text-slate-900 border border-slate-300 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-800 overflow-x-auto">
+                            <pre className="text-xs font-mono leading-relaxed">
                               <code>{sec.codeSnippet}</code>
                             </pre>
                           </div>
@@ -205,8 +201,8 @@ def compute_velocity_features(account_id: str, current_time: int) -> dict:
                       </div>
                     ))}
 
-                    <div className="pt-4 border-t border-border/60">
-                      <p className="text-xs font-mono text-muted-foreground">
+                    <div className="pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+                      <p className="text-xs font-mono text-slate-600 dark:text-slate-400">
                         Summary: {note.content.summaryPoint}
                       </p>
                     </div>
@@ -218,11 +214,11 @@ def compute_velocity_features(account_id: str, current_time: int) -> dict:
         </div>
 
         {/* ── Bottom Section ── */}
-        <div className="p-10 rounded-lg bg-card border border-border text-center max-w-3xl mx-auto shadow-sm">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-foreground mb-3">
+        <div className="p-10 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 text-center max-w-3xl mx-auto shadow-sm">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
             Discussing an architecture challenge?
           </h2>
-          <p className="text-secondary text-sm mb-6 max-w-xl mx-auto leading-relaxed">
+          <p className="text-slate-700 dark:text-slate-300 text-sm mb-6 max-w-xl mx-auto leading-relaxed">
             Our engineers are open to technical discussions regarding data infrastructure, offline synchronization, and machine learning architectures.
           </p>
           <Link

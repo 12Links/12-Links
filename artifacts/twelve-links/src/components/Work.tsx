@@ -2,16 +2,7 @@ import { Link } from "wouter";
 import { 
   ArrowRight, 
   ExternalLink, 
-  Cpu, 
-  Terminal, 
-  Layers, 
-  Check, 
-  HardDrive, 
-  ShieldCheck, 
-  Code2, 
-  Smartphone, 
-  Eye, 
-  Radio
+  Check 
 } from "lucide-react";
 
 export default function Work() {
@@ -61,32 +52,32 @@ export default function Work() {
   ];
 
   return (
-    <div className="bg-background text-foreground min-h-screen py-16 transition-colors">
+    <div className="bg-[#FAF9F6] dark:bg-[#090D16] text-slate-900 dark:text-slate-50 min-h-screen py-16 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ── Page Header ── */}
         <div className="max-w-3xl mb-16">
-          <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3">
+          <div className="text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase mb-3">
             PROJECTS & ARCHITECTURE
           </div>
-          <h1 className="text-4xl sm:text-5xl font-semibold text-foreground tracking-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl font-semibold text-slate-900 dark:text-slate-50 tracking-tight mb-5">
             Systems and reference builds.
           </h1>
-          <p className="text-secondary text-lg leading-relaxed font-normal">
+          <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed font-normal">
             Selected internal products and reference architectures developed by the 12 Links engineering team in Pretoria.
           </p>
         </div>
 
         {/* ── Featured Internal Product: AXIS OS ── */}
         <div className="mb-20">
-          <div className="rounded-lg bg-card border border-border p-8 sm:p-12 shadow-sm">
+          <div className="rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 p-8 sm:p-12 shadow-sm">
             
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b border-border">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-200 dark:border-slate-800">
               <div>
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 block mb-1">
-                  Internal Product · 12 Links & Axis Technologies
+                  Internal Product · Developed by 12 Links & Axis Technologies in Pretoria
                 </span>
-                <h2 className="text-3xl font-semibold text-foreground">
+                <h2 className="text-3xl font-semibold text-slate-900 dark:text-slate-50">
                   AXIS OS
                 </h2>
               </div>
@@ -95,7 +86,7 @@ export default function Work() {
                   href="https://github.com/12Links"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs font-medium px-3.5 py-2 rounded-md bg-muted text-foreground border border-border hover:bg-muted/80 transition-colors"
+                  className="inline-flex items-center gap-2 text-xs font-medium px-3.5 py-2 rounded-md bg-slate-100 text-slate-800 border border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   GitHub Repository
@@ -107,32 +98,32 @@ export default function Work() {
               
               <div className="lg:col-span-7 space-y-6">
                 <div>
-                  <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                  <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2">
                     Systems & Operating System Engineering
                   </h3>
-                  <p className="text-secondary text-base leading-relaxed font-normal">
+                  <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed font-normal">
                     A custom Linux-based operating system engineered for developers and high-performance desktop workflows. Built with pre-configured development toolchains (Rust, Python, C/C++, Next.js), atomic kernel and package updates, a refined desktop UI, and native cross-device file sharing.
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                  <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-3">
                     Core Engineering Focus
                   </h4>
                   <ul className="space-y-2.5">
-                    <li className="flex items-start gap-2.5 text-sm text-secondary">
+                    <li className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                       <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
                       <span>Custom Linux kernel configuration optimized for low-latency developer tasks</span>
                     </li>
-                    <li className="flex items-start gap-2.5 text-sm text-secondary">
+                    <li className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                       <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
                       <span>Atomic system package manager with transactional rollbacks</span>
                     </li>
-                    <li className="flex items-start gap-2.5 text-sm text-secondary">
+                    <li className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                       <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
                       <span>Pre-configured development runtime environments for modern systems programming</span>
                     </li>
-                    <li className="flex items-start gap-2.5 text-sm text-secondary">
+                    <li className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                       <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
                       <span>Native hardware driver integration and low-overhead desktop compositor</span>
                     </li>
@@ -140,42 +131,38 @@ export default function Work() {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 p-6 rounded-md bg-muted/40 border border-border space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-border text-xs text-muted-foreground">
-                  <span className="font-mono text-foreground font-medium">axis-system-spec.conf</span>
+              <div className="lg:col-span-5 p-6 rounded-md bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400">
+                  <span className="font-mono text-slate-900 dark:text-slate-50 font-medium">axis-system-spec.conf</span>
                   <span className="text-[11px] font-mono text-blue-600 dark:text-blue-400">Active Build</span>
                 </div>
 
-                <div className="space-y-2 text-xs font-mono text-secondary">
-                  <div className="flex justify-between py-1 border-b border-border/50">
-                    <span className="text-muted-foreground">Kernel:</span>
-                    <span>Custom Linux 6.x LTS</span>
+                <div className="space-y-2 text-xs font-mono">
+                  <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-800/60">
+                    <span className="text-slate-600 dark:text-slate-400">Kernel:</span>
+                    <span className="text-slate-900 dark:text-slate-100 font-medium">Custom Linux 6.x LTS</span>
                   </div>
-                  <div className="flex justify-between py-1 border-b border-border/50">
-                    <span className="text-muted-foreground">Toolchains:</span>
-                    <span>Rust, C/C++, Python 3.12, Node.js</span>
+                  <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-800/60">
+                    <span className="text-slate-600 dark:text-slate-400">Toolchains:</span>
+                    <span className="text-slate-900 dark:text-slate-100 font-medium">Rust, C/C++, Python 3.12, Node.js</span>
                   </div>
-                  <div className="flex justify-between py-1 border-b border-border/50">
-                    <span className="text-muted-foreground">Updates:</span>
-                    <span>Transactional / Atomic OStree</span>
-                  </div>
-                  <div className="flex justify-between py-1 border-b border-border/50">
-                    <span className="text-muted-foreground">Display Server:</span>
-                    <span>Wayland Native Compositor</span>
+                  <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-800/60">
+                    <span className="text-slate-600 dark:text-slate-400">Updates:</span>
+                    <span className="text-slate-900 dark:text-slate-100 font-medium">Transactional / Atomic OStree</span>
                   </div>
                   <div className="flex justify-between py-1">
-                    <span className="text-muted-foreground">Partnership:</span>
-                    <span>12 Links & Axis Technologies</span>
+                    <span className="text-slate-600 dark:text-slate-400">Display Server:</span>
+                    <span className="text-slate-900 dark:text-slate-100 font-medium">Wayland Native Compositor</span>
                   </div>
                 </div>
 
                 <div className="pt-3">
-                  <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
+                  <div className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">
                     Systems Technologies
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {["Linux Kernel", "Rust", "C/C++", "Wayland", "Bash", "Systemd"].map((t, idx) => (
-                      <span key={idx} className="text-[11px] font-mono px-2 py-0.5 rounded bg-card border border-border text-secondary">
+                      <span key={idx} className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 border border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 font-medium">
                         {t}
                       </span>
                     ))}
@@ -192,13 +179,13 @@ export default function Work() {
         {/* ── Reference Architectures Section ── */}
         <div className="mb-24">
           <div className="max-w-3xl mb-12">
-            <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2">
+            <div className="text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase mb-2">
               REFERENCE ARCHITECTURES
             </div>
-            <h2 className="text-3xl font-semibold text-foreground tracking-tight mb-3">
+            <h2 className="text-3xl font-semibold text-slate-900 dark:text-slate-50 tracking-tight mb-3">
               Production blueprints and system patterns
             </h2>
-            <p className="text-secondary text-base leading-relaxed font-normal">
+            <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed font-normal">
               These reference implementations demonstrate our architectural patterns for distributed data, edge computing, and high-frequency transactions.
             </p>
           </div>
@@ -207,29 +194,29 @@ export default function Work() {
             {referenceArchitectures.map((arch) => (
               <div 
                 key={arch.id}
-                className="p-8 rounded-lg bg-card border border-border flex flex-col justify-between shadow-sm"
+                className="p-8 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm"
               >
                 <div className="space-y-4">
                   <div>
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground block mb-1">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 block mb-1">
                       {arch.category}
                     </span>
-                    <h3 className="text-lg font-semibold text-foreground">
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
                       {arch.title}
                     </h3>
                   </div>
 
-                  <p className="text-secondary text-sm leading-relaxed font-normal">
+                  <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-normal">
                     {arch.overview}
                   </p>
 
                   <div className="pt-2">
-                    <h4 className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mb-2">
+                    <h4 className="text-[11px] font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2">
                       Key Architectural Components
                     </h4>
                     <ul className="space-y-2">
                       {arch.architectureDetails.map((detail, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-xs text-secondary">
+                        <li key={idx} className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
                           <Check className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
                           <span>{detail}</span>
                         </li>
@@ -238,15 +225,15 @@ export default function Work() {
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-border">
-                  <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mb-2">
+                <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-800">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2">
                     Technology Stack
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {arch.stack.map((t, idx) => (
                       <span 
                         key={idx}
-                        className="text-[11px] font-mono px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border"
+                        className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 border border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 font-medium"
                       >
                         {t}
                       </span>
@@ -260,11 +247,11 @@ export default function Work() {
         </div>
 
         {/* ── Bottom Scoping Callout ── */}
-        <div className="p-10 rounded-lg bg-card border border-border text-center max-w-3xl mx-auto shadow-sm">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-foreground mb-3">
+        <div className="p-10 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 text-center max-w-3xl mx-auto shadow-sm">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
             Reviewing architecture for an upcoming build?
           </h2>
-          <p className="text-secondary text-sm mb-6 max-w-xl mx-auto leading-relaxed">
+          <p className="text-slate-700 dark:text-slate-300 text-sm mb-6 max-w-xl mx-auto leading-relaxed">
             Our systems engineers can evaluate your requirements, design technical specifications, and establish a milestone schedule.
           </p>
           <Link

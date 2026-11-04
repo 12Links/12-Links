@@ -55,8 +55,8 @@ export default function Navbar() {
         aria-label="Main Navigation"
         className={`w-full transition-all duration-200 ${
           scrolled
-            ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm py-3"
-            : "bg-transparent border-b border-border/50 py-4"
+            ? "bg-white/95 dark:bg-[#090D16]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm py-3"
+            : "bg-transparent border-b border-slate-200/50 dark:border-slate-800/50 py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -70,7 +70,7 @@ export default function Navbar() {
                   alt="12 Links Logo" 
                   className="w-8 h-8 sm:w-9 sm:h-9 object-contain transition-transform group-hover:scale-105" 
                 />
-                <span className="text-xl font-bold tracking-tight text-foreground">
+                <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
                   12<span className="text-blue-600 dark:text-blue-400">Links</span>
                 </span>
               </Link>
@@ -86,8 +86,8 @@ export default function Navbar() {
                     href={link.href}
                     className={`px-3 py-1.5 rounded-md text-xs xl:text-sm font-medium transition-colors ${
                       isActive
-                        ? "text-foreground bg-muted font-semibold"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                        ? "text-slate-900 dark:text-slate-50 bg-slate-100 dark:bg-slate-800 font-semibold"
+                        : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100/60 dark:hover:bg-slate-800/60"
                     }`}
                   >
                     {link.name}
@@ -102,7 +102,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="p-2 rounded-md bg-card border border-border text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                className="p-2 rounded-md bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all cursor-pointer"
                 title={resolvedTheme === "dark" ? "Switch to Architectural Light Mode" : "Switch to Matte Carbon Dark Mode"}
                 aria-label="Toggle Theme"
               >
@@ -127,7 +127,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="p-2 rounded-md bg-card border border-border text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                className="p-2 rounded-md bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all cursor-pointer"
                 aria-label="Toggle Theme"
               >
                 {resolvedTheme === "dark" ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
@@ -136,11 +136,11 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-muted-foreground hover:text-foreground p-2 rounded-md border border-border focus:outline-none cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 p-2 rounded-md border border-slate-200 dark:border-slate-800 focus:outline-none cursor-pointer"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
               >
-                {isOpen ? <X className="h-5 w-5 text-foreground" /> : <Menu className="h-5 w-5" />}
+                {isOpen ? <X className="h-5 w-5 text-slate-900 dark:text-slate-50" /> : <Menu className="h-5 w-5" />}
               </button>
             </div>
 
@@ -155,13 +155,13 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="lg:hidden border-b border-border bg-background/98 backdrop-blur-xl px-4 pt-3 pb-6 space-y-2"
+              className="lg:hidden border-b border-slate-200 dark:border-slate-800 bg-white/98 dark:bg-[#090D16]/98 backdrop-blur-xl px-4 pt-3 pb-6 space-y-2"
             >
               <div className="flex flex-col space-y-1">
                 <Link
                   href="/"
                   className={`px-3 py-2 rounded-md text-sm font-medium ${
-                    location === "/" ? "text-foreground bg-muted font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    location === "/" ? "text-slate-900 dark:text-slate-50 bg-slate-100 dark:bg-slate-800 font-semibold" : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
                   }`}
                 >
                   Home
@@ -174,8 +174,8 @@ export default function Navbar() {
                       href={link.href}
                       className={`px-3 py-2 rounded-md text-sm font-medium ${
                         isActive
-                          ? "text-foreground bg-muted font-semibold"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                          ? "text-slate-900 dark:text-slate-50 bg-slate-100 dark:bg-slate-800 font-semibold"
+                          : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
                       }`}
                     >
                       {link.name}
@@ -184,7 +184,7 @@ export default function Navbar() {
                 })}
               </div>
 
-              <div className="pt-3 border-t border-border">
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-800">
                 <Link
                   href="/contact"
                   className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2.5 rounded-md text-sm transition-colors cursor-pointer"

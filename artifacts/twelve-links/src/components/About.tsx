@@ -8,7 +8,6 @@ import {
   Mail,
   Copy,
   Check,
-  CheckCircle2,
   GraduationCap
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -112,29 +111,29 @@ export default function About() {
   };
 
   return (
-    <div className="bg-background text-foreground min-h-screen py-16 transition-colors">
+    <div className="bg-[#FAF9F6] dark:bg-[#090D16] text-slate-900 dark:text-slate-50 min-h-screen py-16 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ── Page Header ── */}
         <div className="max-w-3xl mb-16">
-          <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3">
+          <div className="text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase mb-3">
             ABOUT 12 LINKS
           </div>
-          <h1 className="text-4xl sm:text-5xl font-semibold text-foreground tracking-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl font-semibold text-slate-900 dark:text-slate-50 tracking-tight mb-5">
             Built by computer scientists and engineers in Pretoria.
           </h1>
-          <p className="text-secondary text-lg leading-relaxed font-normal">
+          <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed font-normal">
             12 Links is a software and AI engineering studio founded in Pretoria by seven University of Pretoria computer science, data science, and information systems specialists.
           </p>
         </div>
 
         {/* ── Origin Narrative ── */}
-        <div className="grid lg:grid-cols-12 gap-12 items-start mb-24 pb-16 border-b border-border">
-          <div className="lg:col-span-6 space-y-4 text-base text-secondary leading-relaxed font-normal">
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground block">
+        <div className="grid lg:grid-cols-12 gap-12 items-start mb-24 pb-16 border-b border-slate-200 dark:border-slate-800">
+          <div className="lg:col-span-6 space-y-4 text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 block">
               Origin & Purpose
             </span>
-            <h2 className="text-2xl font-semibold text-foreground leading-tight">
+            <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-50 leading-tight">
               A direct path to serious systems engineering
             </h2>
             <p>
@@ -143,56 +142,56 @@ export default function About() {
             <p>
               Our team combines rigorous computer science foundations with fast, milestone-driven execution to ship software that works in production. We operate on structured milestones where your technical leads review functional software at each gate before sign-off.
             </p>
-            <div className="pt-4 text-xs text-muted-foreground border-t border-border">
-              <strong className="text-foreground">Why 12 Links? </strong>
+            <div className="pt-4 text-xs text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800">
+              <strong className="text-slate-900 dark:text-slate-50">Why 12 Links? </strong>
               In computer engineering, a distributed architecture is only as resilient as its weakest connection. We ensure your data pipelines, machine learning models, security protocols, and client interfaces connect with equal durability.
             </div>
           </div>
 
-          <div className="lg:col-span-6 p-8 rounded-lg bg-card border border-border space-y-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-foreground">
+          <div className="lg:col-span-6 p-8 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 space-y-6 shadow-sm">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
               Core Studio Principles
             </h3>
             
             <div className="space-y-4">
-              <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1">
+              <div className="p-4 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-1">
                 <span className="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 block">
                   01. Milestone-Gated Delivery
                 </span>
-                <p className="text-xs text-secondary leading-relaxed">
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                   We bill strictly on demonstrable technical deliverables. You test and verify working software in staging before funds are approved.
                 </p>
               </div>
 
-              <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1">
+              <div className="p-4 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-1">
                 <span className="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 block">
                   02. 100% Source Code Ownership
                 </span>
-                <p className="text-xs text-secondary leading-relaxed">
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                   All repositories, trained model weights, documentation, and cloud deployment scripts belong exclusively to your business.
                 </p>
               </div>
 
-              <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1">
+              <div className="p-4 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-1">
                 <span className="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 block">
                   03. In-Country Compliance
                 </span>
-                <p className="text-xs text-secondary leading-relaxed">
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                   We architect systems for South African data sovereignty and cloud regions with AES-256 encryption and cryptographic audit trails.
                 </p>
               </div>
 
-              <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1">
+              <div className="p-4 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-1">
                 <span className="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 block">
                   04. 30-Day Defect Warranty
                 </span>
-                <p className="text-xs text-secondary leading-relaxed">
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                   Every production handover includes 30 calendar days of active defect resolution support at zero additional charge.
                 </p>
               </div>
             </div>
 
-            <div className="pt-2 text-xs text-muted-foreground flex items-center gap-1.5">
+            <div className="pt-2 text-xs text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
               <MapPin className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
               <span>Headquartered in Pretoria, Gauteng, South Africa</span>
             </div>
@@ -202,13 +201,13 @@ export default function About() {
         {/* ── The Founding Team ── */}
         <div className="mb-24">
           <div className="max-w-3xl mb-12">
-            <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2">
+            <div className="text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase mb-2">
               FOUNDING TEAM
             </div>
-            <h2 className="text-3xl font-semibold text-foreground tracking-tight mb-3">
+            <h2 className="text-3xl font-semibold text-slate-900 dark:text-slate-50 tracking-tight mb-3">
               Engineers and systems architects
             </h2>
-            <p className="text-secondary text-base leading-relaxed font-normal">
+            <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed font-normal">
               When you work with 12 Links, you collaborate directly with the engineers designing and writing your code.
             </p>
           </div>
@@ -217,11 +216,11 @@ export default function About() {
             {team.map((member, idx) => (
               <div 
                 key={idx}
-                className="p-6 rounded-lg bg-card border border-border flex flex-col justify-between space-y-5 shadow-sm"
+                className="p-6 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-5 shadow-sm"
               >
                 <div>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 rounded-full overflow-hidden border border-border shrink-0">
+                    <div className="w-14 h-14 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800 shrink-0">
                       <img 
                         src={member.image} 
                         alt={member.name}
@@ -230,31 +229,31 @@ export default function About() {
                       />
                     </div>
                     <div>
-                      <h3 className="text-base font-semibold text-foreground leading-tight">
+                      <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50 leading-tight">
                         {member.name}
                       </h3>
                       <p className="text-xs text-blue-600 dark:text-blue-400 font-medium leading-tight mt-0.5">
                         {member.role}
                       </p>
-                      <span className="text-[11px] text-muted-foreground flex items-center gap-1 mt-1 font-mono">
-                        <GraduationCap className="w-3 h-3 text-muted-foreground" />
+                      <span className="text-[11px] text-slate-600 dark:text-slate-400 flex items-center gap-1 mt-1 font-mono">
+                        <GraduationCap className="w-3 h-3 text-slate-500" />
                         {member.university}
                       </span>
                     </div>
                   </div>
 
-                  <p className="text-secondary text-xs leading-relaxed font-normal">
+                  <p className="text-slate-700 dark:text-slate-300 text-xs leading-relaxed font-normal">
                     {member.bio}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-border flex items-center justify-between text-xs">
+                <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-3">
                     <a
                       href={member.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors p-1"
+                      className="text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-colors p-1"
                       aria-label={`${member.name}'s GitHub Profile`}
                     >
                       <Github className="w-4 h-4" />
@@ -263,7 +262,7 @@ export default function About() {
                       href={member.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors p-1"
+                      className="text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-colors p-1"
                       aria-label={`${member.name}'s LinkedIn Profile`}
                     >
                       <Linkedin className="w-4 h-4" />
@@ -273,7 +272,7 @@ export default function About() {
                   <div className="flex items-center gap-2">
                     <a
                       href={`mailto:${member.email}`}
-                      className="text-[11px] font-mono text-muted-foreground hover:text-foreground flex items-center gap-1"
+                      className="text-[11px] font-mono text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 flex items-center gap-1"
                       title={member.email}
                     >
                       <Mail className="w-3.5 h-3.5" />
@@ -282,7 +281,7 @@ export default function About() {
                     <button
                       type="button"
                       onClick={() => handleCopyEmail(member.email)}
-                      className="text-muted-foreground hover:text-foreground p-1 cursor-pointer"
+                      className="text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 p-1 cursor-pointer"
                       title="Copy Email Address"
                     >
                       {copiedEmail === member.email ? (
@@ -300,11 +299,11 @@ export default function About() {
         </div>
 
         {/* ── Bottom Callout ── */}
-        <div className="p-10 rounded-lg bg-card border border-border text-center max-w-3xl mx-auto shadow-sm">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-foreground mb-3">
+        <div className="p-10 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 text-center max-w-3xl mx-auto shadow-sm">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
             Start a project with our team
           </h2>
-          <p className="text-secondary text-sm mb-6 max-w-xl mx-auto leading-relaxed">
+          <p className="text-slate-700 dark:text-slate-300 text-sm mb-6 max-w-xl mx-auto leading-relaxed">
             Reach out to our engineering leads in Pretoria to review your technical requirements and timeline.
           </p>
           <Link

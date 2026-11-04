@@ -1,21 +1,9 @@
-import { motion } from "framer-motion";
 import { 
   ArrowRight, 
-  CheckCircle2, 
-  ShieldCheck, 
   Code2, 
   Brain, 
   Smartphone, 
-  Cloud, 
-  Layers, 
-  Cpu, 
-  Server, 
-  Key, 
-  Check, 
-  Terminal,
-  Activity,
-  Database,
-  Lock
+  Cloud 
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -85,137 +73,48 @@ export default function Hero() {
   ];
 
   return (
-    <div className="bg-background text-foreground transition-colors">
+    <div className="bg-[#FAF9F6] dark:bg-[#090D16] text-slate-900 dark:text-slate-50 transition-colors">
       
-      {/* ── 1. HERO SECTION ── */}
-      <section className="pt-16 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-border">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Column: Positioning & CTAs */}
-          <div className="lg:col-span-7">
-            <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-4">
-              SOFTWARE & AI ENGINEERING STUDIO · PRETORIA, SOUTH AFRICA
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground leading-[1.1] mb-6">
-              Custom software and applied AI built for South African enterprise.
-            </h1>
-
-            <p className="text-lg text-secondary leading-relaxed mb-8 max-w-2xl font-normal">
-              12 Links designs, builds, and deploys production web platforms, mobile applications, and machine learning systems. Every engagement runs on fixed-scope milestones with complete source code handover.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-3.5 mb-10">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3.5 rounded-md text-sm transition-colors shadow-sm cursor-pointer"
-              >
-                Start a Project
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex items-center justify-center gap-2 border border-border hover:border-foreground/30 hover:bg-muted text-foreground font-medium px-6 py-3.5 rounded-md text-sm transition-colors cursor-pointer"
-              >
-                View Capabilities
-              </Link>
-            </div>
+      {/* ── 1. HERO SECTION (CLEAN SINGLE-COLUMN ARCHITECTURAL HERO) ── */}
+      <section className="pt-20 pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-slate-800">
+        <div className="max-w-4xl text-left">
+          <div className="text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase mb-4">
+            SOFTWARE & AI ENGINEERING STUDIO · PRETORIA, SOUTH AFRICA
           </div>
 
-          {/* Right Column: Architectural Systems Visualizer (Clean, high-tech, 0% neon) */}
-          <div className="lg:col-span-5">
-            <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
-              <div className="flex items-center justify-between pb-4 border-b border-border text-xs text-muted-foreground">
-                <div className="flex items-center gap-2 font-mono">
-                  <div className="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700" />
-                  <span className="ml-1 text-foreground font-medium">systems-topology.svg</span>
-                </div>
-                <span className="text-[11px] font-mono text-blue-600 dark:text-blue-400">Pretoria Core</span>
-              </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-slate-50 leading-[1.1] mb-6">
+            Custom software and applied AI built for South African enterprise.
+          </h1>
 
-              {/* Architectural Topology Nodes */}
-              <div className="py-6 space-y-4">
-                
-                {/* Node 1: Client Edge / Ingestion */}
-                <div className="p-3.5 rounded-md bg-muted/40 border border-border flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded bg-card border border-border text-blue-600 dark:text-blue-400">
-                      <Smartphone className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-semibold text-foreground">Client Applications & Edge</div>
-                      <div className="text-[11px] text-muted-foreground">Offline-first sync · Local SQLite · Web & Mobile</div>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-card border border-border text-muted-foreground">
-                    Layer 01
-                  </span>
-                </div>
+          <p className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 leading-relaxed mb-8 max-w-3xl font-normal">
+            12 Links designs, builds, and deploys production web platforms, mobile applications, and machine learning systems. Every engagement runs on fixed-scope milestones with complete source code handover.
+          </p>
 
-                {/* Flow Connector */}
-                <div className="flex justify-center items-center py-0.5">
-                  <div className="w-px h-4 bg-border" />
-                </div>
-
-                {/* Node 2: Core Processing & Machine Learning */}
-                <div className="p-3.5 rounded-md bg-muted/40 border border-border flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded bg-card border border-border text-blue-600 dark:text-blue-400">
-                      <Cpu className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-semibold text-foreground">Inference & Application Core</div>
-                      <div className="text-[11px] text-muted-foreground">FastAPI · PyTorch · Custom business logic</div>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-card border border-border text-muted-foreground">
-                    Layer 02
-                  </span>
-                </div>
-
-                {/* Flow Connector */}
-                <div className="flex justify-center items-center py-0.5">
-                  <div className="w-px h-4 bg-border" />
-                </div>
-
-                {/* Node 3: Data Tier & Governance */}
-                <div className="p-3.5 rounded-md bg-muted/40 border border-border flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded bg-card border border-border text-blue-600 dark:text-blue-400">
-                      <Database className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-semibold text-foreground">Data Layer & Security</div>
-                      <div className="text-[11px] text-muted-foreground">PostgreSQL · pgvector · AES-256 encryption</div>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-card border border-border text-muted-foreground">
-                    Layer 03
-                  </span>
-                </div>
-
-              </div>
-
-              {/* Status bar */}
-              <div className="pt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
-                <span className="font-mono text-[11px]">Architecture Spec // v2026.4</span>
-                <span className="text-[11px] text-foreground font-medium">100% Client-Owned</span>
-              </div>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-4 mb-16">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3.5 rounded-md text-sm transition-colors shadow-sm cursor-pointer"
+            >
+              Start a Project
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/services"
+              className="inline-flex items-center justify-center gap-2 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-50 font-medium px-6 py-3.5 rounded-md text-sm transition-colors cursor-pointer"
+            >
+              View Capabilities
+            </Link>
           </div>
-
         </div>
 
         {/* Key Commitments Bar (4-Column Hairline Grid) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-12 mt-12 border-t border-border">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-10 border-t border-slate-200 dark:border-slate-800">
           {commitments.map((item, idx) => (
-            <div key={idx} className="space-y-1.5">
-              <h3 className="text-sm font-semibold text-foreground">
+            <div key={idx} className="space-y-2">
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-50">
                 {item.title}
               </h3>
-              <p className="text-xs text-secondary leading-relaxed font-normal">
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                 {item.desc}
               </p>
             </div>
@@ -224,15 +123,15 @@ export default function Hero() {
       </section>
 
       {/* ── 2. CORE CAPABILITIES SECTION (2x2 ARCHITECTURAL GRID) ── */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-border">
+      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-3xl mb-16">
-          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+          <div className="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2">
             CAPABILITIES
           </div>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-foreground tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 dark:text-slate-50 tracking-tight mb-4">
             Engineering capabilities
           </h2>
-          <p className="text-secondary leading-relaxed font-normal text-base">
+          <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-normal text-base">
             We build end-to-end systems from backend data infrastructure to customer-facing applications.
           </p>
         </div>
@@ -244,29 +143,29 @@ export default function Hero() {
             return (
               <div 
                 key={idx}
-                className="p-8 rounded-lg bg-card border border-border hover:border-slate-400 dark:hover:border-slate-600 transition-colors flex flex-col justify-between"
+                className="p-8 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 transition-colors flex flex-col justify-between shadow-sm"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-md bg-muted border border-border flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6">
+                  <div className="w-10 h-10 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
                     {cap.title}
                   </h3>
-                  <p className="text-secondary text-sm leading-relaxed mb-6 font-normal">
+                  <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-6 font-normal">
                     {cap.description}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-border">
-                  <div className="text-[11px] text-muted-foreground font-mono mb-2 uppercase tracking-wider">
+                <div className="pt-4 border-t border-slate-200 dark:border-slate-800">
+                  <div className="text-[11px] text-slate-600 dark:text-slate-400 font-mono mb-2 uppercase tracking-wider">
                     Technologies
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {cap.stack.map((tech, tIdx) => (
                       <span 
                         key={tIdx} 
-                        className="text-xs font-mono px-2.5 py-1 rounded-md bg-muted/60 text-secondary border border-border font-medium"
+                        className="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 font-medium"
                       >
                         {tech}
                       </span>
@@ -280,30 +179,30 @@ export default function Hero() {
       </section>
 
       {/* ── 3. DELIVERY MODEL SECTION (3-COLUMN STEP GRID) ── */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-border">
+      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-3xl mb-16">
-          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+          <div className="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2">
             DELIVERY MODEL
           </div>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-foreground tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 dark:text-slate-50 tracking-tight mb-4">
             How we deliver
           </h2>
-          <p className="text-secondary leading-relaxed font-normal text-base">
+          <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-normal text-base">
             We work alongside your team in transparent two-week sprints without open-ended retainers.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {steps.map((step, idx) => (
-            <div key={idx} className="p-8 rounded-lg bg-card border border-border flex flex-col justify-between">
+            <div key={idx} className="p-8 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm">
               <div>
                 <span className="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 block mb-3">
                   {step.number}
                 </span>
-                <h3 className="text-lg font-semibold text-foreground mb-3">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-3">
                   {step.title}
                 </h3>
-                <p className="text-secondary text-sm leading-relaxed font-normal">
+                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-normal">
                   {step.description}
                 </p>
               </div>
@@ -314,24 +213,24 @@ export default function Hero() {
 
       {/* ── 4. BOTTOM CTA SECTION ── */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-10 sm:p-14 rounded-lg bg-card border border-border text-center max-w-3xl mx-auto shadow-sm">
-          <h2 className="text-3xl sm:text-4xl font-semibold text-foreground mb-4">
+        <div className="p-10 sm:p-14 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 text-center max-w-3xl mx-auto shadow-sm">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 dark:text-slate-50 mb-4">
             Ready to scope your next system?
           </h2>
-          <p className="text-secondary text-base mb-8 font-normal leading-relaxed">
+          <p className="text-slate-700 dark:text-slate-300 text-base mb-8 font-normal leading-relaxed">
             Speak directly with our engineering leads in Pretoria. We review your requirements and return a clear technical scope within one business day.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-7 py-3.5 rounded-md text-sm transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-7 py-3.5 rounded-md text-sm transition-colors shadow-sm cursor-pointer"
             >
               Book a Technical Call
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="mailto:info@12links.co.za"
-              className="inline-flex items-center justify-center gap-2 border border-border hover:border-foreground/30 text-foreground font-medium px-6 py-3.5 rounded-md text-sm transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-50 font-medium px-6 py-3.5 rounded-md text-sm transition-colors cursor-pointer"
             >
               info@12links.co.za
             </a>

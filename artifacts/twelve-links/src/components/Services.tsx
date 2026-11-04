@@ -7,9 +7,7 @@ import {
   Brain, 
   Code2, 
   Database, 
-  Users, 
-  ShieldCheck, 
-  Sparkles
+  Users 
 } from "lucide-react";
 
 export default function Services() {
@@ -114,18 +112,18 @@ export default function Services() {
   ];
 
   return (
-    <div className="bg-background text-foreground min-h-screen py-16 transition-colors">
+    <div className="bg-[#FAF9F6] dark:bg-[#090D16] text-slate-900 dark:text-slate-50 min-h-screen py-16 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ── Page Header ── */}
         <div className="max-w-3xl mb-20">
-          <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3">
+          <div className="text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase mb-3">
             SERVICES & CAPABILITIES
           </div>
-          <h1 className="text-4xl sm:text-5xl font-semibold text-foreground tracking-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl font-semibold text-slate-900 dark:text-slate-50 tracking-tight mb-5">
             Full-lifecycle software and systems engineering.
           </h1>
-          <p className="text-secondary text-lg leading-relaxed font-normal">
+          <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed font-normal">
             Whether you need a custom platform built from the ground up or a dedicated engineering team to clear critical technical bottlenecks, we deliver production-ready code.
           </p>
         </div>
@@ -137,15 +135,15 @@ export default function Services() {
             return (
               <div 
                 key={block.id}
-                className="p-8 sm:p-10 rounded-lg bg-card border border-border shadow-sm"
+                className="p-8 sm:p-10 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 shadow-sm"
               >
                 {/* Header within block */}
-                <div className="flex items-center gap-3.5 pb-6 mb-8 border-b border-border">
-                  <div className="w-10 h-10 rounded-md bg-muted border border-border flex items-center justify-center text-blue-600 dark:text-blue-400">
+                <div className="flex items-center gap-3.5 pb-6 mb-8 border-b border-slate-200 dark:border-slate-800">
+                  <div className="w-10 h-10 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-blue-600 dark:text-blue-400">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-semibold text-foreground">
+                    <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-50">
                       {block.title}
                     </h2>
                   </div>
@@ -156,17 +154,17 @@ export default function Services() {
                   
                   {/* Left Column: Overview & Use Cases */}
                   <div className="lg:col-span-6 space-y-6">
-                    <p className="text-secondary leading-relaxed font-normal">
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                       {block.overview}
                     </p>
 
                     <div>
-                      <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                      <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-3">
                         Operational Use Cases
                       </h3>
                       <ul className="space-y-2.5">
                         {block.useCases.map((uc, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5 text-sm text-secondary">
+                          <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                             <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
                             <span>{uc}</span>
                           </li>
@@ -176,14 +174,14 @@ export default function Services() {
                   </div>
 
                   {/* Right Column: Deliverables & Tech Stack */}
-                  <div className="lg:col-span-6 space-y-6 lg:pl-6 lg:border-l lg:border-border">
+                  <div className="lg:col-span-6 space-y-6 lg:pl-6 lg:border-l lg:border-slate-200 lg:dark:border-slate-800">
                     <div>
-                      <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                      <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-3">
                         Concrete Deliverables
                       </h3>
                       <ul className="space-y-2.5">
                         {block.deliverables.map((deliv, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5 text-sm text-secondary">
+                          <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                             <Check className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
                             <span>{deliv}</span>
                           </li>
@@ -191,15 +189,15 @@ export default function Services() {
                       </ul>
                     </div>
 
-                    <div className="pt-4 border-t border-border">
-                      <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                    <div className="pt-4 border-t border-slate-200 dark:border-slate-800">
+                      <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-3">
                         Core Technologies
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {block.stack.map((item, idx) => (
                           <span 
                             key={idx}
-                            className="text-xs font-mono px-2.5 py-1 rounded-md bg-muted text-secondary border border-border"
+                            className="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 font-medium"
                           >
                             {item}
                           </span>
@@ -215,12 +213,12 @@ export default function Services() {
         </div>
 
         {/* ── FAQ Section ── */}
-        <div className="max-w-3xl mx-auto pt-12 border-t border-border">
+        <div className="max-w-3xl mx-auto pt-12 border-t border-slate-200 dark:border-slate-800">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-foreground mb-3">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
               Frequently asked questions
             </h2>
-            <p className="text-secondary text-sm">
+            <p className="text-slate-700 dark:text-slate-300 text-sm">
               Straight answers on commercial terms, IP ownership, and project governance.
             </p>
           </div>
@@ -229,18 +227,18 @@ export default function Services() {
             {faqs.map((faq, idx) => (
               <div 
                 key={idx}
-                className="rounded-lg border border-border bg-card overflow-hidden"
+                className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] overflow-hidden shadow-sm"
               >
                 <button
                   type="button"
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="w-full flex items-center justify-between p-5 text-left text-foreground font-medium text-base hover:bg-muted/40 transition-colors cursor-pointer"
+                  className="w-full flex items-center justify-between p-5 text-left text-slate-900 dark:text-slate-50 font-medium text-base hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer"
                 >
                   <span>{faq.q}</span>
-                  <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${openFaq === idx ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform duration-200 ${openFaq === idx ? "rotate-180" : ""}`} />
                 </button>
                 {openFaq === idx && (
-                  <div className="px-5 pb-5 pt-1 text-sm text-secondary leading-relaxed border-t border-border/50">
+                  <div className="px-5 pb-5 pt-1 text-sm text-slate-700 dark:text-slate-300 leading-relaxed border-t border-slate-200/60 dark:border-slate-800/60">
                     {faq.a}
                   </div>
                 )}
