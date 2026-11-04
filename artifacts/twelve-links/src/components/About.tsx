@@ -70,7 +70,7 @@ export default function About() {
       linkedin: "https://www.linkedin.com/company/12-links/"
     },
     { 
-      name: "Luke George", 
+      name: "Lwandiso George", 
       role: "Chief Operating Officer & Cloud Architect", 
       bio: "Manages quality assurance, automated CI/CD security scanning, and cloud deployment operations to guarantee zero-defect handovers across every client sprint.", 
       image: "/team/ghost.jpeg",

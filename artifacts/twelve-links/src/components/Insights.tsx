@@ -30,7 +30,7 @@ export default function Insights() {
     {
       id: "offline-sync",
       title: "Designing Offline-First Mobile Sync with SQLite for Low-Connectivity Field Operations",
-      authors: "Jacky Mpoka & Luke George",
+      authors: "Jacky Mpoka & Lwandiso George",
       date: "October 2026",
       category: "Distributed Systems & Mobile",
       summary: "Architectural patterns for reliable field data collection using embedded SQLite, monotonic delta queues, and deterministic conflict resolution over intermittent cellular networks.",
