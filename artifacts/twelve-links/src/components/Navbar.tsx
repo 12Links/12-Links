@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, Sun, Moon, Sparkles } from "lucide-react";
+import { Menu, X, ArrowRight, Sun, Moon } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -34,11 +34,11 @@ export default function Navbar() {
   }, [isOpen]);
 
   const links = [
-    { name: "Work", href: "/work" },
-    { name: "Services", href: "/services" },
+    { name: "Capabilities", href: "/services" },
+    { name: "Projects & Architecture", href: "/work" },
     { name: "Industries", href: "/industries" },
-    { name: "Insights", href: "/insights" },
-    { name: "Trust & Security", href: "/trust" },
+    { name: "Governance & Trust", href: "/trust" },
+    { name: "Technical Notes", href: "/insights" },
     { name: "About", href: "/about" },
   ];
 
@@ -46,7 +46,7 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 w-full z-50">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] bg-emerald-500 text-white px-4 py-2 rounded font-medium text-xs"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] bg-blue-600 text-white px-4 py-2 rounded-md font-medium text-xs"
       >
         Skip to main content
       </a>
@@ -55,8 +55,8 @@ export default function Navbar() {
         aria-label="Main Navigation"
         className={`w-full transition-all duration-200 ${
           scrolled
-            ? "bg-background/90 backdrop-blur-md border-b border-border shadow-sm py-3"
-            : "bg-transparent border-b border-transparent py-4 sm:py-5"
+            ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm py-3"
+            : "bg-transparent border-b border-border/50 py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,23 +71,23 @@ export default function Navbar() {
                   className="w-8 h-8 sm:w-9 sm:h-9 object-contain transition-transform group-hover:scale-105" 
                 />
                 <span className="text-xl font-bold tracking-tight text-foreground">
-                  12<span className="text-emerald-400">Links</span>
+                  12<span className="text-blue-600 dark:text-blue-400">Links</span>
                 </span>
               </Link>
             </div>
             
             {/* Desktop Navigation Links */}
-            <div className="hidden lg:flex items-center space-x-1 xl:space-x-1.5">
+            <div className="hidden lg:flex items-center space-x-1">
               {links.map((link) => {
                 const isActive = location === link.href;
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`relative px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors ${
+                    className={`px-3 py-1.5 rounded-md text-xs xl:text-sm font-medium transition-colors ${
                       isActive
                         ? "text-foreground bg-muted font-semibold"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                     }`}
                   >
                     {link.name}
@@ -102,20 +102,20 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="p-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground transition-all cursor-pointer"
-                title={resolvedTheme === "dark" ? "Switch to High-Contrast Light Mode" : "Switch to Deep Dark Mode"}
+                className="p-2 rounded-md bg-card border border-border text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                title={resolvedTheme === "dark" ? "Switch to Architectural Light Mode" : "Switch to Matte Carbon Dark Mode"}
                 aria-label="Toggle Theme"
               >
                 {resolvedTheme === "dark" ? (
                   <Sun className="w-4 h-4 text-amber-400" />
                 ) : (
-                  <Moon className="w-4 h-4 text-emerald-600" />
+                  <Moon className="w-4 h-4 text-slate-700" />
                 )}
               </button>
 
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2 rounded-lg text-xs xl:text-sm transition-colors shadow-sm cursor-pointer"
+                className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-md text-xs xl:text-sm transition-colors shadow-sm cursor-pointer"
               >
                 Start a Project
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -127,20 +127,20 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="p-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                className="p-2 rounded-md bg-card border border-border text-muted-foreground hover:text-foreground transition-all cursor-pointer"
                 aria-label="Toggle Theme"
               >
-                {resolvedTheme === "dark" ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-emerald-600" />}
+                {resolvedTheme === "dark" ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
               </button>
 
               <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-muted-foreground hover:text-foreground p-2 rounded-lg focus:outline-none cursor-pointer"
+                className="text-muted-foreground hover:text-foreground p-2 rounded-md border border-border focus:outline-none cursor-pointer"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
               >
-                {isOpen ? <X className="h-6 w-6 text-foreground" /> : <Menu className="h-6 w-6" />}
+                {isOpen ? <X className="h-5 w-5 text-foreground" /> : <Menu className="h-5 w-5" />}
               </button>
             </div>
 
@@ -155,12 +155,12 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="lg:hidden border-b border-border bg-background/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-2"
+              className="lg:hidden border-b border-border bg-background/98 backdrop-blur-xl px-4 pt-3 pb-6 space-y-2"
             >
               <div className="flex flex-col space-y-1">
                 <Link
                   href="/"
-                  className={`px-3 py-2 rounded-lg text-sm font-medium ${
+                  className={`px-3 py-2 rounded-md text-sm font-medium ${
                     location === "/" ? "text-foreground bg-muted font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                   }`}
                 >
@@ -172,7 +172,7 @@ export default function Navbar() {
                     <Link
                       key={link.name}
                       href={link.href}
-                      className={`px-3 py-2 rounded-lg text-sm font-medium ${
+                      className={`px-3 py-2 rounded-md text-sm font-medium ${
                         isActive
                           ? "text-foreground bg-muted font-semibold"
                           : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -187,9 +187,9 @@ export default function Navbar() {
               <div className="pt-3 border-t border-border">
                 <Link
                   href="/contact"
-                  className="w-full flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2.5 rounded-lg text-sm transition-colors cursor-pointer"
+                  className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2.5 rounded-md text-sm transition-colors cursor-pointer"
                 >
-                  Schedule a Technical Call
+                  Start a Project
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

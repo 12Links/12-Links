@@ -60,7 +60,7 @@ function App() {
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <div className="min-h-screen font-sans selection:bg-emerald-500 selection:text-white bg-background text-foreground transition-colors duration-200">
+          <div className="min-h-screen font-sans selection:bg-blue-600 selection:text-white bg-background text-foreground transition-colors duration-200">
             <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
               <Router />
             </WouterRouter>

@@ -21,7 +21,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         return saved;
       }
     }
-    return "dark"; // Default to dark slate
+    return "light"; // Default to Architectural Light Mode
   });
 
   const [reducedMotion, setReducedMotionState] = useState<boolean>(() => {
@@ -35,7 +35,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return false;
   });
 
-  const [resolvedTheme, setResolvedTheme] = useState<"dark" | "light">("dark");
+  const [resolvedTheme, setResolvedTheme] = useState<"dark" | "light">("light");
 
   useEffect(() => {
     const root = document.documentElement;

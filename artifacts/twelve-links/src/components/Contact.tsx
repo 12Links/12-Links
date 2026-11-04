@@ -8,15 +8,8 @@ import {
   Clock, 
   Calendar as CalendarIcon, 
   ArrowRight, 
-  Phone, 
   ShieldCheck, 
-  Server, 
-  Sparkles,
-  ChevronRight,
-  Send,
-  Building,
-  CheckCircle2,
-  GraduationCap,
+  Send, 
   UserCheck
 } from "lucide-react";
 import emailjs from "@emailjs/browser";
@@ -39,7 +32,7 @@ export default function Contact() {
     name: "",
     email: "",
     company: "",
-    vertical: "Fintech & Banking",
+    vertical: "Financial Services & Payments",
     timeline: "1 - 3 Months",
     budget: "R150,000 - R350,000",
     cloud: "AWS Cape Town (af-south-1)",
@@ -102,7 +95,6 @@ export default function Contact() {
     const routingText = consultant ? ` with ${consultant}` : "";
     const emailTarget = consultantEmail || "info@12links.co.za";
 
-    // Direct mailto link preparation to notify the engineer and client
     const subject = encodeURIComponent(`20-Minute Technical Discovery Call${routingText}`);
     const body = encodeURIComponent(
       `Hi ${consultant || "12 Links Team"},\n\nI have scheduled a 20-minute technical discovery call for ${selectedDate} at ${selectedSlot}.\n\nPlease send the Google Meet / Teams calendar invite.\n\nThank you!`
@@ -130,8 +122,7 @@ export default function Contact() {
     const ccParam = consultantEmail ? `?cc=${consultantEmail}&` : "?";
 
     if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
-      // Direct email client fallback
-      const subject = encodeURIComponent(`12 Links Scoping Scope from ${formData.name} (${formData.company || "Enterprise"})`);
+      const subject = encodeURIComponent(`12 Links Scoping Inquiry from ${formData.name} (${formData.company || "Enterprise"})`);
       const body = encodeURIComponent(payloadSummary);
       window.location.href = `mailto:info@12links.co.za${ccParam}subject=${subject}&body=${body}`;
 
@@ -172,7 +163,7 @@ export default function Contact() {
         name: "",
         email: "",
         company: "",
-        vertical: "Fintech & Banking",
+        vertical: "Financial Services & Payments",
         timeline: "1 - 3 Months",
         budget: "R150,000 - R350,000",
         cloud: "AWS Cape Town (af-south-1)",
@@ -192,148 +183,107 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ── Page Header ── */}
-        <div className="max-w-3xl mb-14">
-          <div className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
-            <GraduationCap className="w-4 h-4 text-emerald-400" />
-            <span>University of Pretoria (UP) Systems Engineering Hub</span>
+        <div className="max-w-3xl mb-16">
+          <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3">
+            CONTACT
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground tracking-tight mb-4">
-            Connect directly with our engineering team.
+          <h1 className="text-4xl sm:text-5xl font-semibold text-foreground tracking-tight mb-5">
+            Start a conversation with our engineering team.
           </h1>
-          <p className="text-muted-foreground text-lg leading-relaxed font-normal">
-            Whether you want to schedule an immediate 20-minute technical discovery call or submit a detailed project specification for architecture review, our University of Pretoria systems architects respond within 24 hours.
+          <p className="text-secondary text-lg leading-relaxed font-normal">
+            Tell us about your project, technical challenge, or timeline. A lead engineer in Pretoria will review your inquiry and respond within one business day.
           </p>
         </div>
 
-        {/* ── 2-Column Enterprise Intake Grid ── */}
+        {/* ── 2-Column Layout ── */}
         <div className="grid lg:grid-cols-12 gap-12 items-start mb-20">
           
-          {/* Left Column: Direct Credentials, Phone, Hub Addresses (Cols 1-5) */}
+          {/* Left Column: Pretoria Details & Studio Information (Cols 1-5) */}
           <div className="lg:col-span-5 space-y-6">
             
-            {/* Direct Channel Cards */}
-            <div className="p-6 rounded-2xl bg-card border border-border space-y-4">
-              <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
-                Direct Channels & SLAs
+            <div className="p-6 rounded-lg bg-card border border-border space-y-4 shadow-sm">
+              <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+                Studio & Direct Channels
               </h3>
 
               <div className="space-y-3 text-xs">
+                
+                {/* Location */}
+                <div className="p-3.5 rounded-md bg-muted/40 border border-border space-y-1">
+                  <div className="flex items-center gap-2 text-foreground font-medium">
+                    <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    <span>Studio Location</span>
+                  </div>
+                  <p className="text-secondary pl-6">
+                    Pretoria, Gauteng, South Africa
+                  </p>
+                </div>
+
                 {/* Email */}
-                <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border">
-                  <span className="text-muted-foreground flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-emerald-400" />
-                    Direct Email:
+                <div className="flex items-center justify-between p-3.5 rounded-md bg-muted/40 border border-border">
+                  <span className="text-secondary flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    <span>Direct Email:</span>
                   </span>
                   <div className="flex items-center gap-1.5">
-                    <span className="text-foreground font-semibold font-mono">info@12links.co.za</span>
+                    <span className="text-foreground font-mono font-medium">info@12links.co.za</span>
                     <button
                       type="button"
                       onClick={copyEmail}
-                      className="p-1 hover:text-emerald-400 text-muted-foreground transition-colors cursor-pointer"
+                      className="p-1 hover:text-foreground text-muted-foreground transition-colors cursor-pointer"
                       title="Copy Email"
                     >
-                      {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      {copied ? <Check className="w-3.5 h-3.5 text-blue-600" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                   </div>
                 </div>
 
-                {/* Direct Phone */}
-                <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border">
-                  <span className="text-muted-foreground flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-emerald-400" />
-                    Direct Business Line:
+                {/* Response SLA */}
+                <div className="flex items-center justify-between p-3.5 rounded-md bg-muted/40 border border-border">
+                  <span className="text-secondary flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    <span>Response Window:</span>
                   </span>
-                  <a 
-                    href="tel:+27120040122" 
-                    className="text-foreground font-semibold font-mono hover:text-emerald-400 transition-colors"
-                  >
-                    +27 (0) 12 004 0122
-                  </a>
+                  <span className="text-foreground font-mono font-medium">Within 1 business day (SAST / UTC+2)</span>
                 </div>
 
-                {/* 24-Hour SLA */}
-                <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border">
-                  <span className="text-muted-foreground flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-emerald-400" />
-                    Proposal & Architecture SLA:
-                  </span>
-                  <span className="text-emerald-400 font-semibold font-mono">&lt; 24 Hours</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Physical Engineering Hubs */}
-            <div className="p-6 rounded-2xl bg-card border border-border space-y-4">
-              <h3 className="text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-emerald-400" />
-                Physical Engineering Hubs
-              </h3>
-
-              <div className="space-y-3.5 text-xs">
-                {/* Pretoria Hub */}
-                <div className="p-3.5 rounded-xl bg-background border border-border space-y-1">
-                  <div className="flex items-center justify-between">
-                    <strong className="text-foreground">Pretoria Engineering Lab</strong>
-                    <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">UP Campus Ecosystem</span>
-                  </div>
-                  <p className="text-muted-foreground text-[11px] leading-relaxed">
-                    Lynnwood Bridge Office Park, 4 Daventry St, Lynnwood Manor, Pretoria, 0081
-                  </p>
-                </div>
-
-                {/* Johannesburg Hub */}
-                <div className="p-3.5 rounded-xl bg-background border border-border space-y-1">
-                  <div className="flex items-center justify-between">
-                    <strong className="text-foreground">Johannesburg Innovation Pod</strong>
-                    <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">Commercial Hub</span>
-                  </div>
-                  <p className="text-muted-foreground text-[11px] leading-relaxed">
-                    The Rosebank Link, 173 Oxford Rd, Rosebank, Johannesburg, 2196
-                  </p>
-                </div>
               </div>
             </div>
 
             {/* University & Governance Assurance */}
-            <div className="p-5 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 text-xs text-muted-foreground space-y-2">
-              <div className="flex items-center gap-2 text-emerald-400 font-semibold">
-                <ShieldCheck className="w-4 h-4" />
-                <span>University of Pretoria Engineering Discipline</span>
+            <div className="p-6 rounded-lg bg-card border border-border text-xs text-secondary space-y-3 shadow-sm">
+              <div className="flex items-center gap-2 text-foreground font-semibold">
+                <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <span>Confidentiality & Governance</span>
               </div>
               <p className="leading-relaxed">
-                All 7 founding builders attend the <strong>University of Pretoria (UP)</strong>. All communications, NDA scopes, and technical proposals are held in strict legal confidence with local in-country data storage compliant with POPIA Act No. 4 (2013).
+                All seven founding engineers are University of Pretoria (UP) specialists. Every initial inquiry, technical discussion, and scoping document is handled under strict professional confidentiality and POPIA-aligned data practices.
               </p>
             </div>
 
           </div>
 
-          {/* Right Column: Interactive Mode Switcher (Scheduler vs Scoping Form) (Cols 6-12) */}
+          {/* Right Column: Interaction Modes (Cols 6-12) */}
           <div className="lg:col-span-7">
-            <div className="p-8 rounded-2xl bg-card border border-border shadow-xl space-y-6">
+            <div className="p-8 rounded-lg bg-card border border-border shadow-sm space-y-6">
               
-              {/* Dedicated Consultant Routing Banner (If Selected) */}
+              {/* Consultant Banner */}
               {consultant && (
-                <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-                  <div className="space-y-0.5">
-                    <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">
-                      <UserCheck className="w-3.5 h-3.5" />
-                      Dedicated Consultant Selected // University of Pretoria
-                    </div>
-                    <div className="text-sm font-bold text-foreground">
-                      Direct Discovery Call with {consultant}
+                <div className="p-4 rounded-md bg-muted border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                  <div>
+                    <div className="text-xs font-semibold text-foreground">
+                      Direct consultation requested with {consultant}
                     </div>
                     {consultantEmail && (
-                      <div className="text-muted-foreground font-mono text-[11px] flex items-center gap-1.5 pt-0.5">
-                        <span>Direct Email:</span>
-                        <strong className="text-foreground">{consultantEmail}</strong>
+                      <div className="text-muted-foreground font-mono text-[11px] mt-0.5">
+                        {consultantEmail}
                       </div>
                     )}
                   </div>
-
                   {consultantEmail && (
                     <a
-                      href={`mailto:${consultantEmail}?subject=${encodeURIComponent(`Technical Call Request for ${consultant}`)}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 text-white font-medium text-xs hover:bg-emerald-600 transition-colors shrink-0"
+                      href={`mailto:${consultantEmail}?subject=${encodeURIComponent(`Technical Inquiry for ${consultant}`)}`}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-blue-600 text-white font-medium text-xs hover:bg-blue-700 transition-colors"
                     >
                       <Mail className="w-3.5 h-3.5" />
                       Email Directly
@@ -343,289 +293,178 @@ export default function Contact() {
               )}
 
               {/* Mode Toggle Header */}
-              <div className="flex items-center gap-2 p-1 rounded-xl bg-background border border-border">
+              <div className="flex items-center gap-2 p-1 rounded-md bg-muted border border-border">
                 <button
                   type="button"
                   onClick={() => setActiveTab("book")}
-                  className={`flex-1 py-2.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                  className={`flex-1 py-2 rounded-md text-xs font-medium transition-colors cursor-pointer flex items-center justify-center gap-2 ${
                     activeTab === "book"
-                      ? "bg-emerald-500 text-white shadow-sm"
+                      ? "bg-card text-foreground shadow-sm font-semibold"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   <CalendarIcon className="w-3.5 h-3.5" />
-                  Instant 20-Min Call
+                  Schedule a 20-Min Call
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveTab("scope")}
-                  className={`flex-1 py-2.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                  className={`flex-1 py-2 rounded-md text-xs font-medium transition-colors cursor-pointer flex items-center justify-center gap-2 ${
                     activeTab === "scope"
-                      ? "bg-emerald-500 text-white shadow-sm"
+                      ? "bg-card text-foreground shadow-sm font-semibold"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  <Building className="w-3.5 h-3.5" />
-                  Structured Project Scoping
+                  <Send className="w-3.5 h-3.5" />
+                  Structured Project Scope
                 </button>
               </div>
 
-              {/* ── OPTION A: INSTANT 20-MINUTE CALL SCHEDULER ── */}
+              {/* TAB 1: 20-MIN CALL SCHEDULER */}
               {activeTab === "book" && (
-                <div className="space-y-6">
+                <form onSubmit={handleBookingSubmit} className="space-y-5">
                   <div>
-                    <h3 className="text-xl font-bold text-foreground">
-                      Schedule a 20-Minute Technical Discovery Call
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      Select an available engineering slot with our University of Pretoria team{consultant ? ` (${consultant})` : ""}. We meet over Google Meet or Microsoft Teams.
-                    </p>
+                    <label className="text-xs font-medium text-foreground block mb-2">
+                      Select Meeting Day (South African Standard Time)
+                    </label>
+                    <div className="grid grid-cols-3 gap-2">
+                      {["Tomorrow", "In 2 Days", "Next Monday"].map((day) => (
+                        <button
+                          key={day}
+                          type="button"
+                          onClick={() => setSelectedDate(day)}
+                          className={`py-2 px-3 rounded-md text-xs font-medium border text-center transition-colors cursor-pointer ${
+                            selectedDate === day
+                              ? "border-blue-600 bg-blue-600/10 text-foreground font-semibold"
+                              : "border-border bg-background text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          {day}
+                        </button>
+                      ))}
+                    </div>
                   </div>
 
-                  {bookingConfirmed ? (
-                    <div className="p-6 rounded-xl bg-emerald-950/20 border border-emerald-500/40 text-center space-y-3">
-                      <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center">
-                        <CheckCircle2 className="w-6 h-6" />
-                      </div>
-                      <h4 className="text-lg font-bold text-foreground">Discovery Call Reserved!</h4>
-                      <p className="text-xs text-muted-foreground max-w-md mx-auto leading-relaxed">
-                        We have reserved <strong>{selectedDate}</strong> at <strong>{selectedSlot}</strong>{consultant ? ` with ${consultant}` : ""}. A calendar invite with direct meeting link has been prepared.
-                      </p>
-                      {consultantEmail && (
-                        <p className="text-[11px] font-mono text-emerald-400">
-                          Routed to: {consultantEmail}
-                        </p>
-                      )}
-                      <button
-                        type="button"
-                        onClick={() => setBookingConfirmed(false)}
-                        className="text-xs font-mono text-emerald-400 hover:text-foreground cursor-pointer pt-2 inline-block"
-                      >
-                        ← Modify date & time
-                      </button>
+                  <div>
+                    <label className="text-xs font-medium text-foreground block mb-2">
+                      Available SAST Time Slots
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {timeSlots.map((slot) => (
+                        <button
+                          key={slot}
+                          type="button"
+                          onClick={() => setSelectedSlot(slot)}
+                          className={`py-2 px-2.5 rounded-md text-xs font-mono border text-center transition-colors cursor-pointer ${
+                            selectedSlot === slot
+                              ? "border-blue-600 bg-blue-600/10 text-foreground font-semibold"
+                              : "border-border bg-background text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          {slot}
+                        </button>
+                      ))}
                     </div>
-                  ) : (
-                    <form onSubmit={handleBookingSubmit} className="space-y-5">
-                      {/* Day Selector */}
-                      <div className="space-y-2">
-                        <label className="text-xs font-mono text-muted-foreground uppercase">
-                          1. Select Date:
-                        </label>
-                        <div className="grid grid-cols-3 gap-2">
-                          {["Tomorrow", "In 2 Days", "Next Monday"].map((d) => (
-                            <button
-                              key={d}
-                              type="button"
-                              onClick={() => setSelectedDate(d)}
-                              className={`p-3 rounded-xl border text-xs font-medium transition-all cursor-pointer text-center ${
-                                selectedDate === d
-                                  ? "border-emerald-500 bg-emerald-500/10 text-emerald-400 font-bold"
-                                  : "border-border bg-background text-muted-foreground hover:text-foreground"
-                              }`}
-                            >
-                              {d}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
+                  </div>
 
-                      {/* Time Slot Selector */}
-                      <div className="space-y-2">
-                        <label className="text-xs font-mono text-muted-foreground uppercase">
-                          2. Select Time Slot (SAST // UTC+2):
-                        </label>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                          {timeSlots.map((slot) => (
-                            <button
-                              key={slot}
-                              type="button"
-                              onClick={() => setSelectedSlot(slot)}
-                              className={`p-2.5 rounded-lg border text-xs font-mono transition-all cursor-pointer text-center ${
-                                selectedSlot === slot
-                                  ? "border-emerald-500 bg-emerald-500 text-white font-bold"
-                                  : "border-border bg-background text-muted-foreground hover:text-foreground"
-                              }`}
-                            >
-                              {slot}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
+                  <div className="p-4 rounded-md bg-muted/40 border border-border text-xs text-secondary leading-relaxed">
+                    Selected consultation: <strong className="text-foreground">{selectedDate} at {selectedSlot}</strong>. Clicking below opens your mail client with pre-filled details to send a direct calendar invite.
+                  </div>
 
-                      {/* Attendee Details */}
-                      <div className="grid sm:grid-cols-2 gap-4">
-                        <div className="space-y-1.5">
-                          <label className="text-xs font-medium text-foreground">Your Name *</label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. Sindi Ndlovu"
-                            className="w-full px-3.5 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors"
-                          />
-                        </div>
-                        <div className="space-y-1.5">
-                          <label className="text-xs font-medium text-foreground">Work Email *</label>
-                          <input
-                            type="email"
-                            required
-                            placeholder="sindi@company.co.za"
-                            className="w-full px-3.5 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-medium text-foreground">Discussion Topic (Optional)</label>
-                        <input
-                          type="text"
-                          defaultValue={consultant ? `Technical Discovery with ${consultant}` : ""}
-                          placeholder="e.g. Architecture review for AWS Cape Town migration"
-                          className="w-full px-3.5 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors"
-                        />
-                      </div>
-
-                      <button
-                        type="submit"
-                        className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-xl text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
-                      >
-                        Confirm 20-Minute Technical Call {consultant ? `with ${consultant}` : ""}
-                        <ArrowRight className="w-4 h-4" />
-                      </button>
-                    </form>
-                  )}
-                </div>
+                  <button
+                    type="submit"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-md text-sm transition-colors shadow-sm cursor-pointer"
+                  >
+                    Confirm & Schedule Call
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </form>
               )}
 
-              {/* ── OPTION B: STRUCTURED PROJECT SCOPING FORM ── */}
+              {/* TAB 2: STRUCTURED SCOPING FORM */}
               {activeTab === "scope" && (
                 <form onSubmit={handleScopingSubmit} className="space-y-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground">
-                      Structured Project Scope Submission
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      Provide high-level parameters for your application or machine learning pipeline. We evaluate requirements and provide a formal milestone proposal.
-                    </p>
-                  </div>
-
                   <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-foreground">Your Name *</label>
+                    <div>
+                      <label className="text-xs font-medium text-foreground block mb-1.5">
+                        Your Name *
+                      </label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Liam de Kock"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-md bg-background border border-border text-foreground text-xs focus:outline-none focus:border-blue-600"
+                        placeholder="e.g. Sindi Ndlovu"
                       />
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-foreground">Work Email *</label>
+                    <div>
+                      <label className="text-xs font-medium text-foreground block mb-1.5">
+                        Work Email *
+                      </label>
                       <input
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="liam@enterprise.co.za"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-md bg-background border border-border text-foreground text-xs focus:outline-none focus:border-blue-600"
+                        placeholder="sindi@enterprise.co.za"
                       />
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-foreground">Company / Organization</label>
+                    <div>
+                      <label className="text-xs font-medium text-foreground block mb-1.5">
+                        Company or Project Name
+                      </label>
                       <input
                         type="text"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        placeholder="e.g. Standard Logistics Ltd"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-md bg-background border border-border text-foreground text-xs focus:outline-none focus:border-blue-600"
+                        placeholder="e.g. Apex Logistics"
                       />
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-foreground">Industry Vertical</label>
+                    <div>
+                      <label className="text-xs font-medium text-foreground block mb-1.5">
+                        Primary Industry Vertical
+                      </label>
                       <select
                         value={formData.vertical}
                         onChange={(e) => setFormData({ ...formData, vertical: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 rounded-md bg-background border border-border text-foreground text-xs focus:outline-none focus:border-blue-600"
                       >
-                        <option value="Fintech & Banking">Fintech & Banking</option>
-                        <option value="Agriculture & AgriTech">Agriculture & AgriTech</option>
-                        <option value="MedTech & Public Health">MedTech & Public Health</option>
-                        <option value="Manufacturing & Industrial">Manufacturing & Industrial</option>
-                        <option value="Enterprise SaaS & Logistics">Enterprise SaaS & Logistics</option>
-                        <option value="Other / Emerging Tech">Other / Emerging Tech</option>
+                        <option>Financial Services & Payments</option>
+                        <option>Agriculture & Supply Chain</option>
+                        <option>Healthcare & Operations</option>
+                        <option>Manufacturing & Industrial Systems</option>
+                        <option>Other Enterprise Application</option>
                       </select>
                     </div>
                   </div>
 
-                  <div className="grid sm:grid-cols-3 gap-3">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-foreground">Timeline</label>
-                      <select
-                        value={formData.timeline}
-                        onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors cursor-pointer"
-                      >
-                        <option value="Rapid MVP (< 4 Weeks)">Rapid MVP (&lt; 4 Weeks)</option>
-                        <option value="1 - 3 Months">1 - 3 Months</option>
-                        <option value="3 - 6 Months">3 - 6 Months</option>
-                        <option value="Ongoing Pod">Ongoing Pod</option>
-                      </select>
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-foreground">Estimated Budget Tier</label>
-                      <select
-                        value={formData.budget}
-                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors cursor-pointer"
-                      >
-                        <option value="R50,000 - R150,000">R50k - R150k</option>
-                        <option value="R150,000 - R350,000">R150k - R350k</option>
-                        <option value="R350,000+">R350k+</option>
-                        <option value="Enterprise Custom">Enterprise Custom</option>
-                      </select>
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-foreground">Target Cloud</label>
-                      <select
-                        value={formData.cloud}
-                        onChange={(e) => setFormData({ ...formData, cloud: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors cursor-pointer"
-                      >
-                        <option value="AWS Cape Town (af-south-1)">AWS Cape Town (af-south-1)</option>
-                        <option value="Microsoft Azure South Africa">Azure South Africa</option>
-                        <option value="On-Premise Private Server">On-Premise Server</option>
-                        <option value="Flexible / Undecided">Flexible / Undecided</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-foreground">
-                      Tell us what you're building or what's slowing your team down *
+                  <div>
+                    <label className="text-xs font-medium text-foreground block mb-1.5">
+                      Project Description & Requirements *
                     </label>
                     <textarea
                       required
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Outline your application requirements, current tech stack, integration needs, or compliance constraints..."
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-background border border-border text-foreground text-xs focus:outline-none focus:border-emerald-500 transition-colors resize-none leading-relaxed"
+                      className="w-full px-3.5 py-2.5 rounded-md bg-background border border-border text-foreground text-xs focus:outline-none focus:border-blue-600 resize-none"
+                      placeholder="Outline your project scope, core technical challenges, and target milestones..."
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-medium rounded-xl text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium py-3 rounded-md text-sm transition-colors shadow-sm cursor-pointer"
                   >
-                    {loading ? "Transmitting Scope..." : `Submit Project Scope for Architecture Review${consultant ? ` (${consultant})` : ""}`}
-                    <Send className="w-3.5 h-3.5" />
+                    {loading ? "Transmitting..." : "Submit Project Scope"}
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>
               )}

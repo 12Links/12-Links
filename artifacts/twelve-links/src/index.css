@@ -5,132 +5,97 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
+  --color-background: var(--bg-canvas);
+  --color-foreground: var(--text-primary);
+  --color-border: var(--border-hairline);
+  --color-input: var(--border-hairline);
+  --color-ring: var(--accent-primary);
 
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-card-border: hsl(var(--card-border));
+  --color-card: var(--bg-surface);
+  --color-card-foreground: var(--text-primary);
+  --color-card-border: var(--border-hairline);
 
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-popover-border: hsl(var(--popover-border));
+  --color-popover: var(--bg-surface);
+  --color-popover-foreground: var(--text-primary);
+  --color-popover-border: var(--border-hairline);
 
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-primary-border: var(--primary-border);
+  --color-primary: var(--accent-primary);
+  --color-primary-foreground: #FFFFFF;
+  --color-primary-hover: var(--accent-primary-hover);
 
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-secondary-border: var(--secondary-border);
+  --color-secondary: var(--bg-subtle);
+  --color-secondary-foreground: var(--text-primary);
 
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-muted-border: var(--muted-border);
+  --color-muted: var(--bg-subtle);
+  --color-muted-foreground: var(--text-muted);
 
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-accent-border: var(--accent-border);
+  --color-accent: var(--accent-primary);
+  --color-accent-foreground: #FFFFFF;
 
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-destructive-border: var(--destructive-border);
+  --color-destructive: #DC2626;
+  --color-destructive-foreground: #FFFFFF;
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: Georgia, serif;
-  --font-mono: 'Space Mono', Menlo, Monaco, Consolas, monospace;
+  --font-mono: 'JetBrains Mono', 'Geist Mono', Menlo, Monaco, Consolas, monospace;
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.5rem;
 }
 
-:root, .dark {
-  /* Warm off-black / deep slate palette */
-  --background: 222 18% 7%; /* #0F1117 */
-  --foreground: 210 20% 96%; /* #F3F4F6 */
-  
-  --card: 222 16% 11%; /* #151821 */
-  --card-foreground: 210 20% 96%;
-  --card-border: 220 13% 18%; /* subtle slate border */
-  
-  --popover: 222 16% 11%;
-  --popover-foreground: 210 20% 96%;
-  --popover-border: 220 13% 18%;
-  
-  --primary: 158 64% 48%; /* #10B981 Tasteful Emerald Green */
-  --primary-foreground: 0 0% 100%;
-  
-  --secondary: 217 19% 20%;
-  --secondary-foreground: 210 20% 96%;
-  
-  --muted: 220 14% 15%;
-  --muted-foreground: 215 14% 65%;
-  
-  --accent: 158 64% 48%;
-  --accent-foreground: 0 0% 100%;
-  
-  --destructive: 0 72% 51%;
-  --destructive-foreground: 0 0% 100%;
-  
-  --border: 220 13% 18%;
-  --input: 222 14% 14%;
-  --ring: 158 64% 48%;
-  
-  --radius: 0.75rem;
+:root {
+  /* Architectural Light Mode (Primary Default) */
+  --bg-canvas: #FAF9F6;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F1F5F9;
+  --border-hairline: #E2E8F0;
+  --border-strong: #CBD5E1;
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --accent-primary: #1D4ED8;
+  --accent-primary-hover: #1E40AF;
+  --accent-secondary: #0F172A;
+  --accent-warm: #B45309;
 }
 
-.light {
-  /* High-contrast crisp enterprise light mode */
-  --background: 210 25% 98%; /* #F8FAFC */
-  --foreground: 222 35% 10%; /* #0B1120 */
-  
-  --card: 0 0% 100%; /* #FFFFFF */
-  --card-foreground: 222 35% 10%;
-  --card-border: 214 20% 88%; /* #E2E8F0 */
-  
-  --popover: 0 0% 100%;
-  --popover-foreground: 222 35% 10%;
-  --popover-border: 214 20% 88%;
-  
-  --primary: 158 68% 38%; /* #059669 Vibrant Emerald */
-  --primary-foreground: 0 0% 100%;
-  
-  --secondary: 214 18% 92%;
-  --secondary-foreground: 222 35% 10%;
-  
-  --muted: 214 18% 94%;
-  --muted-foreground: 215 16% 40%;
-  
-  --accent: 158 68% 38%;
-  --accent-foreground: 0 0% 100%;
-  
-  --destructive: 0 72% 51%;
-  --destructive-foreground: 0 0% 100%;
-  
-  --border: 214 20% 88%;
-  --input: 214 20% 88%;
-  --ring: 158 68% 38%;
+.dark {
+  /* Matte Carbon Dark Mode (Zero Glow) */
+  --bg-canvas: #0B0F17;
+  --bg-surface: #111827;
+  --bg-subtle: #1E293B;
+  --border-hairline: #1F2937;
+  --border-strong: #334155;
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  --accent-primary: #3B82F6;
+  --accent-primary-hover: #2563EB;
+  --accent-secondary: #F8FAFC;
+  --accent-warm: #D97706;
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: var(--border-hairline);
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden transition-colors duration-200;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    line-height: 1.65;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
 
-  /* Refined, minimal scrollbar */
+  /* Minimal clean scrollbar without glows */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -141,11 +106,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(120, 130, 145, 0.25);
+    background: var(--border-strong);
     border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(120, 130, 145, 0.45);
   }
 }

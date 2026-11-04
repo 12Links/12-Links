@@ -5,329 +5,328 @@ import {
   Lock, 
   FileText, 
   Server, 
-  CheckCircle2, 
-  AlertCircle, 
+  Check, 
   ArrowRight, 
-  Download, 
-  ExternalLink,
-  Cpu,
-  Key,
-  Database,
-  Terminal,
+  Key, 
   Scale
 } from "lucide-react";
 
 export default function Trust() {
   const [activeTab, setActiveTab] = useState<"popia" | "ip" | "infosec" | "warranty">("popia");
 
+  const pillars = [
+    {
+      icon: Key,
+      title: "100% Source Code & IP Transfer",
+      description: "Upon milestone completion, all repositories, custom model weights, and infrastructure scripts belong exclusively to your organization."
+    },
+    {
+      icon: Scale,
+      title: "POPIA-Aligned Data Handling",
+      description: "Systems are architected around South African data protection principles, including role-based access control, encryption at rest (AES-256) and in transit (TLS 1.3), and audit logging."
+    },
+    {
+      icon: Server,
+      title: "Flexible Deployment Targets",
+      description: "We deploy directly into your organization's own AWS, Azure, Google Cloud, or on-premise Linux environments so you retain full administrative control."
+    },
+    {
+      icon: ShieldCheck,
+      title: "Milestone-Gated Governance",
+      description: "Every project is scoped with clear acceptance criteria, staging environment reviews, and a 30-day post-deployment defect warranty."
+    }
+  ];
+
   return (
     <div className="bg-background text-foreground min-h-screen py-16 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* ── Enterprise Trust Hero ── */}
-        <div className="max-w-3xl mb-14">
-          <div className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>12 Links Trust & Security Center</span>
+        {/* ── Page Header ── */}
+        <div className="max-w-3xl mb-16">
+          <div className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3">
+            GOVERNANCE & SECURITY
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground tracking-tight mb-4">
-            Enterprise governance, POPIA compliance, and verified IP protection.
+          <h1 className="text-4xl sm:text-5xl font-semibold text-foreground tracking-tight mb-5">
+            Security, data residency, and IP ownership.
           </h1>
-          <p className="text-muted-foreground text-lg leading-relaxed font-normal">
-            We hold our engineering to the highest regulatory and security standards. Enterprise legal and procurement teams can review our data protection posture, code ownership guarantees, and infrastructure controls below.
+          <p className="text-secondary text-lg leading-relaxed font-normal">
+            Clear contractual and technical safeguards for organizations deploying custom software and AI systems.
           </p>
         </div>
 
-        {/* ── 4 Quick Trust Badges ── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          <div className="p-4 rounded-xl bg-card border border-border space-y-1.5">
-            <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold">
-              <Scale className="w-4 h-4" />
-              <span>POPIA Act No. 4</span>
-            </div>
-            <h4 className="text-sm font-bold text-foreground">100% In-Country Storage</h4>
-            <p className="text-[11px] text-muted-foreground leading-tight">Data never leaves South African jurisdiction without explicit bilateral consent.</p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-card border border-border space-y-1.5">
-            <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold">
-              <Key className="w-4 h-4" />
-              <span>IP Ownership</span>
-            </div>
-            <h4 className="text-sm font-bold text-foreground">100% Code Handover</h4>
-            <p className="text-[11px] text-muted-foreground leading-tight">All model weights, source code, and infra configs belong exclusively to you.</p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-card border border-border space-y-1.5">
-            <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold">
-              <Server className="w-4 h-4" />
-              <span>AWS Cape Town</span>
-            </div>
-            <h4 className="text-sm font-bold text-foreground">Sub-40ms af-south-1</h4>
-            <p className="text-[11px] text-muted-foreground leading-tight">Hardened Kubernetes microservices deployed locally in Cape Town.</p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-card border border-border space-y-1.5">
-            <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold">
-              <CheckCircle2 className="w-4 h-4" />
-              <span>Milestone Billing</span>
-            </div>
-            <h4 className="text-sm font-bold text-foreground">30-Day Defect Warranty</h4>
-            <p className="text-[11px] text-muted-foreground leading-tight">Funds released only upon testing and approving functional milestone gates.</p>
-          </div>
+        {/* ── 4 Core Pillars Grid ── */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          {pillars.map((pillar, idx) => {
+            const Icon = pillar.icon;
+            return (
+              <div 
+                key={idx}
+                className="p-6 rounded-lg bg-card border border-border shadow-sm flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-10 h-10 rounded-md bg-muted border border-border flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-base font-semibold text-foreground mb-2">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-xs text-secondary leading-relaxed font-normal">
+                    {pillar.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        {/* ── Interactive Governance Navigation Tabs ── */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 border-b border-border">
+        {/* ── Detailed Technical Specifications ── */}
+        <div className="mb-8">
+          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+            DETAILED SPECIFICATIONS
+          </div>
+          <h2 className="text-2xl font-semibold text-foreground">
+            Contractual and engineering schedules
+          </h2>
+        </div>
+
+        {/* Interactive Specification Tabs */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 border-b border-border">
           <button
             type="button"
             onClick={() => setActiveTab("popia")}
-            className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-md text-xs font-medium whitespace-nowrap transition-colors cursor-pointer flex items-center gap-2 ${
               activeTab === "popia"
-                ? "bg-emerald-500 text-white shadow-sm"
+                ? "bg-blue-600 text-white shadow-sm"
                 : "bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-muted"
             }`}
           >
-            <Scale className="w-4 h-4" />
-            <span>POPIA & Regulatory Compliance</span>
+            <Scale className="w-3.5 h-3.5" />
+            <span>POPIA & Data Protection</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("ip")}
-            className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-md text-xs font-medium whitespace-nowrap transition-colors cursor-pointer flex items-center gap-2 ${
               activeTab === "ip"
-                ? "bg-emerald-500 text-white shadow-sm"
+                ? "bg-blue-600 text-white shadow-sm"
                 : "bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-muted"
             }`}
           >
-            <Key className="w-4 h-4" />
-            <span>100% IP & Code Ownership</span>
+            <Key className="w-3.5 h-3.5" />
+            <span>IP & Repository Transfer</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("infosec")}
-            className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-md text-xs font-medium whitespace-nowrap transition-colors cursor-pointer flex items-center gap-2 ${
               activeTab === "infosec"
-                ? "bg-emerald-500 text-white shadow-sm"
+                ? "bg-blue-600 text-white shadow-sm"
                 : "bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-muted"
             }`}
           >
-            <Lock className="w-4 h-4" />
-            <span>InfoSec & Cryptography</span>
+            <Lock className="w-3.5 h-3.5" />
+            <span>Infrastructure Hardening</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("warranty")}
-            className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-md text-xs font-medium whitespace-nowrap transition-colors cursor-pointer flex items-center gap-2 ${
               activeTab === "warranty"
-                ? "bg-emerald-500 text-white shadow-sm"
+                ? "bg-blue-600 text-white shadow-sm"
                 : "bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-muted"
             }`}
           >
-            <CheckCircle2 className="w-4 h-4" />
-            <span>Milestone SLA & Warranty</span>
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>Milestone Gates & Warranty</span>
           </button>
         </div>
 
-        {/* ── Detailed Tab Viewport ── */}
-        <div className="grid lg:grid-cols-12 gap-10 items-start mb-20">
+        {/* Tab Detail Viewport */}
+        <div className="grid lg:grid-cols-12 gap-10 items-start mb-24">
           
-          {/* Main Detail Container (Cols 1-8) */}
-          <div className="lg:col-span-8 p-8 rounded-2xl bg-card border border-border space-y-6">
+          <div className="lg:col-span-8 p-8 rounded-lg bg-card border border-border space-y-6 shadow-sm">
             
             {/* TAB 1: POPIA COMPLIANCE */}
             {activeTab === "popia" && (
               <div className="space-y-6">
                 <div>
-                  <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-1">
-                    Regulatory Mandate // Act No. 4 of 2013
-                  </span>
-                  <h3 className="text-2xl font-bold text-foreground">
-                    Protection of Personal Information Act (POPIA) Governance
+                  <h3 className="text-xl font-semibold text-foreground">
+                    Protection of Personal Information Act (POPIA) Alignment
                   </h3>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                    12 Links operates as both an Information Officer and Operator under South African law. All data architectures engineered for clients strictly adhere to the 8 statutory conditions for lawful processing.
+                  <p className="text-sm text-secondary mt-2 leading-relaxed">
+                    All software architectures designed for South African deployment adhere to the statutory conditions for lawful data processing under Act No. 4 of 2013.
                   </p>
                 </div>
 
                 <div className="space-y-4 pt-2">
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      Condition 7: Section 19 Security Safeguards
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Section 19 Security Safeguards
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      All client databases and feature stores are encrypted using industry-standard AES-256 at rest and TLS 1.3 in transit. We implement strict pseudonymization and tokenization so sensitive records are never stored in cleartext.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      Databases and data pipelines are encrypted using industry standard AES-256 at rest and TLS 1.3 in transit. Sensitive fields are tokenized so private records are never logged in cleartext.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      Section 72: Strict Transborder Data Transfer Controls
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      In-Country Hosting & Section 72 Compliance
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      We prioritize in-country data residency on AWS Cape Town (af-south-1) and local South African data centers. Client data is never transmitted to foreign jurisdictions or third-party AI models without explicit bilateral SOW authorization.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      We configure deployments within South African cloud data centers or on-premise infrastructure. Client information remains within local jurisdiction unless cross-border transfers are explicitly authorized.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      Condition 8: Data Subject Participation & Erasure
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Data Subject Rights & Audit Logging
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      Every consumer platform we build includes native API endpoints for data subject access requests, automated right-to-erasure workflows, and cryptographic consent logging.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      Applications are designed with administrative functions supporting data subject access, rectification, and erasure workflows, alongside immutable audit trails.
                     </p>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* TAB 2: 100% IP OWNERSHIP */}
+            {/* TAB 2: IP OWNERSHIP */}
             {activeTab === "ip" && (
               <div className="space-y-6">
                 <div>
-                  <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-1">
-                    Contractual Guarantee // Full Source Handover
-                  </span>
-                  <h3 className="text-2xl font-bold text-foreground">
-                    100% Intellectual Property & Codebase Ownership
+                  <h3 className="text-xl font-semibold text-foreground">
+                    Complete Intellectual Property Assignment
                   </h3>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                    Unlike traditional consultancies that trap clients in proprietary platforms or recurring per-seat licensing fees, 12 Links operates on a complete handover model.
+                  <p className="text-sm text-secondary mt-2 leading-relaxed">
+                    12 Links operates on a transparent handover model. We build software specifically for your organization without recurring software license dependencies.
                   </p>
                 </div>
 
                 <div className="space-y-4 pt-2">
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <Key className="w-4 h-4 text-emerald-400" />
-                      All Source Code & Git Repositories
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Complete Source Code Transfer
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      Upon final milestone settlement, complete ownership of all TypeScript, Python, frontend, and backend code is irrevocably assigned to your organization with full commit history.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      Upon milestone sign-off, full repository ownership across frontend, backend, and documentation is irrevocably assigned to your organization with complete Git history.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <Cpu className="w-4 h-4 text-emerald-400" />
-                      Trained Model Weights & Fine-Tuning Checkpoints
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Model Weights & Pipeline Artifacts
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      All custom ML weights, vector index checkpoints, and feature engineering pipelines developed for your product belong 100% to you. We never train public or third-party models on your proprietary data.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      All custom machine learning models, feature engineering pipelines, and fine-tuned weights trained on your data belong entirely to you.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <Server className="w-4 h-4 text-emerald-400" />
-                      Infrastructure-as-Code & Deployment Manifests
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Infrastructure as Code
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      We deliver complete Dockerfiles, Terraform scripts, and CI/CD pipelines configured directly to your internal cloud accounts (AWS Cape Town, Azure, or private VPS) with zero vendor lock-in.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      We provide container manifests, automated setup scripts, and environment documentation so your internal team can operate the system independently.
                     </p>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* TAB 3: INFOSEC & CRYPTOGRAPHY */}
+            {/* TAB 3: INFOSEC */}
             {activeTab === "infosec" && (
               <div className="space-y-6">
                 <div>
-                  <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-1">
-                    Defense-in-Depth // Zero-Trust Architecture
-                  </span>
-                  <h3 className="text-2xl font-bold text-foreground">
-                    Information Security & Hardened Infrastructure
+                  <h3 className="text-xl font-semibold text-foreground">
+                    Infrastructure Security & Access Control
                   </h3>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                    Our security leads design every application with defense-in-depth principles, automated secret scanning, and least-privilege cloud IAM roles.
+                  <p className="text-sm text-secondary mt-2 leading-relaxed">
+                    We incorporate automated vulnerability testing, secret management, and principle-of-least-privilege access across all application layers.
                   </p>
                 </div>
 
                 <div className="space-y-4 pt-2">
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <Lock className="w-4 h-4 text-emerald-400" />
-                      Cryptographic Protocols
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Transport Security & Encryption
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      mTLS is enforced on all inter-service microservice communications. Public endpoints terminate on TLS 1.3 with strict HSTS, CSP headers, and automated certificate rotations.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      Inter-service microservice communications use mutual TLS where applicable. Public web endpoints enforce TLS 1.3 with modern cipher suites and automated certificate rotation.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <Terminal className="w-4 h-4 text-emerald-400" />
-                      CI/CD Pipeline Security & SAST Scanning
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Continuous Automated Testing
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      Every sprint commit undergoes automated static application security testing (SAST), secret entropy scanning (TruffleHog), and container vulnerability audits before merge.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      Continuous integration pipelines run automated static analysis, dependency vulnerability scans, and unit tests before any pull request is merged into staging.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                      Zero-Trust Access Control
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Secret and Key Management
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      No hardcoded API credentials. All database and API keys are stored in AWS Secrets Manager or HashiCorp Vault with short-lived session tokens and full audit trail logging.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      Credentials and API keys are managed using secure secrets management vaults with scoped IAM policies, preventing any exposure in code repositories.
                     </p>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* TAB 4: MILESTONE SLA & WARRANTY */}
+            {/* TAB 4: WARRANTY */}
             {activeTab === "warranty" && (
               <div className="space-y-6">
                 <div>
-                  <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-1">
-                    Delivery Integrity // Risk-Free Engagement
-                  </span>
-                  <h3 className="text-2xl font-bold text-foreground">
-                    Milestone-Gated Billing & 30-Day Defect Warranty
+                  <h3 className="text-xl font-semibold text-foreground">
+                    Milestone Delivery & 30-Day Defect Warranty
                   </h3>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                    We eliminate enterprise financial risk by anchoring all invoices to verified, demonstrable technical milestones.
+                  <p className="text-sm text-secondary mt-2 leading-relaxed">
+                    Projects proceed through distinct phases where deliverables are reviewed and verified on staging before milestone completion.
                   </p>
                 </div>
 
                 <div className="space-y-4 pt-2">
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      Sprint Acceptance Gates
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Clear Milestone Criteria
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      Every project is divided into 2-to-3 week milestone sprints with pre-agreed acceptance criteria. Funds are released only after your engineering leads review and test the staging build.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      Before work commences, we establish measurable acceptance criteria for each development milestone. Milestone payments are tied directly to tested deliverables.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                       30-Day Active Defect Warranty
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      Following production deployment and handover, 12 Links provides 30 calendar days of active defect resolution support at zero additional charge to guarantee operational stability.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      Following production deployment, 12 Links provides 30 calendar days of active defect resolution support at no additional cost to ensure seamless adoption.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                    <h4 className="text-xs font-bold text-foreground flex items-center gap-2">
-                      <Scale className="w-4 h-4 text-emerald-400" />
-                      Governing South African Law
+                  <div className="p-4 rounded-md bg-muted/40 border border-border space-y-1.5">
+                    <h4 className="text-xs font-semibold text-foreground flex items-center gap-2">
+                      <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Governing Law
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      All bilateral Statements of Work (SOW) are legally binding agreements executed under the laws of the Republic of South Africa, subject to the jurisdiction of South African courts.
+                    <p className="text-xs text-secondary leading-relaxed">
+                      All engagement agreements are executed under the laws of the Republic of South Africa and subject to the jurisdiction of South African courts.
                     </p>
                   </div>
                 </div>
@@ -336,64 +335,58 @@ export default function Trust() {
 
           </div>
 
-          {/* Side Legal & Security Inquiries Column (Cols 9-12) */}
+          {/* Legal / Contact Side Box */}
           <div className="lg:col-span-4 space-y-6">
-            
-            <div className="p-6 rounded-2xl bg-card border border-border space-y-4">
-              <h4 className="text-xs font-mono font-bold text-foreground uppercase tracking-wider">
-                Enterprise Procurement Pack
+            <div className="p-6 rounded-lg bg-card border border-border space-y-4 shadow-sm">
+              <h4 className="text-xs font-mono font-semibold text-foreground uppercase tracking-wider">
+                Procurement & Inquiries
               </h4>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Need our formal security schedules, POPIA operator agreements, or standard bilateral Statement of Work (SOW) template for legal review?
+              <p className="text-xs text-secondary leading-relaxed">
+                Need security documentation, data processing schedules, or standard statement of work templates for legal review?
               </p>
               
               <div className="space-y-2 pt-2">
                 <a
-                  href="mailto:legal@12links.co.za?subject=Request%20for%2012%20Links%20Procurement%20%26%20Security%20Pack"
-                  className="w-full inline-flex items-center justify-between p-3 rounded-lg bg-background border border-border hover:border-emerald-500/50 text-xs font-medium text-foreground transition-all"
+                  href="mailto:info@12links.co.za?subject=Procurement%20Documentation%20Inquiry"
+                  className="w-full inline-flex items-center justify-between p-3 rounded-md bg-muted/50 border border-border hover:bg-muted text-xs font-medium text-foreground transition-colors"
                 >
                   <span className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-emerald-400" />
-                    Request Procurement Pack
+                    <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    Request Documentation
                   </span>
                   <ArrowRight className="w-3.5 h-3.5 text-muted-foreground" />
                 </a>
 
                 <a
-                  href="mailto:security@12links.co.za?subject=Responsible%20Disclosure%20%2F%20Security%20Inquiry"
-                  className="w-full inline-flex items-center justify-between p-3 rounded-lg bg-background border border-border hover:border-emerald-500/50 text-xs font-medium text-foreground transition-all"
+                  href="mailto:info@12links.co.za?subject=Security%20Inquiry"
+                  className="w-full inline-flex items-center justify-between p-3 rounded-md bg-muted/50 border border-border hover:bg-muted text-xs font-medium text-foreground transition-colors"
                 >
                   <span className="flex items-center gap-2">
-                    <Lock className="w-4 h-4 text-emerald-400" />
-                    Responsible Disclosure
+                    <Lock className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    Security Contact
                   </span>
                   <ArrowRight className="w-3.5 h-3.5 text-muted-foreground" />
                 </a>
               </div>
             </div>
 
-            {/* Direct Consultation Link */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/30 space-y-3">
-              <span className="text-xs font-mono text-emerald-400 font-bold uppercase">
-                Direct Technical Scoping
-              </span>
-              <h4 className="text-sm font-bold text-foreground">
-                Discuss compliance & architecture directly with our engineers.
+            <div className="p-6 rounded-lg bg-muted/30 border border-border space-y-3">
+              <h4 className="text-sm font-semibold text-foreground">
+                Technical Scoping Call
               </h4>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Schedule a 20-minute consultation to review your technical requirements and data residency needs.
+              <p className="text-xs text-secondary leading-relaxed">
+                Schedule a consultation to discuss system requirements, compliance, and deployment targets.
               </p>
               <div className="pt-2">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2.5 rounded-lg text-xs transition-colors"
+                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2.5 rounded-md text-xs transition-colors"
                 >
-                  Schedule a Technical Call
+                  Schedule a Call
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
-
           </div>
 
         </div>
