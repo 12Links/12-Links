@@ -26,7 +26,6 @@ interface TeamMember {
   image: string;
   focus: string;
   university: string;
-  credentials: string;
   email: string;
   github: string;
   linkedin: string;
@@ -44,7 +43,6 @@ export default function About() {
       image: "/team/tebello.jpg",
       focus: "Predictive Modeling & Executive Strategy",
       university: "University of Pretoria (UP)",
-      credentials: "BSc Computer Science & Data Science",
       email: "Matmohohoma68@gmail.com",
       github: "https://github.com/Matome",
       linkedin: "https://www.linkedin.com/company/12-links/"
@@ -56,7 +54,6 @@ export default function About() {
       image: "/team/nkosinathi-ngwenya.jpeg",
       focus: "Machine Learning & Distributed Systems",
       university: "University of Pretoria (UP)",
-      credentials: "BSc Information Technology // AI Systems",
       email: "devthrivepty@gmail.com",
       github: "https://github.com/NuttyDev",
       linkedin: "https://www.linkedin.com/company/12-links/"
@@ -68,7 +65,6 @@ export default function About() {
       image: "/team/jackyn.png",
       focus: "Fullstack Architecture & Sprint Velocity",
       university: "University of Pretoria (UP)",
-      credentials: "BSc Computer Science & Software Engineering",
       email: "jackympoka22@gmail.com",
       github: "https://github.com/Jackympoka",
       linkedin: "https://www.linkedin.com/company/12-links/"
@@ -80,7 +76,6 @@ export default function About() {
       image: "/team/lesego-mageza.jpeg",
       focus: "Information Security & Financial Governance",
       university: "University of Pretoria (UP)",
-      credentials: "BCom Financial Management & InfoSec Governance",
       email: "magezalesego@gmail.com",
       github: "https://github.com/magezalesego",
       linkedin: "https://www.linkedin.com/company/12-links/"
@@ -92,7 +87,6 @@ export default function About() {
       image: "/team/ghost.jpeg",
       focus: "Cloud Security & Quality Assurance",
       university: "University of Pretoria (UP)",
-      credentials: "BSc Information Technology // Cloud Security",
       email: "Lwandiso1234@users.noreply.github.com",
       github: "https://github.com/Lwandiso1234",
       linkedin: "https://www.linkedin.com/company/12-links/"
@@ -104,7 +98,6 @@ export default function About() {
       image: "/team/Savuzwa.png",
       focus: "Client Scoping & Strategic Alliances",
       university: "University of Pretoria (UP)",
-      credentials: "BSc Computer Science & Ecosystem Partnerships",
       email: "savuzwampayipheli590@gmail.com",
       github: "https://github.com/Savuzwa-Mpayipheli",
       linkedin: "https://www.linkedin.com/company/12-links/"
@@ -116,7 +109,6 @@ export default function About() {
       image: "/team/zila.jpg",
       focus: "Market Intelligence & Telemetry Analytics",
       university: "University of Pretoria (UP)",
-      credentials: "BSc Mathematical Statistics & Data Science",
       email: "207455937+SelloAphanee@users.noreply.github.com",
       github: "https://github.com/SelloAphanee",
       linkedin: "https://www.linkedin.com/company/12-links/"
@@ -159,7 +151,7 @@ export default function About() {
               From University of Pretoria Labs to Enterprise Delivery
             </h2>
             <p>
-              In university computer science and data science labs at the <strong>University of Pretoria (UP)</strong>, our founders saw two broken extremes in software development:
+              In engineering and computing research labs at the <strong>University of Pretoria (UP)</strong>, our founders saw two broken extremes in software development:
             </p>
             <p>
               On one side were multinational consultancies charging exorbitant monthly retainers, moving at glacial bureaucratic speeds, and delivering bloated legacy codebases. On the other side were fragmented gig freelancers with zero architectural accountability or long-term defect warranty.
@@ -229,7 +221,7 @@ export default function About() {
               The 7 University of Pretoria Builders.
             </h2>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              When you engage 12 Links, you collaborate directly with the engineers designing and writing your code. Every profile is backed by verified University of Pretoria (UP) credentials, direct GitHub profiles, and individual contact emails.
+              When you engage 12 Links, you collaborate directly with the engineers designing and writing your code. Every profile is backed by verified University of Pretoria (UP) affiliations, direct GitHub profiles, and individual contact emails.
             </p>
           </div>
 
@@ -264,8 +256,7 @@ export default function About() {
                   </p>
 
                   <div className="p-3 rounded-xl bg-background border border-border text-[11px] font-mono text-muted-foreground space-y-1.5">
-                    <div><strong className="text-foreground">Focus:</strong> {member.focus}</div>
-                    <div className="text-[10px] text-muted-foreground/80 truncate">{member.credentials}</div>
+                    <div><strong className="text-foreground">Technical Focus:</strong> {member.focus}</div>
                     
                     {/* Direct Verified Email */}
                     <div className="pt-1.5 border-t border-border flex items-center justify-between text-[10px]">
