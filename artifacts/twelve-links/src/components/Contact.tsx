@@ -9,7 +9,9 @@ import {
   Calendar as CalendarIcon, 
   ArrowRight, 
   ShieldCheck, 
-  Send 
+  Send,
+  CheckCircle2,
+  AlertCircle
 } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
@@ -18,11 +20,19 @@ export default function Contact() {
   const [activeTab, setActiveTab] = useState<"book" | "scope">("book");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  // Booking State
   const [selectedDate, setSelectedDate] = useState<string>("Tomorrow");
   const [selectedSlot, setSelectedSlot] = useState<string>("10:00 AM SAST");
+  const [bookingData, setBookingData] = useState({
+    name: "",
+    email: "",
+    notes: ""
+  });
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
+  const [scopeConfirmed, setScopeConfirmed] = useState(false);
 
-  // Dedicated Consultant Routing State (From Team Member GitHub / UP Credentials)
+  // Dedicated Consultant Routing State
   const [consultant, setConsultant] = useState<string | null>(null);
   const [consultantEmail, setConsultantEmail] = useState<string | null>(null);
 
@@ -87,75 +97,92 @@ export default function Contact() {
     "04:30 PM SAST"
   ];
 
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  // Shared EmailJS dispatcher (zero mailto: popups)
+  const dispatchEmail = async (templateParams: Record<string, string>) => {
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      throw new Error("Email service configuration keys are missing in environment variables.");
+    }
+
+    return emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+  };
+
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setBookingConfirmed(true);
+    setLoading(true);
 
     const routingText = consultant ? ` with ${consultant}` : "";
-    const emailTarget = consultantEmail || "info@12links.co.za";
+    const targetEmail = consultantEmail || "info@12links.co.za";
+    const payloadSummary = `Inquiry Type: 20-Minute Technical Discovery Call\nName: ${bookingData.name}\nEmail: ${bookingData.email}\nPreferred Day: ${selectedDate}\nPreferred Time: ${selectedSlot}\nAssigned Consultant: ${consultant || "General Engineering"} (${targetEmail})\n\nNotes:\n${bookingData.notes || "None provided"}`;
 
-    const subject = encodeURIComponent(`20-Minute Technical Discovery Call${routingText}`);
-    const body = encodeURIComponent(
-      `Hi ${consultant || "12 Links Team"},\n\nI have scheduled a 20-minute technical discovery call for ${selectedDate} at ${selectedSlot}.\n\nPlease send the Google Meet / Teams calendar invite.\n\nThank you!`
-    );
+    try {
+      await dispatchEmail({
+        inquiry_type: "20-Minute Technical Discovery Call",
+        name: bookingData.name,
+        email: bookingData.email,
+        company: "Discovery Call Booking",
+        vertical: "Technical Discovery",
+        timeline: `${selectedDate} at ${selectedSlot}`,
+        budget: "N/A",
+        cloud: "N/A",
+        message: bookingData.notes || `Discovery call requested for ${selectedDate} at ${selectedSlot}.`,
+        consultant: consultant || "General Engineering",
+        consultant_email: targetEmail,
+        to_email: targetEmail,
+        cc_email: "info@12links.co.za",
+        summary: payloadSummary
+      });
 
-    window.location.href = `mailto:${emailTarget}?cc=info@12links.co.za&subject=${subject}&body=${body}`;
-
-    toast({
-      title: "Technical Discovery Call Scheduled",
-      description: `Reserved for ${selectedDate} at ${selectedSlot}${routingText}. A direct calendar invite has been queued.`,
-    });
+      setBookingConfirmed(true);
+      toast({
+        title: "Technical Discovery Call Scheduled",
+        description: `Reserved for ${selectedDate} at ${selectedSlot}${routingText}. We have sent your booking directly to our engineering team.`,
+      });
+    } catch (err) {
+      console.error("Booking submission failed:", err);
+      toast({
+        variant: "destructive",
+        title: "Transmission Failed",
+        description: "Unable to send your booking right now. Please try again or copy info@12links.co.za.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleScopingSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
-    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "";
-    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "";
-    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
-
-    const assignedConsultantInfo = consultant ? `\nAssigned Consultant: ${consultant} (${consultantEmail || "info@12links.co.za"})` : "";
-    const payloadSummary = `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}${assignedConsultantInfo}\nVertical: ${formData.vertical}\nTimeline: ${formData.timeline}\nBudget Tier: ${formData.budget}\nTarget Cloud: ${formData.cloud}\n\nProject Scope:\n${formData.message}`;
-
-    const ccParam = consultantEmail ? `?cc=${consultantEmail}&` : "?";
-
-    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
-      const subject = encodeURIComponent(`12 Links Scoping Inquiry from ${formData.name} (${formData.company || "Enterprise"})`);
-      const body = encodeURIComponent(payloadSummary);
-      window.location.href = `mailto:info@12links.co.za${ccParam}subject=${subject}&body=${body}`;
-
-      toast({
-        title: "Dispatching via Email Client",
-        description: `Your structured project scope has been drafted to info@12links.co.za${consultantEmail ? ` (CC: ${consultantEmail})` : ""}.`,
-      });
-      setLoading(false);
-      return;
-    }
+    const targetEmail = consultantEmail || "info@12links.co.za";
+    const assignedConsultantInfo = consultant ? `\nAssigned Consultant: ${consultant} (${targetEmail})` : "";
+    const payloadSummary = `Inquiry Type: Structured Project Scope\nName: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}${assignedConsultantInfo}\nVertical: ${formData.vertical}\nTimeline: ${formData.timeline}\nBudget Tier: ${formData.budget}\nTarget Cloud: ${formData.cloud}\n\nProject Scope:\n${formData.message}`;
 
     try {
-      await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        {
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          vertical: formData.vertical,
-          timeline: formData.timeline,
-          budget: formData.budget,
-          cloud: formData.cloud,
-          message: formData.message,
-          consultant: consultant || "General Engineering",
-          consultant_email: consultantEmail || "info@12links.co.za",
-          summary: payloadSummary
-        },
-        PUBLIC_KEY
-      );
+      await dispatchEmail({
+        inquiry_type: "Structured Project Scope",
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        vertical: formData.vertical,
+        timeline: formData.timeline,
+        budget: formData.budget,
+        cloud: formData.cloud,
+        message: formData.message,
+        consultant: consultant || "General Engineering",
+        consultant_email: targetEmail,
+        to_email: targetEmail,
+        cc_email: "info@12links.co.za",
+        summary: payloadSummary
+      });
 
+      setScopeConfirmed(true);
       toast({
         title: "Project Scope Transmitted",
-        description: `Our systems architects${consultant ? ` and ${consultant}` : ""} will evaluate your requirements and send a formal response within 24 hours.`,
+        description: `Our systems architects${consultant ? ` and ${consultant}` : ""} have received your scope and will respond within 24 hours.`,
       });
 
       setFormData({
@@ -169,9 +196,12 @@ export default function Contact() {
         message: ""
       });
     } catch (err) {
-      const subject = encodeURIComponent(`12 Links Inquiry from ${formData.name}`);
-      const body = encodeURIComponent(payloadSummary);
-      window.location.href = `mailto:info@12links.co.za${ccParam}subject=${subject}&body=${body}`;
+      console.error("Scoping submission failed:", err);
+      toast({
+        variant: "destructive",
+        title: "Transmission Failed",
+        description: "Unable to send your project scope right now. Please try again or copy info@12links.co.za.",
+      });
     } finally {
       setLoading(false);
     }
@@ -183,13 +213,13 @@ export default function Contact() {
         
         {/* ── Page Header ── */}
         <div className="max-w-3xl mb-16">
-          <div className="text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase mb-3">
+          <div className="text-xs font-semibold tracking-wider text-slate-400 uppercase mb-3">
             CONTACT
           </div>
-          <h1 className="text-4xl sm:text-5xl font-semibold text-slate-900 dark:text-slate-50 tracking-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl font-semibold text-slate-50 tracking-tight mb-5">
             Start a conversation with our engineering team.
           </h1>
-          <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed font-normal">
+          <p className="text-slate-300 text-lg leading-relaxed font-normal">
             Tell us about your project, technical challenge, or timeline. A lead engineer in Pretoria will review your inquiry and respond within one business day.
           </p>
         </div>
@@ -200,59 +230,59 @@ export default function Contact() {
           {/* Left Column: Pretoria Details & Studio Information (Cols 1-5) */}
           <div className="lg:col-span-5 space-y-6">
             
-            <div className="p-6 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-50 uppercase tracking-wider">
+            <div className="p-6 rounded-lg bg-[#111827] border border-slate-800 space-y-4 shadow-sm">
+              <h3 className="text-sm font-semibold text-slate-50 uppercase tracking-wider">
                 Studio & Direct Channels
               </h3>
 
               <div className="space-y-3 text-xs">
                 
                 {/* Location */}
-                <div className="p-3.5 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-1">
-                  <div className="flex items-center gap-2 text-slate-900 dark:text-slate-50 font-medium">
-                    <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <div className="p-3.5 rounded-md bg-slate-900/60 border border-slate-800 space-y-1">
+                  <div className="flex items-center gap-2 text-slate-50 font-medium">
+                    <MapPin className="w-4 h-4 text-blue-400" />
                     <span>Studio Location</span>
                   </div>
-                  <p className="text-slate-700 dark:text-slate-300 pl-6">
+                  <p className="text-slate-300 pl-6">
                     Pretoria, Gauteng, South Africa
                   </p>
                 </div>
 
                 {/* Email */}
-                <div className="flex items-center justify-between p-3.5 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
-                  <span className="text-slate-600 dark:text-slate-400 flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <div className="flex items-center justify-between p-3.5 rounded-md bg-slate-900/60 border border-slate-800">
+                  <span className="text-slate-400 flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-blue-400" />
                     <span>Direct Email:</span>
                   </span>
                   <div className="flex items-center gap-1.5">
-                    <span className="text-slate-900 dark:text-slate-50 font-mono font-medium">info@12links.co.za</span>
+                    <span className="text-slate-50 font-mono font-medium">info@12links.co.za</span>
                     <button
                       type="button"
                       onClick={copyEmail}
-                      className="p-1 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 transition-colors cursor-pointer"
+                      className="p-1 hover:text-slate-100 text-slate-500 transition-colors cursor-pointer"
                       title="Copy Email"
                     >
-                      {copied ? <Check className="w-3.5 h-3.5 text-blue-600" /> : <Copy className="w-3.5 h-3.5" />}
+                      {copied ? <Check className="w-3.5 h-3.5 text-blue-400" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                   </div>
                 </div>
 
                 {/* Response SLA */}
-                <div className="flex items-center justify-between p-3.5 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
-                  <span className="text-slate-600 dark:text-slate-400 flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <div className="flex items-center justify-between p-3.5 rounded-md bg-slate-900/60 border border-slate-800">
+                  <span className="text-slate-400 flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-blue-400" />
                     <span>Response Window:</span>
                   </span>
-                  <span className="text-slate-900 dark:text-slate-50 font-mono font-medium">Within 1 business day (SAST / UTC+2)</span>
+                  <span className="text-slate-50 font-mono font-medium">Within 1 business day (SAST / UTC+2)</span>
                 </div>
 
               </div>
             </div>
 
             {/* University & Governance Assurance */}
-            <div className="p-6 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 space-y-3 shadow-sm">
-              <div className="flex items-center gap-2 text-slate-900 dark:text-slate-50 font-semibold">
-                <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+            <div className="p-6 rounded-lg bg-[#111827] border border-slate-800 text-xs text-slate-300 space-y-3 shadow-sm">
+              <div className="flex items-center gap-2 text-slate-50 font-semibold">
+                <ShieldCheck className="w-4 h-4 text-blue-400" />
                 <span>Confidentiality & Governance</span>
               </div>
               <p className="leading-relaxed">
@@ -264,42 +294,39 @@ export default function Contact() {
 
           {/* Right Column: Interaction Modes (Cols 6-12) */}
           <div className="lg:col-span-7">
-            <div className="p-8 rounded-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+            <div className="p-8 rounded-lg bg-[#111827] border border-slate-800 shadow-sm space-y-6">
               
               {/* Consultant Banner */}
               {consultant && (
-                <div className="p-4 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div className="p-4 rounded-md bg-slate-900/60 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                   <div>
-                    <div className="text-xs font-semibold text-slate-900 dark:text-slate-50">
-                      Direct consultation requested with {consultant}
+                    <div className="text-xs font-semibold text-slate-50">
+                      Direct consultation routed to {consultant}
                     </div>
                     {consultantEmail && (
-                      <div className="text-slate-600 dark:text-slate-400 font-mono text-[11px] mt-0.5">
+                      <div className="text-slate-400 font-mono text-[11px] mt-0.5">
                         {consultantEmail}
                       </div>
                     )}
                   </div>
-                  {consultantEmail && (
-                    <a
-                      href={`mailto:${consultantEmail}?subject=${encodeURIComponent(`Technical Inquiry for ${consultant}`)}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-blue-600 text-white font-medium text-xs hover:bg-blue-700 transition-colors"
-                    >
-                      <Mail className="w-3.5 h-3.5" />
-                      Email Directly
-                    </a>
-                  )}
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-600/15 text-blue-400 border border-blue-500/30 font-medium text-[11px]">
+                    Direct Web Dispatch Active
+                  </span>
                 </div>
               )}
 
               {/* Mode Toggle Header */}
-              <div className="flex items-center gap-2 p-1 rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <div className="flex items-center gap-2 p-1 rounded-md bg-slate-800/80 border border-slate-700">
                 <button
                   type="button"
-                  onClick={() => setActiveTab("book")}
+                  onClick={() => {
+                    setActiveTab("book");
+                    setBookingConfirmed(false);
+                  }}
                   className={`flex-1 py-2 rounded-md text-xs font-medium transition-colors cursor-pointer flex items-center justify-center gap-2 ${
                     activeTab === "book"
-                      ? "bg-white dark:bg-[#111827] text-slate-900 dark:text-slate-50 shadow-sm font-semibold"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
+                      ? "bg-[#111827] text-slate-50 shadow-sm font-semibold"
+                      : "text-slate-400 hover:text-slate-100"
                   }`}
                 >
                   <CalendarIcon className="w-3.5 h-3.5" />
@@ -307,11 +334,14 @@ export default function Contact() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setActiveTab("scope")}
+                  onClick={() => {
+                    setActiveTab("scope");
+                    setScopeConfirmed(false);
+                  }}
                   className={`flex-1 py-2 rounded-md text-xs font-medium transition-colors cursor-pointer flex items-center justify-center gap-2 ${
                     activeTab === "scope"
-                      ? "bg-white dark:bg-[#111827] text-slate-900 dark:text-slate-50 shadow-sm font-semibold"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
+                      ? "bg-[#111827] text-slate-50 shadow-sm font-semibold"
+                      : "text-slate-400 hover:text-slate-100"
                   }`}
                 >
                   <Send className="w-3.5 h-3.5" />
@@ -321,151 +351,239 @@ export default function Contact() {
 
               {/* TAB 1: 20-MIN CALL SCHEDULER */}
               {activeTab === "book" && (
-                <form onSubmit={handleBookingSubmit} className="space-y-5">
-                  <div>
-                    <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-2">
-                      Select Meeting Day (South African Standard Time)
-                    </label>
-                    <div className="grid grid-cols-3 gap-2">
-                      {["Tomorrow", "In 2 Days", "Next Monday"].map((day) => (
-                        <button
-                          key={day}
-                          type="button"
-                          onClick={() => setSelectedDate(day)}
-                          className={`py-2 px-3 rounded-md text-xs font-medium border text-center transition-colors cursor-pointer ${
-                            selectedDate === day
-                              ? "border-blue-600 bg-blue-600/10 text-slate-900 dark:text-slate-50 font-semibold"
-                              : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
-                          }`}
-                        >
-                          {day}
-                        </button>
-                      ))}
+                bookingConfirmed ? (
+                  <div className="p-6 rounded-md bg-slate-900/80 border border-blue-500/30 text-center space-y-4">
+                    <CheckCircle2 className="w-10 h-10 text-blue-400 mx-auto" />
+                    <div className="space-y-1">
+                      <h3 className="text-base font-semibold text-slate-50">
+                        Discovery Call Request Sent
+                      </h3>
+                      <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
+                        We have received your request for <strong>{selectedDate} at {selectedSlot}</strong>. A calendar invite will be sent to <strong>{bookingData.email}</strong> shortly.
+                      </p>
                     </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setBookingConfirmed(false);
+                        setBookingData({ name: "", email: "", notes: "" });
+                      }}
+                      className="text-xs text-blue-400 hover:text-blue-300 underline cursor-pointer"
+                    >
+                      Schedule another time
+                    </button>
                   </div>
-
-                  <div>
-                    <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-2">
-                      Available SAST Time Slots
-                    </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {timeSlots.map((slot) => (
-                        <button
-                          key={slot}
-                          type="button"
-                          onClick={() => setSelectedSlot(slot)}
-                          className={`py-2 px-2.5 rounded-md text-xs font-mono border text-center transition-colors cursor-pointer ${
-                            selectedSlot === slot
-                              ? "border-blue-600 bg-blue-600/10 text-slate-900 dark:text-slate-50 font-semibold"
-                              : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
-                          }`}
-                        >
-                          {slot}
-                        </button>
-                      ))}
+                ) : (
+                  <form onSubmit={handleBookingSubmit} className="space-y-5">
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs font-medium text-slate-50 block mb-1.5">
+                          Your Name *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={bookingData.name}
+                          onChange={(e) => setBookingData({ ...bookingData, name: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-md bg-slate-900 text-slate-50 placeholder:text-slate-400 border border-slate-700 text-xs focus:outline-none focus:border-blue-600"
+                          placeholder="Full name"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs font-medium text-slate-50 block mb-1.5">
+                          Work Email *
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          value={bookingData.email}
+                          onChange={(e) => setBookingData({ ...bookingData, email: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-md bg-slate-900 text-slate-50 placeholder:text-slate-400 border border-slate-700 text-xs focus:outline-none focus:border-blue-600"
+                          placeholder="you@company.co.za"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="p-4 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-                    Selected consultation: <strong className="text-slate-900 dark:text-slate-50">{selectedDate} at {selectedSlot}</strong>. Clicking below opens your mail client with pre-filled details to send a direct calendar invite.
-                  </div>
+                    <div>
+                      <label className="text-xs font-medium text-slate-50 block mb-2">
+                        Select Meeting Day (South African Standard Time)
+                      </label>
+                      <div className="grid grid-cols-3 gap-2">
+                        {["Tomorrow", "In 2 Days", "Next Monday"].map((day) => (
+                          <button
+                            key={day}
+                            type="button"
+                            onClick={() => setSelectedDate(day)}
+                            className={`py-2 px-3 rounded-md text-xs font-medium border text-center transition-colors cursor-pointer ${
+                              selectedDate === day
+                                ? "border-blue-600 bg-blue-600/15 text-slate-50 font-semibold"
+                                : "border-slate-700 bg-slate-900 text-slate-400 hover:text-slate-100"
+                            }`}
+                          >
+                            {day}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
 
-                  <button
-                    type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-md text-sm transition-colors shadow-sm cursor-pointer"
-                  >
-                    Confirm & Schedule Call
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </form>
+                    <div>
+                      <label className="text-xs font-medium text-slate-50 block mb-2">
+                        Available SAST Time Slots
+                      </label>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        {timeSlots.map((slot) => (
+                          <button
+                            key={slot}
+                            type="button"
+                            onClick={() => setSelectedSlot(slot)}
+                            className={`py-2 px-2.5 rounded-md text-xs font-mono border text-center transition-colors cursor-pointer ${
+                              selectedSlot === slot
+                                ? "border-blue-600 bg-blue-600/15 text-slate-50 font-semibold"
+                                : "border-slate-700 bg-slate-900 text-slate-400 hover:text-slate-100"
+                            }`}
+                          >
+                            {slot}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-medium text-slate-50 block mb-1.5">
+                        Topic / Agenda (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={bookingData.notes}
+                        onChange={(e) => setBookingData({ ...bookingData, notes: e.target.value })}
+                        className="w-full px-3.5 py-2.5 rounded-md bg-slate-900 text-slate-50 placeholder:text-slate-400 border border-slate-700 text-xs focus:outline-none focus:border-blue-600"
+                        placeholder="e.g., Cloud architecture review, API integration..."
+                      />
+                    </div>
+
+                    <div className="p-4 rounded-md bg-slate-900/60 border border-slate-800 text-xs text-slate-300 leading-relaxed">
+                      Selected consultation: <strong className="text-slate-50">{selectedDate} at {selectedSlot}</strong>. Submitting sends your request directly to our team—we will email your Google Meet / Teams invite.
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium py-3 rounded-md text-sm transition-colors shadow-sm cursor-pointer"
+                    >
+                      {loading ? "Scheduling Call..." : "Confirm & Schedule Call"}
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </form>
+                )
               )}
 
               {/* TAB 2: STRUCTURED SCOPING FORM */}
               {activeTab === "scope" && (
-                <form onSubmit={handleScopingSubmit} className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
+                scopeConfirmed ? (
+                  <div className="p-6 rounded-md bg-slate-900/80 border border-blue-500/30 text-center space-y-4">
+                    <CheckCircle2 className="w-10 h-10 text-blue-400 mx-auto" />
+                    <div className="space-y-1">
+                      <h3 className="text-base font-semibold text-slate-50">
+                        Project Scope Received
+                      </h3>
+                      <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
+                        Thank you. Your technical requirements have been transmitted directly to our engineering leads in Pretoria. We will follow up within one business day.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setScopeConfirmed(false)}
+                      className="text-xs text-blue-400 hover:text-blue-300 underline cursor-pointer"
+                    >
+                      Submit another inquiry
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleScopingSubmit} className="space-y-4">
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs font-medium text-slate-50 block mb-1.5">
+                          Your Name *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-md bg-slate-900 text-slate-50 placeholder:text-slate-400 border border-slate-700 text-xs focus:outline-none focus:border-blue-600"
+                          placeholder="Full name"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs font-medium text-slate-50 block mb-1.5">
+                          Work Email *
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-md bg-slate-900 text-slate-50 placeholder:text-slate-400 border border-slate-700 text-xs focus:outline-none focus:border-blue-600"
+                          placeholder="Work email address"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs font-medium text-slate-50 block mb-1.5">
+                          Company or Project Name
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.company}
+                          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-md bg-slate-900 text-slate-50 placeholder:text-slate-400 border border-slate-700 text-xs focus:outline-none focus:border-blue-600"
+                          placeholder="Company or organization"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs font-medium text-slate-50 block mb-1.5">
+                          Primary Industry Vertical
+                        </label>
+                        <select
+                          value={formData.vertical}
+                          onChange={(e) => setFormData({ ...formData, vertical: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-md bg-slate-900 text-slate-50 border border-slate-700 text-xs focus:outline-none focus:border-blue-600"
+                        >
+                          <option>Financial Services & Payments</option>
+                          <option>Agriculture & Supply Chain</option>
+                          <option>Healthcare & Operations</option>
+                          <option>Manufacturing & Industrial Systems</option>
+                          <option>Other Enterprise Application</option>
+                        </select>
+                      </div>
+                    </div>
+
                     <div>
-                      <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-1.5">
-                        Your Name *
+                      <label className="text-xs font-medium text-slate-50 block mb-1.5">
+                        Project Description & Requirements *
                       </label>
-                      <input
-                        type="text"
+                      <textarea
                         required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-md bg-white text-slate-900 placeholder:text-slate-500 border border-slate-300 dark:bg-slate-900 dark:text-slate-50 dark:placeholder:text-slate-400 dark:border-slate-700 text-xs focus:outline-none focus:border-blue-600"
-                        placeholder="Full name"
+                        rows={4}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        className="w-full px-3.5 py-2.5 rounded-md bg-slate-900 text-slate-50 placeholder:text-slate-400 border border-slate-700 text-xs focus:outline-none focus:border-blue-600 resize-none leading-relaxed"
+                        placeholder="Briefly describe what you are building, your timeline, and any technical requirements."
                       />
                     </div>
-                    <div>
-                      <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-1.5">
-                        Work Email *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-md bg-white text-slate-900 placeholder:text-slate-500 border border-slate-300 dark:bg-slate-900 dark:text-slate-50 dark:placeholder:text-slate-400 dark:border-slate-700 text-xs focus:outline-none focus:border-blue-600"
-                        placeholder="Work email address"
-                      />
-                    </div>
-                  </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-1.5">
-                        Company or Project Name
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-md bg-white text-slate-900 placeholder:text-slate-500 border border-slate-300 dark:bg-slate-900 dark:text-slate-50 dark:placeholder:text-slate-400 dark:border-slate-700 text-xs focus:outline-none focus:border-blue-600"
-                        placeholder="Company or organization"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-1.5">
-                        Primary Industry Vertical
-                      </label>
-                      <select
-                        value={formData.vertical}
-                        onChange={(e) => setFormData({ ...formData, vertical: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-md bg-white text-slate-900 border border-slate-300 dark:bg-slate-900 dark:text-slate-50 dark:border-slate-700 text-xs focus:outline-none focus:border-blue-600"
-                      >
-                        <option>Financial Services & Payments</option>
-                        <option>Agriculture & Supply Chain</option>
-                        <option>Healthcare & Operations</option>
-                        <option>Manufacturing & Industrial Systems</option>
-                        <option>Other Enterprise Application</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="text-xs font-medium text-slate-900 dark:text-slate-50 block mb-1.5">
-                      Project Description & Requirements *
-                    </label>
-                    <textarea
-                      required
-                      rows={4}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-md bg-white text-slate-900 placeholder:text-slate-500 border border-slate-300 dark:bg-slate-900 dark:text-slate-50 dark:placeholder:text-slate-400 dark:border-slate-700 text-xs focus:outline-none focus:border-blue-600 resize-none leading-relaxed"
-                      placeholder="Briefly describe what you are building, your timeline, and any technical requirements."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium py-3 rounded-md text-sm transition-colors shadow-sm cursor-pointer"
-                  >
-                    {loading ? "Transmitting..." : "Submit Project Scope"}
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </form>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium py-3 rounded-md text-sm transition-colors shadow-sm cursor-pointer"
+                    >
+                      {loading ? "Transmitting..." : "Submit Project Scope"}
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </form>
+                )
               )}
 
             </div>
