@@ -40,8 +40,8 @@ export default function About() {
     },
     { 
       name: "Nkosinathi Ngwenya", 
-      role: "Chief Technology Officer & AI Systems Architect", 
-      bio: "Architects low-latency distributed backends, pgvector retrieval pipelines, and containerized inference services deployed in South African cloud regions.", 
+      role: "Chief Product Officer & AI Systems Architect", 
+      bio: "Leads product strategy and designs AI-powered systems, translating user needs into clear requirements and practical, scalable solutions.", 
       image: "/team/nkosinathi-ngwenya.jpeg",
       university: "University of Pretoria (UP)",
       email: "devthrivepty@gmail.com",
@@ -50,8 +50,8 @@ export default function About() {
     },
     { 
       name: "Jacky Mpoka", 
-      role: "Project Lead & Full-Stack / Systems Engineer", 
-      bio: "Directs agile sprint velocity, engineering high-throughput web and mobile platforms with resilient offline-first SQLite synchronization and clean UI.", 
+      role: "Chief Technical Officer & Full-Stack / Systems Engineer", 
+      bio: "Leads technical strategy and full-stack engineering, guiding system architecture and ensuring reliable, end-to-end software delivery.", 
       image: "/team/jackyn.png",
       university: "University of Pretoria (UP)",
       email: "jackympoka22@gmail.com",
@@ -80,7 +80,7 @@ export default function About() {
     },
     { 
       name: "Savuzwa Mpayipheli", 
-      role: "Head of Partnerships & Software Engineer", 
+      role: "Chief Alliance Officer & Software Engineer", 
       bio: "Bridges client scoping with hands-on application development while building alliances across South Africa's tech ecosystem and developer communities.", 
       image: "/team/Savuzwa.png",
       university: "University of Pretoria (UP)",
